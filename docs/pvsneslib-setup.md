@@ -6,7 +6,26 @@
 - git, make, build-essential, cmake
 - Conexión a Internet
 
-## Instalación rápida (release binario)
+## Instalación automática (recomendada)
+
+El script `scripts/setup-snesdev.sh` detecta automáticamente si tu sistema es compatible:
+
+```bash
+cd vs-snes
+bash scripts/setup-snesdev.sh
+```
+
+**Qué hace:**
+1. Detecta tu versión de **glibc**
+2. Si glibc >= 2.34 (Ubuntu 22.04+ / Debian 12+): descarga el release binario (rápido)
+3. Si glibc < 2.34 (Ubuntu 20.04, Debian 11): compila 816-tcc y wla-dx desde source
+4. Setea `PVSNESLIB_HOME` en ~/.bashrc
+5. Compila hello_world para verificar que el toolchain funciona
+6. Genera sprites placeholder para empezar a probar al tiro
+
+## Instalación manual
+
+### Opción A: Release binario (glibc >= 2.34)
 
 ```bash
 # 1. Descargar release 4.3.0
@@ -24,6 +43,9 @@ echo 'export PVSNESLIB_HOME=~/snesdev/pvsneslib' >> ~/.bashrc
 
 ## Instalación desde source
 
+Usa esta opción si estás en un sistema con **glibc < 2.34** (Ubuntu 20.04, Debian 11, etc.)
+o si el release binario no funciona por cualquier razón.
+
 ```bash
 # 1. Clonar repo
 git clone https://github.com/alekmaul/pvsneslib.git
@@ -33,7 +55,7 @@ cd pvsneslib
 git submodule update --init --recursive
 
 # 3. Instalar dependencias
-sudo apt-get install -y build-essential gcc-12 cmake make git doxygen
+sudo apt-get install -y build-essential gcc cmake make git doxygen
 
 # 4. Setear PVSNESLIB_HOME
 export PVSNESLIB_HOME=$(pwd)
@@ -42,7 +64,11 @@ export PVSNESLIB_HOME=$(pwd)
 make
 ```
 
-Esto puede tomar bastante tiempo (compila 816-tcc y wla-dx desde cero).
+Esto puede tomar **3 a 10 minutos** (compila 816-tcc y wla-dx desde cero).
+
+> ⚠️ **Nota de compatibilidad:** Los binarios pre-compilados de 816-tcc en el release
+> requieren **glibc 2.34+**. En Ubuntu 20.04 (glibc 2.31) o similar, debes compilar
+> desde source. El script `setup-snesdev.sh` detecta esto automáticamente.
 
 ## Verificar instalación
 
