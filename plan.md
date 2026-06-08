@@ -121,6 +121,15 @@
 | Con flickering | ~40-50 |
 | + Background bullets | ~60-70 |
 
+## Herramientas
+
+Todas las herramientas necesarias están documentadas en [docs/herramientas.md](docs/herramientas.md):
+
+- **Sprites**: Aseprite / GIMP + gfx4snes
+- **Debugging**: Mesen-S (recomendado), bsnes-plus, mednafen
+- **Sonido**: SuperFamistudio
+- **Scripts**: `scripts/setup-snesdev.sh`, `scripts/placeholder-sprites.py`, `scripts/run.sh`
+
 ### Comandos rápidos
 ```bash
 export PVSNESLIB_HOME=~/snesdev/pvsneslib

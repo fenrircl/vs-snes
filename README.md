@@ -23,11 +23,29 @@ MVP en fase de investigación y prototipado. Consulta [plan.md](plan.md) para el
 
 Demostrar que se puede tener ~40+ enemigos simultáneos en SNES usando técnicas de flickering, sprites 8x8, update escalonado y colisiones eficientes, todo en C con PVSNESlib.
 
+## Scripts
+
+| Script | Propósito |
+|---|---|
+| `scripts/setup-snesdev.sh` | Instala PVSNESlib + todas las herramientas |
+| `scripts/placeholder-sprites.py` | Genera sprites placeholder para compilar sin arte |
+| `scripts/run.sh` | Compila y corre la ROM en un emulador |
+
+```bash
+# Rápido: generar sprites, compilar y correr
+python3 scripts/placeholder-sprites.py
+cd mvp
+gfx4snes -s 8 -o 16 -u 16 -p -e 0 -i gfx/sprites.png
+make
+mednafen vs-snes-mvp.sfc
+```
+
 ## Docs
 
 - [Guía de instalación](docs/pvsneslib-setup.md)
 - [API de PVSNESlib](docs/pvsneslib-api.md)
 - [Ejemplos de código](docs/pvsneslib-examples.md)
+- [Herramientas: sprites, debugging y desarrollo](docs/herramientas.md)
 - [Recursos y comunidades](docs/recursos.md)
 
 ## Licencia

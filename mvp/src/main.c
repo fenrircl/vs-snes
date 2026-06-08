@@ -85,7 +85,7 @@ void initEnemies(void) {
     u8 i;
     for (i = 0; i < MAX_ENEMIES; i++) {
         enemies[i].active = 0;
-        enemies[i].oamSlot = 3 + i;  // Dejar slots 0-2 para jugador
+        enemies[i].oamSlot = 4 + i;  // Slots 4..67 para enemigos
     }
 }
 
@@ -94,7 +94,7 @@ void initBullets(void) {
     u8 i;
     for (i = 0; i < MAX_BULLETS; i++) {
         bullets[i].active = 0;
-        bullets[i].oamSlot = 3 + MAX_ENEMIES + i;
+        bullets[i].oamSlot = 4 + MAX_ENEMIES + i;  // Slots 68..83 para balas
     }
 }
 
@@ -315,7 +315,7 @@ void updateBullets(void) {
 
 void renderPlayer(void) {
     oamSet(
-        0,                    // slot 0
+        0,                    // slot 0 — tile sup-izq
         player.x - 8,         // X (top-left)
         player.y - 8,         // Y (top-left)
         OBJ_PRIO(1),          // prioridad
@@ -325,10 +325,9 @@ void renderPlayer(void) {
         OBJ_PAL(0)            // paleta 0
     );
     
-    /* Los otros 3 tiles del metasprite 16x16 */
-    oamSet(1, player.x, player.y - 8, OBJ_PRIO(1), 0, 0, TILE_PLAYER + 1, OBJ_PAL(0));
-    oamSet(2, player.x - 8, player.y, OBJ_PRIO(1), 0, 0, TILE_PLAYER + 2, OBJ_PAL(0));
-    /* Slot 3 sería el 4to tile del 16x16 - se usa para enemigos */
+    oamSet(1, player.x, player.y - 8, OBJ_PRIO(1), 0, 0, TILE_PLAYER + 1, OBJ_PAL(0));  // sup-der
+    oamSet(2, player.x - 8, player.y, OBJ_PRIO(1), 0, 0, TILE_PLAYER + 2, OBJ_PAL(0));  // inf-izq
+    oamSet(3, player.x, player.y, OBJ_PRIO(1), 0, 0, TILE_PLAYER + 3, OBJ_PAL(0));       // inf-der
 }
 
 void renderEnemies(void) {
