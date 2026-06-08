@@ -1,0 +1,9 @@
+*.sfc
+*.o
+*.obj
+*.pic
+*.pal
+*.map
+*.ps
+*.sym
+tmp/

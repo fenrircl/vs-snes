@@ -1,0 +1,12 @@
+mkdir -p gfx
+# Crea un PNG placeholder de 128x128 píxeles con fondo transparente
+# para que el build no falle. Reemplázalo con sprites reales después.
+#
+# Formato: PNG indexado, 16 colores máximo
+# Cada tile: 8x8 píxeles
+# Layout sugerido:
+#   tile 0-3: jugador 16x16 (4 tiles 8x8)
+#   tile 4:   enemigo básico 8x8
+#   tile 5:   bala 8x8
+#   tile 6:   gema 8x8
+#   tile 7+:  otros tipos de enemigos / animaciones

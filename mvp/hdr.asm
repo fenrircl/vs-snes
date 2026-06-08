@@ -1,0 +1,46 @@
+; SNES ROM header for PVSNESlib (LoROM)
+; Based on standard PVSNESlib hdr.asm
+
+.MEMORYMAP
+    DEFAULTSLOT 0
+    SLOTSIZE $8000
+    SLOT 0 $8000
+.ENDME
+
+.ROMBANKSIZE $8000
+.ROMBANKS 4
+
+.SNESHEADER
+    ID "SNES"
+    NAME "VS-SNES MVP      "  ; 21 caracteres exactos
+    SLOWROM
+    LOROM
+    CARTRIDGETYPE $00          ; ROM only
+    ROMSIZE $08               ; 2 Mbits
+    SRAMSIZE $00              ; No SRAM
+    COUNTRY $01               ; USA
+    LICENSEECODE $00
+    VERSION $00
+.ENDSNES
+
+.SNESNATIVEVECTOR
+    COP EMPTY
+    BRK EMPTY
+    ABORT EMPTY
+    NMI VBlank
+    IRQ EMPTY
+.ENDNATVECTOR
+
+.SNESEMUVECTOR
+    COP EMPTY
+    ABORT EMPTY
+    NMI EMPTY
+    RESET tcc__start
+    IRQBRK EMPTY
+.ENDEMUVECTOR
+
+.BANK 0 SLOT 0
+.ORG $8000
+
+EMPTY:
+    RTI
