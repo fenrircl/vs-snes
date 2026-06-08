@@ -9,6 +9,22 @@
 
 set -e
 
+# Resolver ruta absoluta del script al inicio (antes de cualquier cd)
+SCRIPT_DIR=""
+for src in "${BASH_SOURCE[0]}" "$0"; do
+    [ -z "$src" ] && continue
+    candidate="$(command -v realpath 2>/dev/null && realpath "$src" 2>/dev/null)"
+    [ -z "$candidate" ] && candidate="$(readlink -f "$src" 2>/dev/null)"
+    [ -z "$candidate" ] && candidate="$src"
+    candidate="$(dirname "$candidate")"
+    if [ -d "$candidate" ]; then
+        SCRIPT_DIR="$candidate"
+        break
+    fi
+done
+PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
+[ ! -d "$PROJECT_DIR" ] && PROJECT_DIR="$(pwd -P)"
+
 echo "========================================"
 echo "  VS-SNES: Instalación de herramientas"
 echo "========================================"
@@ -69,9 +85,14 @@ sudo apt-get install -y \
 # ──────────────────────────────────────────────
 PVSNESLIB_HOME="${PVSNESLIB_HOME:-$HOME/snesdev/pvsneslib}"
 
+# Helper: check if PVSNESlib is installed (handles both release and source layout)
+have_pvsneslib() {
+    [ -f "$1/include/snes.h" ] || [ -f "$1/pvsneslib/include/snes.h" ]
+}
+
 install_pvsneslib_release() {
     local dest="$HOME/snesdev/pvsneslib-release"
-    mkdir -p "$HOME/snesdev"
+    mkdir -p "$dest"
     cd "$HOME/snesdev"
 
     if [ ! -f "pvsneslib_430_64b_linux_release.zip" ]; then
@@ -80,50 +101,37 @@ install_pvsneslib_release() {
     fi
 
     info "Extrayendo release..."
-    unzip -o pvsneslib_430_64b_linux_release.zip -d "$dest" 2>/dev/null
+    unzip -o pvsneslib_430_64b_linux_release.zip -d "$dest"
 
-    # Encontrar el directorio real dentro del zip
+    # The zip contains a pvsneslib/ top-level directory
     if [ -d "$dest/pvsneslib" ]; then
-        mv "$dest/pvsneslib" "$dest/tmp" 2>/dev/null
-        rm -rf "$dest"
-        mv "$HOME/snesdev/pvsneslib-release/tmp" "$PVSNESLIB_HOME" 2>/dev/null || true
-    fi
-
-    local inner_dir
-    inner_dir=$(find "$dest" -maxdepth 1 -type d -name "pvsneslib*" | head -1)
-    if [ -n "$inner_dir" ] && [ "$inner_dir" != "$dest" ]; then
-        rm -rf "$PVSNESLIB_HOME" 2>/dev/null
-        mv "$inner_dir" "$PVSNESLIB_HOME"
-        rm -rf "$dest"
-    elif [ -d "$dest/pvsneslib" ]; then
-        rm -rf "$PVSNESLIB_HOME" 2>/dev/null
-        mv "$dest" "$PVSNESLIB_HOME"
+        rm -rf "$PVSNESLIB_HOME" 2>/dev/null || true
+        mv "$dest/pvsneslib" "$PVSNESLIB_HOME"
     else
-        # El zip extrae directo al directorio base
-        rm -rf "$PVSNESLIB_HOME" 2>/dev/null
-        mv "$dest" "$PVSNESLIB_HOME"
+        # Flat extraction fallback
+        rm -rf "$PVSNESLIB_HOME" 2>/dev/null || true
+        mv "$dest"/* "$PVSNESLIB_HOME" 2>/dev/null || mv "$dest" "$PVSNESLIB_HOME"
     fi
+    rm -rf "$dest" 2>/dev/null || true
 
-    # Verificar que el binario funciona
+    # Probar el binario
+    TEST_BIN=
     if [ -f "$PVSNESLIB_HOME/devkitsnes/bin/816-tcc" ]; then
-        local TEST_BIN="$PVSNESLIB_HOME/devkitsnes/bin/816-tcc"
+        TEST_BIN="$PVSNESLIB_HOME/devkitsnes/bin/816-tcc"
     elif [ -f "$PVSNESLIB_HOME/devkitsnes/816-tcc" ]; then
-        local TEST_BIN="$PVSNESLIB_HOME/devkitsnes/816-tcc"
-    else
-        return 1
+        TEST_BIN="$PVSNESLIB_HOME/devkitsnes/816-tcc"
     fi
 
-    # Probar ejecución del binario
-    if "$TEST_BIN" --version >/dev/null 2>&1 || "$TEST_BIN" -h >/dev/null 2>&1 || "$TEST_BIN" < /dev/null >/dev/null 2>&1; then
-        return 0
-    else
+    if [ -z "$TEST_BIN" ] || ! ("$TEST_BIN" -v >/dev/null 2>&1 || "$TEST_BIN" < /dev/null >/dev/null 2>&1); then
         warn "El binario 816-tcc no funciona en este sistema (glibc incompatible)"
         return 1
     fi
+    return 0
 }
 
 install_pvsneslib_source() {
     local src_dir="$HOME/snesdev/pvsneslib-source"
+    local symlink_target="${1:-$PVSNESLIB_HOME}"
 
     info "Clonando PVSNESlib desde source..."
     if [ -d "$src_dir" ]; then
@@ -140,16 +148,17 @@ install_pvsneslib_source() {
 
     info "Compilando toolchain + librería + ejemplos..."
     info "Esto toma entre 3 y 10 minutos dependiendo de tu máquina."
+    export PVSNESLIB_HOME="$src_dir"
     make
 
-    # Mover a PVSNESLIB_HOME si el path es diferente
-    if [ "$src_dir" != "$PVSNESLIB_HOME" ]; then
-        rm -rf "$PVSNESLIB_HOME" 2>/dev/null || true
-        ln -sf "$src_dir" "$PVSNESLIB_HOME"
-        info "Link simbólico: $PVSNESLIB_HOME → $src_dir"
+    # Crear symlink desde el path canónico (ej: ~/snesdev/pvsneslib) hacia el source
+    if [ "$src_dir" != "$symlink_target" ]; then
+        rm -rf "$symlink_target" 2>/dev/null || true
+        ln -sf "$src_dir" "$symlink_target"
+        info "Link simbólico: $symlink_target → $src_dir"
     fi
 
-    if [ -f "$PVSNESLIB_HOME/include/snes.h" ]; then
+    if have_pvsneslib "$src_dir"; then
         return 0
     else
         return 1
@@ -159,7 +168,10 @@ install_pvsneslib_source() {
 # ──────────────────────────────────────────────
 # 3b. Ejecutar instalación de PVSNESlib
 # ──────────────────────────────────────────────
-if [ -f "$PVSNESLIB_HOME/include/snes.h" ]; then
+# Path canónico (donde otros scripts buscarán PVSNESlib)
+CANONICAL_HOME="$HOME/snesdev/pvsneslib"
+
+if have_pvsneslib "$PVSNESLIB_HOME"; then
     info "PVSNESlib ya está instalado en $PVSNESLIB_HOME"
 else
     mkdir -p "$HOME/snesdev"
@@ -170,14 +182,14 @@ else
             info "✓ Release binario instalado correctamente"
         else
             warn "Falló release binario — compilando desde source..."
-            install_pvsneslib_source
+            install_pvsneslib_source "$CANONICAL_HOME"
         fi
     else
         info "glibc < 2.34 — compilando desde source directamente..."
-        install_pvsneslib_source
+        install_pvsneslib_source "$CANONICAL_HOME"
     fi
 
-    if [ ! -f "$PVSNESLIB_HOME/include/snes.h" ]; then
+    if ! have_pvsneslib "$CANONICAL_HOME"; then
         error "No se pudo instalar PVSNESlib. Revisa los errores arriba."
         error "Intenta manualmente: https://github.com/alekmaul/pvsneslib/wiki/Installation"
         exit 1
@@ -185,16 +197,19 @@ else
 fi
 
 # ──────────────────────────────────────────────
-# 4. Variable de entorno PVSNESLIB_HOME
+# 4. Variable de entorno PVSNESLIB_HOME — siempre apuntar al path canónico
 # ──────────────────────────────────────────────
-if ! grep -q "PVSNESLIB_HOME" ~/.bashrc 2>/dev/null; then
+if grep -q "^export PVSNESLIB_HOME=" ~/.bashrc 2>/dev/null; then
+    sed -i "s|^export PVSNESLIB_HOME=.*|export PVSNESLIB_HOME=$CANONICAL_HOME|" ~/.bashrc
+    info "PVSNESLIB_HOME actualizado en ~/.bashrc → $CANONICAL_HOME"
+else
     echo "" >> ~/.bashrc
     echo "# PVSNESlib (SNES development toolchain)" >> ~/.bashrc
-    echo "export PVSNESLIB_HOME=$PVSNESLIB_HOME" >> ~/.bashrc
-    info "PVSNESLIB_HOME=$PVSNESLIB_HOME agregado a ~/.bashrc"
+    echo "export PVSNESLIB_HOME=$CANONICAL_HOME" >> ~/.bashrc
+    info "PVSNESLIB_HOME=$CANONICAL_HOME agregado a ~/.bashrc"
 fi
 
-export PVSNESLIB_HOME
+export PVSNESLIB_HOME="$CANONICAL_HOME"
 
 # ──────────────────────────────────────────────
 # 5. Verificar toolchain
@@ -219,19 +234,33 @@ else
 fi
 
 # ──────────────────────────────────────────────
-# 6. Compilar hello_world como verificación
+# 6. Verificar toolchain — probar 816-tcc
 # ──────────────────────────────────────────────
-if [ -d "$PVSNESLIB_HOME/snes-examples/hello_world" ]; then
-    info "Compilando hello_world para verificar toolchain..."
-    cd "$PVSNESLIB_HOME/snes-examples/hello_world"
-    make clean 2>/dev/null || true
-    if make all 2>/dev/null; then
-        info "✓ hello_world compilado correctamente"
-        ls -la hello_world.sfc 2>/dev/null
+TCC_WORKS=false
+if [ -n "$TCC_PATH" ]; then
+    if "$TCC_PATH" -v >/dev/null 2>&1 || "$TCC_PATH" < /dev/null >/dev/null 2>&1; then
+        TCC_WORKS=true
     else
-        warn "hello_world no compiló. Revisa los errores."
-        warn "A veces la compilación de ejemplos necesita make completo primero."
+        warn "816-tcc existe pero NO funciona (probablemente glibc incompatible)"
     fi
+fi
+
+# ──────────────────────────────────────────────
+# 6b. Compilar hello_world como verificación
+# ──────────────────────────────────────────────
+if [ -d "$PVSNESLIB_HOME/snes-examples/hello_world" ] && $TCC_WORKS; then
+    (
+        info "Compilando hello_world para verificar toolchain..."
+        cd "$PVSNESLIB_HOME/snes-examples/hello_world"
+        make clean 2>/dev/null || true
+        if make all; then
+            info "✓ hello_world compilado correctamente"
+            ls -la hello_world.sfc 2>/dev/null
+        else
+            warn "hello_world no compiló. Revisa los errores."
+            warn "A veces la compilación de ejemplos necesita make completo primero."
+        fi
+    )
 fi
 
 # ──────────────────────────────────────────────
@@ -244,8 +273,6 @@ pip3 install Pillow 2>/dev/null || sudo pip3 install Pillow 2>/dev/null || true
 # 8. Generar sprites placeholder
 # ──────────────────────────────────────────────
 info "Generando sprites placeholder..."
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 
 if [ -f "$PROJECT_DIR/scripts/placeholder-sprites.py" ]; then
     cd "$PROJECT_DIR"
@@ -275,6 +302,17 @@ if [ -z "$TCC_PATH" ] || [ -z "$TOOLS_PATH" ]; then
     echo "Si el build desde source falló, prueba:"
     echo "  cd ~/snesdev/pvsneslib-source"
     echo "  make clean 2>/dev/null; make"
+    echo ""
+elif ! $TCC_WORKS; then
+    warn "816-tcc requiere GLIBC 2.34+ pero tu sistema tiene una versión anterior."
+    echo "Solución: compilar toolchain desde source:"
+    echo "  1. rm -rf ~/snesdev/pvsneslib"
+    echo "  2. bash scripts/setup-snesdev.sh   (compilará desde source automáticamente)"
+    echo ""
+    echo "O manualmente:"
+    echo "  cd ~/snesdev/pvsneslib-source"
+    echo "  export PVSNESLIB_HOME=\$(pwd)"
+    echo "  make"
     echo ""
 fi
 

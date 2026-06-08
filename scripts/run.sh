@@ -12,14 +12,18 @@ ROM="$MVP_DIR/vs-snes-mvp.sfc"
 
 # Verificar PVSNESLIB_HOME
 if [ -z "$PVSNESLIB_HOME" ]; then
-    if [ -d "$HOME/snesdev/pvsneslib" ]; then
+    if [ -f "$HOME/.bashrc" ]; then
+        export PVSNESLIB_HOME=$(grep 'export PVSNESLIB_HOME=' "$HOME/.bashrc" | tail -1 | cut -d= -f2)
+    fi
+    if [ -z "$PVSNESLIB_HOME" ] && [ -d "$HOME/snesdev/pvsneslib" ]; then
         export PVSNESLIB_HOME="$HOME/snesdev/pvsneslib"
-        echo "PVSNESLIB_HOME=$PVSNESLIB_HOME"
-    else
+    fi
+    if [ -z "$PVSNESLIB_HOME" ]; then
         echo "ERROR: Define PVSNESLIB_HOME primero"
         echo "  export PVSNESLIB_HOME=~/snesdev/pvsneslib"
         exit 1
     fi
+    echo "PVSNESLIB_HOME=$PVSNESLIB_HOME"
 fi
 
 cd "$MVP_DIR"

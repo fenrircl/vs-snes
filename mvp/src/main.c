@@ -67,7 +67,7 @@ u8 frameCount;
  *  DECLARACIONES DE SPRITES (definidos en sprites.pic)
  * ============================================================ */
 
-extern u8 sprites_pic;     // tiles
+extern u8 sprites_til;     // tiles
 extern u8 sprites_pal;     // paleta
 
 /* Offsets de tiles dentro del spritesheet (dependen de tu PNG) */
@@ -105,24 +105,24 @@ void spawnEnemy(void) {
     
     for (i = 0; i < MAX_ENEMIES; i++) {
         if (!enemies[i].active) {
-            side = GetTickCount() & 3;  // 0-3: arriba, derecha, abajo, izq
+            side = snes_vblank_count & 3;  // 0-3: arriba, derecha, abajo, izq
             
             switch (side) {
                 case 0: // arriba
-                    enemies[i].x = (GetTickCount() % (SCREEN_W - 16)) + 8;
+                    enemies[i].x = (snes_vblank_count % (SCREEN_W - 16)) + 8;
                     enemies[i].y = -8;
                     break;
                 case 1: // derecha
                     enemies[i].x = SCREEN_W + 8;
-                    enemies[i].y = (GetTickCount() % (SCREEN_H - 16)) + 8;
+                    enemies[i].y = (snes_vblank_count % (SCREEN_H - 16)) + 8;
                     break;
                 case 2: // abajo
-                    enemies[i].x = (GetTickCount() % (SCREEN_W - 16)) + 8;
+                    enemies[i].x = (snes_vblank_count % (SCREEN_W - 16)) + 8;
                     enemies[i].y = SCREEN_H + 8;
                     break;
                 case 3: // izquierda
                     enemies[i].x = -8;
-                    enemies[i].y = (GetTickCount() % (SCREEN_H - 16)) + 8;
+                    enemies[i].y = (snes_vblank_count % (SCREEN_H - 16)) + 8;
                     break;
             }
             
@@ -319,8 +319,8 @@ void renderPlayer(void) {
         player.x - 8,         // X (top-left)
         player.y - 8,         // Y (top-left)
         OBJ_PRIO(1),          // prioridad
-        OBJ_FLIPX(0),         // flip X
-        OBJ_FLIPY(0),         // flip Y
+        0,                    // flip X (0=no flip)
+        0,                    // flip Y (0=no flip)
         TILE_PLAYER,          // tile offset
         OBJ_PAL(0)            // paleta 0
     );
@@ -403,7 +403,7 @@ int main(void) {
     
     /* Cargar tiles y paleta de sprites */
     oamInitGfxSet(
-        &sprites_pic,          // tiles
+        &sprites_til,          // tiles
         512,                   // tamaño (512 tiles 8x8 = 128*4 bytes)
         &sprites_pal,          // paleta
         32,                    // 16 colores * 2 bytes
@@ -434,7 +434,9 @@ int main(void) {
         WaitForVBlank();
     }
     
-    consoleClear();
+    consoleDrawText(0, 0, "                           ");
+    consoleDrawText(0, 1, "                           ");
+    consoleDrawText(0, 2, "                           ");
     
     /* ============================================
      *  BUCLE PRINCIPAL DEL JUEGO
@@ -466,9 +468,9 @@ int main(void) {
         
         /* HUD en consola */
         consoleDrawText(0, 0, "SCORE:");
-        consoleDrawInt(7, 0, player.score);
+        consoleDrawText(7, 0, "%d", player.score);
         consoleDrawText(0, 1, "LIVES:");
-        consoleDrawInt(7, 1, player.lives);
+        consoleDrawText(7, 1, "%d", player.lives);
         
         /* Sincronizar con VBlank */
         WaitForVBlank();

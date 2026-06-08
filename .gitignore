@@ -1,9 +1,26 @@
+# Build artifacts
 *.sfc
 *.o
 *.obj
+*.ps
+*.sym
+
+# Graphics conversion output
 *.pic
 *.pal
 *.map
-*.ps
-*.sym
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Editor / OS
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Temp
 tmp/
