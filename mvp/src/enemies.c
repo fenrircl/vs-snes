@@ -23,20 +23,20 @@ void spawnEnemy(void) {
             
             switch (side) {
                 case 0:
-                    enemies[i].x = (snes_vblank_count % (SCREEN_W - 16)) + 8;
-                    enemies[i].y = -8;
+                    enemies[i].x = cameraX + (snes_vblank_count % (SCREEN_W - 16)) + 8;
+                    enemies[i].y = cameraY - 8;
                     break;
                 case 1:
-                    enemies[i].x = SCREEN_W + 8;
-                    enemies[i].y = (snes_vblank_count % (SCREEN_H - 16)) + 8;
+                    enemies[i].x = cameraX + SCREEN_W + 8;
+                    enemies[i].y = cameraY + (snes_vblank_count % (SCREEN_H - 16)) + 8;
                     break;
                 case 2:
-                    enemies[i].x = (snes_vblank_count % (SCREEN_W - 16)) + 8;
-                    enemies[i].y = SCREEN_H + 8;
+                    enemies[i].x = cameraX + (snes_vblank_count % (SCREEN_W - 16)) + 8;
+                    enemies[i].y = cameraY + SCREEN_H + 8;
                     break;
                 case 3:
-                    enemies[i].x = -8;
-                    enemies[i].y = (snes_vblank_count % (SCREEN_H - 16)) + 8;
+                    enemies[i].x = cameraX - 8;
+                    enemies[i].y = cameraY + (snes_vblank_count % (SCREEN_H - 16)) + 8;
                     break;
             }
             
@@ -67,22 +67,18 @@ void updateEnemies(void) {
         if (dy > 0) enemies[i].y += (enemies[i].vx << 1);
         else if (dy < 0) enemies[i].y -= (enemies[i].vx << 1);
         
-        /* Si sale muy lejos de pantalla, desactivar */
-        if (enemies[i].x < -32 || enemies[i].x > SCREEN_W + 32 ||
-            enemies[i].y < -32 || enemies[i].y > SCREEN_H + 32) {
+        /* Si sale muy lejos del jugador, desactivar */
+        s16 distPlayerX = dx < 0 ? -dx : dx;
+        s16 distPlayerY = dy < 0 ? -dy : dy;
+        if (distPlayerX > 200 || distPlayerY > 200) {
             enemies[i].active = 0;
+            continue;
         }
         
         /* Colisión con jugador */
-        s16 cdx = player.x - enemies[i].x;
-        if (cdx < 0) cdx = -cdx;
-        if (cdx <= 12) {
-            s16 cdy = player.y - enemies[i].y;
-            if (cdy < 0) cdy = -cdy;
-            if (cdy <= 12) {
-                enemies[i].active = 0;
-                if (player.lives > 0) player.lives--;
-            }
+        if (distPlayerX <= 12 && distPlayerY <= 12) {
+            enemies[i].active = 0;
+            if (player.lives > 0) player.lives--;
         }
     }
 }
@@ -93,18 +89,33 @@ void renderEnemies(void) {
         u8 slot = enemies[i].oamSlot;
         if (!enemies[i].active) {
             oamSetAttr(slot, 0, 240, 0, 0);
+            oamSetEx(slot, OBJ_SMALL, OBJ_HIDE);
             continue;
         }
-        s16 dx = player.x - enemies[i].x;
-        s16 dy = player.y - enemies[i].y;
-        if (dx < 0) dx = -dx;
-        if (dy < 0) dy = -dy;
-        if ((dx + dy) > 300 && (frameCount & 1)) {
+        s16 screenX = enemies[i].x - cameraX;
+        s16 screenY = enemies[i].y - cameraY;
+        
+        if (screenX < -16 || screenX > SCREEN_W + 16 ||
+            screenY < -16 || screenY > SCREEN_H + 16) {
             oamSetAttr(slot, 0, 240, 0, 0);
+            oamSetEx(slot, OBJ_SMALL, OBJ_HIDE);
             continue;
         }
-        oamSetAttr(slot, enemies[i].x - 4, enemies[i].y - 4,
-            enemyTile[enemies[i].vy], OBJ_PRIO(3) | OBJ_PAL(0));
+        
+        if (enemies[i].vy == 0) {
+            // Primer enemigo (Type 0): Pipeestrello 16x16 animado
+            u8 animFrame = (frameCount / 8) & 3;
+            u16 animTileBase = (&sprites_tilend - &sprites_til) / 32;
+            u16 tileIndex = animTileBase + (animFrame * 2);
+            
+            oamSetAttr(slot, screenX - 8, screenY - 8, tileIndex, OBJ_PRIO(3) | OBJ_PAL(1));
+            oamSetEx(slot, OBJ_LARGE, OBJ_SHOW);
+        } else {
+            // Otros enemigos: 8x8 estáticos
+            oamSetAttr(slot, screenX - 4, screenY - 4,
+                enemyTile[enemies[i].vy], OBJ_PRIO(3) | OBJ_PAL(0));
+            oamSetEx(slot, OBJ_SMALL, OBJ_SHOW);
+        }
     }
 }
 

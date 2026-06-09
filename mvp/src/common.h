@@ -9,6 +9,8 @@
 
 #define SCREEN_W       256
 #define SCREEN_H       224
+#define MAP_W          512
+#define MAP_H          512
 #define PLAYER_SPEED    3
 #define ENEMY_SPEED     2
 #define MAX_ENEMIES     44
@@ -53,6 +55,7 @@ typedef struct {
     u16 score;
     u16 kills;
     u8 shootTimer;
+    u8 facingLeft;
 } Player;
 
 /* ============================================================
@@ -67,8 +70,17 @@ extern u8 frameCount;
 extern u16 gameTimer;
 extern u8 wave, gameMins, gameSecs;
 extern u32 gameStartTime;
+extern s16 cameraX, cameraY;
 
-/* Fuentes */
+/* Fuentes y Sprites */
 extern char tilfont, palfont;
+extern u8 sprites_til, sprites_tilend;
+extern u8 Animated_Pipeestrello_indexed_til, Animated_Pipeestrello_indexed_tilend;
+extern u8 Animated_Pipeestrello_indexed_pal, Animated_Pipeestrello_indexed_palend;
+extern u8 Mad_Forest_crop_64x64_indexed_til, Mad_Forest_crop_64x64_indexed_tilend;
+extern u8 Mad_Forest_crop_64x64_indexed_map, Mad_Forest_crop_64x64_indexed_mapend;
+extern u8 Mad_Forest_crop_64x64_indexed_pal, Mad_Forest_crop_64x64_indexed_palend;
+extern u8 Animated_Antonio_Belpaese_indexed_til, Animated_Antonio_Belpaese_indexed_tilend;
+extern u8 Animated_Antonio_Belpaese_indexed_pal, Animated_Antonio_Belpaese_indexed_palend;
 
 #endif /* COMMON_H */

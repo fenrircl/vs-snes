@@ -8,14 +8,14 @@ void updatePlayer(void) {
     /* Movimiento */
     if (pad & KEY_UP)    player.y -= PLAYER_SPEED;
     if (pad & KEY_DOWN)  player.y += PLAYER_SPEED;
-    if (pad & KEY_LEFT)  player.x -= PLAYER_SPEED;
-    if (pad & KEY_RIGHT) player.x += PLAYER_SPEED;
+    if (pad & KEY_LEFT)  { player.x -= PLAYER_SPEED; player.facingLeft = 1; }
+    if (pad & KEY_RIGHT) { player.x += PLAYER_SPEED; player.facingLeft = 0; }
     
-    /* Límites de pantalla */
+    /* Límites del mapa */
     if (player.x < 8)     player.x = 8;
-    if (player.x > SCREEN_W - 8)  player.x = SCREEN_W - 8;
+    if (player.x > MAP_W - 8)  player.x = MAP_W - 8;
     if (player.y < 8)     player.y = 8;
-    if (player.y > SCREEN_H - 8)  player.y = SCREEN_H - 8;
+    if (player.y > MAP_H - 8)  player.y = MAP_H - 8;
     
     if (player.shootTimer > 0) {
         player.shootTimer--;
@@ -29,6 +29,22 @@ void updatePlayer(void) {
 }
 
 void renderPlayer(void) {
-    oamSetAttr(OAM_PLAYER, player.x - 8, player.y - 8, TILE_PLAYER,
-        OBJ_PRIO(3) | OBJ_PAL(0));
+    s16 screenX = player.x - cameraX;
+    s16 screenY = player.y - cameraY;
+    
+    // Calcular el tile base para Antonio Belpaese
+    u16 baseSpritesSize = &sprites_tilend - &sprites_til;
+    u16 batSpritesSize = &Animated_Pipeestrello_indexed_tilend - &Animated_Pipeestrello_indexed_til;
+    u16 antonioTileBase = (baseSpritesSize + batSpritesSize) / 32;
+    
+    u8 animFrame = (frameCount / 8) & 3;
+    u16 tileIndex = antonioTileBase + (animFrame * 2);
+    
+    u16 oamAttr = OBJ_PRIO(3) | OBJ_PAL(2);
+    if (player.facingLeft) {
+        oamAttr |= OBJ_FLIPX;
+    }
+    
+    oamSetAttr(OAM_PLAYER, screenX - 8, screenY - 8, tileIndex, oamAttr);
+    oamSetEx(OAM_PLAYER, OBJ_LARGE, OBJ_SHOW);
 }

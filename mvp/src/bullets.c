@@ -47,9 +47,11 @@ void updateBullets(void) {
         bullets[i].x += bullets[i].vx;
         bullets[i].y += bullets[i].vy;
         
-        /* Fuera de pantalla → desactivar */
-        if (bullets[i].x < -16 || bullets[i].x > SCREEN_W + 16 ||
-            bullets[i].y < -16 || bullets[i].y > SCREEN_H + 16) {
+        /* Fuera de cámara → desactivar */
+        s16 screenX = bullets[i].x - cameraX;
+        s16 screenY = bullets[i].y - cameraY;
+        if (screenX < -16 || screenX > SCREEN_W + 16 ||
+            screenY < -16 || screenY > SCREEN_H + 16) {
             bullets[i].active = 0;
             continue;
         }
@@ -88,7 +90,9 @@ void renderBullets(void) {
             oamSetAttr(slot, 0, 240, 0, 0);
             continue;
         }
-        oamSetAttr(slot, bullets[i].x - 4, bullets[i].y - 4, TILE_BULLET,
+        s16 screenX = bullets[i].x - cameraX;
+        s16 screenY = bullets[i].y - cameraY;
+        oamSetAttr(slot, screenX - 4, screenY - 4, TILE_BULLET,
             OBJ_PRIO(3) | OBJ_PAL(0));
     }
 }

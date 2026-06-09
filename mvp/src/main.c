@@ -21,6 +21,9 @@ u16 gameTimer;
 u8 wave, gameMins, gameSecs;
 u32 gameStartTime;
 
+s16 cameraX, cameraY;
+static u16 mapBuffer[4096];
+
 /* ============================================================
  *  SPRITES & FONTS EXTERNOS
  * ============================================================ */
@@ -43,8 +46,48 @@ int main(void) {
     bgSetGfxPtr(0, 0x2000);
     bgSetMapPtr(0, 0x6800, SC_32x32);
     setMode(BG_MODE1, 0);
-    bgSetDisable(1);
     bgSetDisable(2);
+    
+    /* Configurar BG1 para el mapa de fondo utilizando los gráficos cargados */
+    bgSetGfxPtr(1, 0x4800);
+    bgSetMapPtr(1, 0x3800, SC_64x64);
+    bgSetEnable(1);
+    
+    /* Copiar los tiles del fondo a la VRAM a partir de 0x4800 */
+    dmaCopyVram(&Mad_Forest_crop_64x64_indexed_til, 0x4800, &Mad_Forest_crop_64x64_indexed_tilend - &Mad_Forest_crop_64x64_indexed_til);
+    
+    /* Copiar la paleta del fondo a la paleta de BG 1 en la CGRAM (offset 16, paleta 1) */
+    dmaCopyCGram(&Mad_Forest_crop_64x64_indexed_pal, 16, 32);
+    
+    /* Llenar mapBuffer repitiendo el mapa de 8x8 tiles para rellenar 64x64 tiles, ordenado en cuadrantes de 32x32 */
+    {
+        u16 mx, my;
+        u16 *srcMap = (u16 *)&Mad_Forest_crop_64x64_indexed_map;
+        for (my = 0; my < 64; my++) {
+            for (mx = 0; mx < 64; mx++) {
+                u16 srcX = mx % 8;
+                u16 srcY = my % 8;
+                u16 tile = srcMap[srcY * 8 + srcX];
+                // Limpiar los bits de paleta existentes (10-12) y poner paleta 1 (bit 10)
+                tile = (tile & ~0x1C00) | (1 << 10);
+                
+                // Determinar a qué cuadrante pertenece (32x32 tiles por cuadrante)
+                u16 quadrantX = mx / 32;
+                u16 quadrantY = my / 32;
+                u16 localX = mx % 32;
+                u16 localY = my % 32;
+                
+                // Índice en la VRAM lineal para SC_64x64:
+                // Quadrant 0 (top-left): offset 0
+                // Quadrant 1 (top-right): offset 1024
+                // Quadrant 2 (bottom-left): offset 2048
+                // Quadrant 3 (bottom-right): offset 3072
+                u32 bufferIndex = (quadrantY * 2048) + (quadrantX * 1024) + (localY * 32) + localX;
+                mapBuffer[bufferIndex] = tile;
+            }
+        }
+        dmaCopyVram((u8 *)mapBuffer, 0x3800, 4096 * 2);
+    }
     
     /* Cargar sprites */
     oamInitGfxSet(
@@ -55,13 +98,27 @@ int main(void) {
         0, 0, OBJ_SIZE8_L16
     );
     
-    /* Init estado */
-    player.x = SCREEN_W / 2;
-    player.y = SCREEN_H / 2;
+    /* Copiar los tiles de la animación del bat a la VRAM de sprites (justo después de sprites_til) */
+    dmaCopyVram(&Animated_Pipeestrello_indexed_til, (&sprites_tilend - &sprites_til) / 2, (&Animated_Pipeestrello_indexed_tilend - &Animated_Pipeestrello_indexed_til));
+    
+    /* Copiar los tiles de la animación del personaje a la VRAM de sprites (justo después de pipeestrello) */
+    dmaCopyVram(&Animated_Antonio_Belpaese_indexed_til, ((&sprites_tilend - &sprites_til) + (&Animated_Pipeestrello_indexed_tilend - &Animated_Pipeestrello_indexed_til)) / 2, (&Animated_Antonio_Belpaese_indexed_tilend - &Animated_Antonio_Belpaese_indexed_til));
+    
+    /* Copiar la paleta de la animación del bat a la paleta de sprites 1 en la CGRAM (offset 144) */
+    dmaCopyCGram(&Animated_Pipeestrello_indexed_pal, 144, 32);
+    
+    /* Copiar la paleta de la animación del personaje a la paleta de sprites 2 en la CGRAM (offset 160) */
+    dmaCopyCGram(&Animated_Antonio_Belpaese_indexed_pal, 160, 32);
+    
+    /* Init estado (centro del mapa de 512x512) */
+    player.x = MAP_W / 2;
+    player.y = MAP_H / 2;
     player.lives = 5;
     player.score = 0;
     player.kills = 0;
     player.shootTimer = 0;
+    cameraX = 0;
+    cameraY = 0;
     initEnemies();
     initBullets();
     spawnTimer = 0;
@@ -101,6 +158,17 @@ start:
         gameMins = (elapsed / 3600);
         wave = elapsed / 900;
         
+        /* Centrar la cámara en el jugador y limitar a los bordes del mapa de 512x512 */
+        cameraX = player.x - (SCREEN_W / 2);
+        cameraY = player.y - (SCREEN_H / 2);
+        if (cameraX < 0) cameraX = 0;
+        else if (cameraX > MAP_W - SCREEN_W) cameraX = MAP_W - SCREEN_W;
+        if (cameraY < 0) cameraY = 0;
+        else if (cameraY > MAP_H - SCREEN_H) cameraY = MAP_H - SCREEN_H;
+        
+        /* Aplicar scroll a BG1 */
+        bgSetScroll(1, cameraX, cameraY);
+        
         updatePlayer();
         if (spawnTimer == 0) {
             spawnEnemy();
@@ -133,10 +201,11 @@ start:
             drawTime(10, 12, gameMins, gameSecs);
             consoleDrawText(2, 14, "PRESIONA START");
             while (!(padsDown(0) & KEY_START)) { WaitForVBlank(); }
-            player.x = SCREEN_W / 2; player.y = SCREEN_H / 2;
+            player.x = MAP_W / 2; player.y = MAP_H / 2;
             player.lives = 5; player.score = 0; player.kills = 0; player.shootTimer = 0;
             spawnTimer = 0; frameCount = 0; gameTimer = 0; wave = 0;
             gameMins = 0; gameSecs = 0;
+            cameraX = 0; cameraY = 0;
             initEnemies(); initBullets();
             consoleDrawText(6, 10, "         ");
             consoleDrawText(2, 11, "                         ");
