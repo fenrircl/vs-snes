@@ -1,5 +1,9 @@
 [objects]
+src/player.obj
+src/enemies.obj
 src/main.obj
+src/hud.obj
+src/bullets.obj
 hdr.obj
 sprites.obj
 data.obj
