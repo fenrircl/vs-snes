@@ -2,7 +2,8 @@
 src/main.obj
 hdr.obj
 sprites.obj
-/home/fenrir/snesdev/pvsneslib-source/pvsneslib/lib/LoROM_SlowROM/crt0_snes.obj
-/home/fenrir/snesdev/pvsneslib-source/pvsneslib/lib/LoROM_SlowROM/libc.obj
-/home/fenrir/snesdev/pvsneslib-source/pvsneslib/lib/LoROM_SlowROM/libm.obj
-/home/fenrir/snesdev/pvsneslib-source/pvsneslib/lib/LoROM_SlowROM/libtcc.obj
+data.obj
+/home/fenrir/snesdev/pvsneslib/pvsneslib/lib/LoROM_SlowROM/crt0_snes.obj
+/home/fenrir/snesdev/pvsneslib/pvsneslib/lib/LoROM_SlowROM/libc.obj
+/home/fenrir/snesdev/pvsneslib/pvsneslib/lib/LoROM_SlowROM/libm.obj
+/home/fenrir/snesdev/pvsneslib/pvsneslib/lib/LoROM_SlowROM/libtcc.obj

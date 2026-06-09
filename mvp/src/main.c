@@ -64,17 +64,26 @@ u8 spawnTimer;
 u8 frameCount;
 
 /* ============================================================
- *  DECLARACIONES DE SPRITES (definidos en sprites.pic)
+ *  DECLARACIONES DE SPRITES (definidos en sprites_data.as)
  * ============================================================ */
 
-extern u8 sprites_til;     // tiles
-extern u8 sprites_pal;     // paleta
+extern u8 sprites_til, sprites_tilend;     // tiles
+extern u8 sprites_pal, sprites_palend;     // paleta
 
-/* Offsets de tiles dentro del spritesheet (dependen de tu PNG) */
-#define TILE_PLAYER     0   // tile 0-3 = jugador 16x16
-#define TILE_ENEMY      4   // tile 4 = enemigo 8x8
-#define TILE_BULLET     5   // tile 5 = bala 8x8
-#define TILE_GEM        6   // tile 6 = gema 8x8
+/* ============================================================
+ *  DECLARACIONES DE FONT (definido en data.asm)
+ * ============================================================ */
+
+extern char tilfont, palfont;
+
+/* Offsets de tiles dentro del spritesheet (128x128px, 16 tiles por fila) */
+#define TILE_PLAYER_TL  0   // tile (0,0) = jugador sup-izq
+#define TILE_PLAYER_TR  1   // tile (1,0) = jugador sup-der
+#define TILE_PLAYER_BL  16  // tile (0,1) = jugador inf-izq
+#define TILE_PLAYER_BR  17  // tile (1,1) = jugador inf-der
+#define TILE_ENEMY      32  // tile (0,2) = enemigo 8x8
+#define TILE_BULLET     33  // tile (1,2) = bala 8x8
+#define TILE_GEM        34  // tile (2,2) = gema 8x8
 
 /* ============================================================
  *  FUNCIONES DE ENTIDADES
@@ -271,8 +280,7 @@ void updateEnemies(void) {
         /* Colisión con jugador */
         if (checkCollision(player.x, player.y, 8, enemies[i].x, enemies[i].y, 4)) {
             enemies[i].active = 0;
-            player.lives--;
-            if (player.lives > 99) player.lives = 0;  // clamp mínimo
+            if (player.lives > 0) player.lives--;
         }
     }
 }
@@ -314,20 +322,10 @@ void updateBullets(void) {
  * ============================================================ */
 
 void renderPlayer(void) {
-    oamSet(
-        0,                    // slot 0 — tile sup-izq
-        player.x - 8,         // X (top-left)
-        player.y - 8,         // Y (top-left)
-        OBJ_PRIO(1),          // prioridad
-        0,                    // flip X (0=no flip)
-        0,                    // flip Y (0=no flip)
-        TILE_PLAYER,          // tile offset
-        OBJ_PAL(0)            // paleta 0
-    );
-    
-    oamSet(1, player.x, player.y - 8, OBJ_PRIO(1), 0, 0, TILE_PLAYER + 1, OBJ_PAL(0));  // sup-der
-    oamSet(2, player.x - 8, player.y, OBJ_PRIO(1), 0, 0, TILE_PLAYER + 2, OBJ_PAL(0));  // inf-izq
-    oamSet(3, player.x, player.y, OBJ_PRIO(1), 0, 0, TILE_PLAYER + 3, OBJ_PAL(0));       // inf-der
+    oamSet(0, player.x - 8, player.y - 8, OBJ_PRIO(3), 0, 0, 0, OBJ_PAL(0));
+    oamSet(1, 0, 240, 0, 0, 0, 0, 0);
+    oamSet(2, 0, 240, 0, 0, 0, 0, 0);
+    oamSet(3, 0, 240, 0, 0, 0, 0, 0);
 }
 
 void renderEnemies(void) {
@@ -337,7 +335,7 @@ void renderEnemies(void) {
         u8 slot = enemies[i].oamSlot;
         
         if (!enemies[i].active) {
-            oamSetVisible(slot, OBJ_HIDE);
+            oamSet(slot, 0, 240, 0, 0, 0, 0, 0);
             continue;
         }
         
@@ -349,19 +347,12 @@ void renderEnemies(void) {
         u16 dist = (u16)(dx + dy);
         
         if (dist > 300 && (frameCount & 1)) {
-            oamSetVisible(slot, OBJ_HIDE);
+            oamSet(slot, 0, 240, 0, 0, 0, 0, 0);
             continue;
         }
         
-        oamSet(
-            slot,
-            enemies[i].x - 4,
-            enemies[i].y - 4,
-            OBJ_PRIO(2),
-            0, 0,
-            TILE_ENEMY,
-            OBJ_PAL(1)  // paleta 1 para enemigos
-        );
+        oamSet(slot, enemies[i].x - 4, enemies[i].y - 4,
+            OBJ_PRIO(3), 0, 0, TILE_ENEMY, OBJ_PAL(0));
     }
 }
 
@@ -372,19 +363,12 @@ void renderBullets(void) {
         u8 slot = bullets[i].oamSlot;
         
         if (!bullets[i].active) {
-            oamSetVisible(slot, OBJ_HIDE);
+            oamSet(slot, 0, 240, 0, 0, 0, 0, 0);
             continue;
         }
         
-        oamSet(
-            slot,
-            bullets[i].x - 4,
-            bullets[i].y - 4,
-            OBJ_PRIO(0),
-            0, 0,
-            TILE_BULLET,
-            OBJ_PAL(2)  // paleta 2 para balas
-        );
+        oamSet(slot, bullets[i].x - 4, bullets[i].y - 4,
+            OBJ_PRIO(3), 0, 0, TILE_BULLET, OBJ_PAL(0));
     }
 }
 
@@ -395,34 +379,39 @@ void renderBullets(void) {
 int main(void) {
     u8 i;
     
-    /* Inicializar consola y pantalla */
+    /* Inicializar sistema */
     consoleInit();
+    consoleSetTextGfxPtr(0x3000);
+    consoleSetTextMapPtr(0x6800);
+    consoleSetTextOffset(0x0100);
+    consoleInitText(0, 16 * 2, &tilfont, &palfont);
+    bgSetGfxPtr(0, 0x2000);
+    bgSetMapPtr(0, 0x6800, SC_32x32);
+    setMode(BG_MODE1, 0);
+    bgSetDisable(1);
+    bgSetDisable(2);
     
-    /* Inicializar sprites */
-    oamInit();
-    
-    /* Cargar tiles y paleta de sprites */
+    /* Cargar sprites */
     oamInitGfxSet(
-        &sprites_til,          // tiles
-        512,                   // tamaño (512 tiles 8x8 = 128*4 bytes)
-        &sprites_pal,          // paleta
-        32,                    // 16 colores * 2 bytes
-        0,                     // paleta 0
-        0,                     // VRAM address 0
-        OBJ_SIZE8_L16          // small=8x8, large=16x16
+        &sprites_til,
+        (&sprites_tilend - &sprites_til),
+        &sprites_pal,
+        (&sprites_palend - &sprites_pal),
+        0, 0, OBJ_SIZE8_L16
     );
     
-    /* Inicializar estado */
+    /* Init estado */
     player.x = SCREEN_W / 2;
     player.y = SCREEN_H / 2;
     player.lives = 5;
     player.score = 0;
     player.shootTimer = 0;
-    
     initEnemies();
     initBullets();
     spawnTimer = 0;
     frameCount = 0;
+    
+    setScreenOn();
     
     /* Mensaje de inicio en consola */
     consoleDrawText(2, 2, "VS-SNES MVP");
@@ -437,58 +426,31 @@ int main(void) {
     consoleDrawText(0, 0, "                           ");
     consoleDrawText(0, 1, "                           ");
     consoleDrawText(0, 2, "                           ");
+    consoleDrawText(0, 3, "                           ");
+    consoleDrawText(0, 4, "                           ");
     
     /* ============================================
-     *  BUCLE PRINCIPAL DEL JUEGO
+     *  BUCLE PRINCIPAL
      * ============================================ */
-    while(1) {
-        /* INPUT */
-        updatePlayer();
+    oamSetEx(0, OBJ_SMALL, OBJ_SHOW);
+    
+    while (1) {
+        u16 pad = padsCurrent(0);
+        if (pad & KEY_UP)    player.y--;
+        if (pad & KEY_DOWN)  player.y++;
+        if (pad & KEY_LEFT)  player.x--;
+        if (pad & KEY_RIGHT) player.x++;
+        if (player.x < 0) player.x = 0;
+        if (player.x > 248) player.x = 248;
+        if (player.y > 224) player.y = 224;
+        if (player.y < 0) player.y = 0;
         
-        /* SPAWN */
-        if (spawnTimer == 0) {
-            spawnEnemy();
-            spawnTimer = SPAWN_COOLDOWN;
-            /* Acelerar spawn con el score */
-            if (player.score > 100) spawnTimer = 20;
-            if (player.score > 300) spawnTimer = 12;
-            if (player.score > 500) spawnTimer = 8;
-        } else {
-            spawnTimer--;
-        }
+        oamSetXY(0, player.x, player.y);
+        oamSetGfxOffset(0, 0);
         
-        /* UPDATE */
-        updateEnemies();
-        updateBullets();
+        consoleDrawText(0, 0, "X=%u Y=%u PAD=%u  ", player.x, player.y, pad);
         
-        /* RENDER */
-        renderPlayer();
-        renderEnemies();
-        renderBullets();
-        
-        /* HUD en consola */
-        consoleDrawText(0, 0, "SCORE:");
-        consoleDrawText(7, 0, "%d", player.score);
-        consoleDrawText(0, 1, "LIVES:");
-        consoleDrawText(7, 1, "%d", player.lives);
-        
-        /* Sincronizar con VBlank */
         WaitForVBlank();
         oamUpdate();
-        
-        frameCount++;
-        
-        /* Game Over */
-        if (player.lives == 0) {
-            consoleDrawText(8, 12, "GAME OVER");
-            break;
-        }
     }
-    
-    /* Loop infinito después de game over */
-    while(1) {
-        WaitForVBlank();
-    }
-    
-    return 0;
 }
