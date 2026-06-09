@@ -32,10 +32,8 @@ void renderPlayer(void) {
     s16 screenX = player.x - cameraX;
     s16 screenY = player.y - cameraY;
     
-    // Calcular el tile base para Antonio Belpaese
-    u16 baseSpritesSize = &sprites_tilend - &sprites_til;
-    u16 batSpritesSize = &Animated_Pipeestrello_indexed_tilend - &Animated_Pipeestrello_indexed_til;
-    u16 antonioTileBase = (baseSpritesSize + batSpritesSize) / 32;
+    // Calcular el tile base para Antonio Belpaese (256 tiles base + 32 tiles del bat)
+    u16 antonioTileBase = 288;
     
     u8 animFrame = (frameCount / 8) & 3;
     u16 tileIndex = antonioTileBase + (animFrame * 2);

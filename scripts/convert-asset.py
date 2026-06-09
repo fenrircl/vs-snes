@@ -63,16 +63,56 @@ def main():
     processed_frames = []
     for idx, frame in enumerate(frames):
         fw, fh = frame.size
-        if (fw, fh) != (target_w, target_h):
-            if asset_type == "sprite":
-                # Usar NEAREST para no emborronar y preservar pixel art
+        if asset_type == "sprite":
+            # Caso especial para Antonio Belpaese (detectado por nombre o tamaño original)
+            if "Antonio" in input_path or (fw == 192 and fh == 198):
+                # Antonio original es 32x33 pixel art, escalado a 192x198 (6x)
+                # Primero deshacemos la escala de 6x para recuperar el pixel art 1:1 limpio
+                clean_w = fw // 6
+                clean_h = fh // 6
+                clean_img = frame.resize((clean_w, clean_h), Image.Resampling.NEAREST)
+                
+                # Luego recortamos/ajustamos a 32x32
+                temp_32 = Image.new("RGBA", (32, 32), (0, 0, 0, 0))
+                temp_32.paste(clean_img, (0, 0))
+                
+                # Escalar al target final (si es 16x16, se reduce de forma limpia al 50%)
+                if (target_w, target_h) == (16, 16):
+                    new_img = temp_32.resize((16, 16), Image.Resampling.NEAREST)
+                else:
+                    new_img = temp_32.resize((target_w, target_h), Image.Resampling.NEAREST)
+                processed_frames.append(new_img)
+            else:
+                # Para otros sprites (como Pipeestrello de 19x21)
+                # Si caben dentro del target sin escalar, los centramos
+                if fw <= target_w and fh <= target_h:
+                    new_img = Image.new("RGBA", (target_w, target_h), (0, 0, 0, 0))
+                    dx = (target_w - fw) // 2
+                    dy = (target_h - fh) // 2
+                    new_img.paste(frame, (dx, dy))
+                    processed_frames.append(new_img)
+                else:
+                    # Si no caben, los reescalamos manteniendo el aspecto y los centramos
+                    aspect = fw / fh
+                    if aspect > 1:
+                        new_w = target_w
+                        new_h = int(target_w / aspect)
+                    else:
+                        new_h = target_h
+                        new_w = int(target_h * aspect)
+                    temp_img = frame.resize((new_w, new_h), Image.Resampling.NEAREST)
+                    new_img = Image.new("RGBA", (target_w, target_h), (0, 0, 0, 0))
+                    dx = (target_w - new_w) // 2
+                    dy = (target_h - new_h) // 2
+                    new_img.paste(temp_img, (dx, dy))
+                    processed_frames.append(new_img)
+        else:
+            # Para fondos
+            if (fw, fh) != (target_w, target_h):
                 new_img = frame.resize((target_w, target_h), Image.Resampling.NEAREST)
                 processed_frames.append(new_img)
             else:
-                new_img = frame.resize((target_w, target_h), Image.Resampling.NEAREST)
-                processed_frames.append(new_img)
-        else:
-            processed_frames.append(frame)
+                processed_frames.append(frame)
 
     # Si es animada, concatenar todos los frames procesados horizontalmente (Sprite Sheet)
     if is_animated and len(processed_frames) > 1:
@@ -123,7 +163,7 @@ def main():
                 px_out[x, y] = px_in[x, y] + 1
                 
     # Guardar como PNG indexado temporal en la subcarpeta correspondiente de gfx/
-    basename = os.path.splitext(os.path.basename(input_path))[0]
+    basename = os.path.splitext(os.path.basename(input_path))[0].replace("-", "_")
     
     # Determinar subcarpeta basada en la ruta original
     subfolder = ""

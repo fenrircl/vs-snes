@@ -2,15 +2,23 @@ ifeq ($(strip $(PVSNESLIB_HOME)),)
 $(error "Error: Debes definir PVSNESLIB_HOME. Ej: export PVSNESLIB_HOME=~/snesdev/pvsneslib")
 endif
 
+# Músicas
+AUDIOFILES := res/bgm.it
+export SOUNDBANK := res/soundbank
+
 include ${PVSNESLIB_HOME}/devkitsnes/snes_rules
 
-.PHONY: bitmaps all
+.PHONY: bitmaps all musics
 
 ROMNAME := vs-snes-mvp
 
-all: bitmaps $(ROMNAME).sfc
+# Regla para compilar músicas
+SMCONVFLAGS := -s -o $(SOUNDBANK) -V -b 5
+musics: $(SOUNDBANK).obj
 
-clean: cleanBuildRes cleanRom cleanGfx
+all: musics bitmaps $(ROMNAME).sfc
+
+clean: cleanBuildRes cleanRom cleanGfx cleanAudio
 
 # Font para la consola de texto
 gfx/pvsneslibfont.pic: gfx/pvsneslibfont.png

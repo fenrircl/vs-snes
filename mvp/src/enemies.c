@@ -105,7 +105,7 @@ void renderEnemies(void) {
         if (enemies[i].vy == 0) {
             // Primer enemigo (Type 0): Pipeestrello 16x16 animado
             u8 animFrame = (frameCount / 8) & 3;
-            u16 animTileBase = (&sprites_tilend - &sprites_til) / 32;
+            u16 animTileBase = 256;
             u16 tileIndex = animTileBase + (animFrame * 2);
             
             oamSetAttr(slot, screenX - 8, screenY - 8, tileIndex, OBJ_PRIO(3) | OBJ_PAL(1));

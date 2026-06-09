@@ -13,6 +13,6 @@
 .BANK 0 SLOT 0
 .SECTION "SpriteData" SEMIFREE
 .include "gfx/sprites_data.as"
-.include "gfx/enemigos/Animated-Pipeestrello_indexed_data.as"
-.include "gfx/personajes/Animated-Antonio_Belpaese_indexed_data.as"
+.include "gfx/enemigos/Animated_Pipeestrello_indexed_data.as"
+.include "gfx/personajes/Animated_Antonio_Belpaese_indexed_data.as"
 .ENDS

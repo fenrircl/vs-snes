@@ -7,6 +7,9 @@
 #include "player.h"
 #include "enemies.h"
 #include "bullets.h"
+#include "res/soundbank.h"
+
+extern char SOUNDBANK__;
 
 /* ============================================================
  *  DEFINICIONES DE VARIABLES GLOBALES
@@ -37,6 +40,11 @@ extern char tilfont, palfont;              // fuente de consola (definida en dat
  * ============================================================ */
 
 int main(void) {
+    /* Inicializar sonido (bota la APU spc700) */
+    spcBoot();
+    spcSetBank(&SOUNDBANK__);
+    spcLoad(MOD_BGM);
+
     /* Inicializar sistema */
     consoleInit();
     consoleSetTextGfxPtr(0x3000);
@@ -49,12 +57,12 @@ int main(void) {
     bgSetDisable(2);
     
     /* Configurar BG1 para el mapa de fondo utilizando los gráficos cargados */
-    bgSetGfxPtr(1, 0x4800);
+    bgSetGfxPtr(1, 0x5000);
     bgSetMapPtr(1, 0x3800, SC_64x64);
     bgSetEnable(1);
     
-    /* Copiar los tiles del fondo a la VRAM a partir de 0x4800 */
-    dmaCopyVram(&Mad_Forest_crop_64x64_indexed_til, 0x4800, &Mad_Forest_crop_64x64_indexed_tilend - &Mad_Forest_crop_64x64_indexed_til);
+    /* Copiar los tiles del fondo a la VRAM a partir de 0x5000 */
+    dmaCopyVram(&Mad_Forest_crop_64x64_indexed_til, 0x5000, &Mad_Forest_crop_64x64_indexed_tilend - &Mad_Forest_crop_64x64_indexed_til);
     
     /* Copiar la paleta del fondo a la paleta de BG 1 en la CGRAM (offset 16, paleta 1) */
     dmaCopyCGram(&Mad_Forest_crop_64x64_indexed_pal, 16, 32);
@@ -98,11 +106,11 @@ int main(void) {
         0, 0, OBJ_SIZE8_L16
     );
     
-    /* Copiar los tiles de la animación del bat a la VRAM de sprites (justo después de sprites_til) */
-    dmaCopyVram(&Animated_Pipeestrello_indexed_til, (&sprites_tilend - &sprites_til) / 2, (&Animated_Pipeestrello_indexed_tilend - &Animated_Pipeestrello_indexed_til));
+    /* Copiar los tiles de la animación del bat a la VRAM de sprites (destino: palabra 4096, tamaño: 1024 bytes) */
+    dmaCopyVram(&Animated_Pipeestrello_indexed_til, 4096, 1024);
     
-    /* Copiar los tiles de la animación del personaje a la VRAM de sprites (justo después de pipeestrello) */
-    dmaCopyVram(&Animated_Antonio_Belpaese_indexed_til, ((&sprites_tilend - &sprites_til) + (&Animated_Pipeestrello_indexed_tilend - &Animated_Pipeestrello_indexed_til)) / 2, (&Animated_Antonio_Belpaese_indexed_tilend - &Animated_Antonio_Belpaese_indexed_til));
+    /* Copiar los tiles de la animación del personaje a la VRAM de sprites (destino: palabra 4608, tamaño: 1024 bytes) */
+    dmaCopyVram(&Animated_Antonio_Belpaese_indexed_til, 4608, 1024);
     
     /* Copiar la paleta de la animación del bat a la paleta de sprites 1 en la CGRAM (offset 144) */
     dmaCopyCGram(&Animated_Pipeestrello_indexed_pal, 144, 32);
@@ -137,8 +145,12 @@ int main(void) {
     
     /* Esperar START */
     while (!(padsDown(0) & KEY_START)) {
+        spcProcess();
         WaitForVBlank();
     }
+    
+    /* Iniciar música del juego */
+    spcPlay(0);
     
     // Clear start screen texts
     consoleDrawText(12, 5, "       ");
@@ -190,6 +202,7 @@ start:
         consoleDrawText(22, 1, "%u ", player.score);
         consoleDrawText(27, 1, "%u ", player.kills);
         
+        spcProcess();
         WaitForVBlank();
         oamUpdate();
         frameCount++;
@@ -200,7 +213,10 @@ start:
             consoleDrawText(2, 12, "TIEMPO: ");
             drawTime(10, 12, gameMins, gameSecs);
             consoleDrawText(2, 14, "PRESIONA START");
-            while (!(padsDown(0) & KEY_START)) { WaitForVBlank(); }
+            while (!(padsDown(0) & KEY_START)) {
+                spcProcess();
+                WaitForVBlank();
+            }
             player.x = MAP_W / 2; player.y = MAP_H / 2;
             player.lives = 5; player.score = 0; player.kills = 0; player.shootTimer = 0;
             spawnTimer = 0; frameCount = 0; gameTimer = 0; wave = 0;
