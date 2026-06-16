@@ -33,5 +33,4 @@ mvp/res/test_*
 scripts/create_it_*
 scripts/patch_it.py
 scripts/create_loop_it.py
-music/*.wav
 music/*.brr
