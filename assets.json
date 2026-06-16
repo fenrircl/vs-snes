@@ -1,0 +1,45 @@
+{
+  "_comment": "Manifiesto unico de sprites para VS-SNES. Editar aqui = agregar/quitar enemigos sin tocar C/asm. Regenerar con: python3 scripts/build-sprites.py",
+  "frames": 4,
+  "sprite_size": 16,
+
+  "palette_groups": {
+    "enemies": { "slot": 1, "members": ["Pipeestrello", "Zombie", "Skeleton", "Ghost", "Mudman"] },
+    "player":  { "slot": 2, "members": ["Antonio_Belpaese"] },
+    "weapons": { "slot": 3, "members": ["Whip", "King_Bible", "Axe", "Garlic", "Magic_Wand", "Santa_Water"] }
+  },
+
+  "sprites": [
+    { "name": "Pipeestrello",     "src": "sprites/enemigos/Animated-Pipeestrello.gif",      "role": "enemy"  },
+    { "name": "Antonio_Belpaese", "src": "sprites/personajes/Animated-Antonio_Belpaese.gif", "role": "player" },
+    { "name": "Zombie",           "src": "sprites/enemigos/Animated-Zombie.gif",            "role": "enemy"  },
+    { "name": "Skeleton",         "src": "sprites/enemigos/Animated-Skeleton.gif",          "role": "enemy"  },
+    { "name": "Ghost",            "src": "sprites/enemigos/Animated-Ghost.webp",            "role": "enemy"  },
+    { "name": "Mudman",           "src": "sprites/enemigos/Animated-Mudman.gif",            "role": "enemy"  },
+    { "name": "Whip",             "src": "sprites/ataques/whip.png",                        "role": "weapon", "layout": "vertical", "frame_size": [32, 16] },
+    { "name": "King_Bible",       "src": "sprites/items/Sprite-King_Bible.png",             "role": "weapon", "layout": "static" },
+    { "name": "Axe",              "src": "sprites/items/Sprite-Axe.png",                    "role": "weapon", "layout": "static" },
+    { "name": "Garlic",           "src": "sprites/items/Sprite-Garlic.png",                 "role": "weapon", "layout": "static" },
+    { "name": "Magic_Wand",       "src": "sprites/items/Sprite-Magic_Wand.png",             "role": "weapon", "layout": "static" },
+    { "name": "Santa_Water",      "src": "sprites/items/Sprite-Santa_Water.png",            "role": "weapon", "layout": "static" }
+  ],
+
+  "enemy_table": [
+    { "sprite": "Pipeestrello", "hp": 1, "speed": 1, "score": 10, "anim": 6  },
+    { "sprite": "Zombie",       "hp": 2, "speed": 1, "score": 20, "anim": 12 },
+    { "sprite": "Skeleton",     "hp": 3, "speed": 1, "score": 30, "anim": 8  },
+    { "sprite": "Ghost",        "hp": 1, "speed": 2, "score": 15, "anim": 10 },
+    { "sprite": "Mudman",       "hp": 4, "speed": 1, "score": 40, "anim": 10 }
+  ],
+
+  "weapon_icons": [
+    { "name": "Experience_Gem", "src": "sprites/items/Sprite-Experience_Gem.png", "tile_start": 34 },
+    { "name": "Whip",        "src": "sprites/items/Sprite-Whip.png",        "tile_start": 64 },
+    { "name": "King_Bible",  "src": "sprites/items/Sprite-King_Bible.png",  "tile_start": 68 },
+    { "name": "Axe",         "src": "sprites/items/Sprite-Axe.png",         "tile_start": 72 },
+    { "name": "Garlic",      "src": "sprites/items/Sprite-Garlic.png",      "tile_start": 76 },
+    { "name": "Magic_Wand",  "src": "sprites/items/Sprite-Magic_Wand.png",  "tile_start": 96 },
+    { "name": "Santa_Water", "src": "sprites/items/Sprite-Santa_Water.png", "tile_start": 100 }
+  ]
+}
+

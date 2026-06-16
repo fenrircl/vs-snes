@@ -1,8 +1,16 @@
 [objects]
+src/bible.obj
+src/garlic.obj
+src/water.obj
 src/player.obj
-src/enemies.obj
 src/main.obj
+src/enemies.obj
+src/axe.obj
+src/whip.obj
 src/hud.obj
+src/wand.obj
+src/gems.obj
+src/assets_gen.obj
 src/bullets.obj
 res/soundbank.obj
 hdr.obj

@@ -1,0 +1,10 @@
+; AUTO-GENERADO por scripts/build-sprites.py - NO EDITAR
+.include "gfx/sprites_data.as"
+.include "gfx/enemigos/Animated_Pipeestrello_indexed_data.as"
+.include "gfx/personajes/Animated_Antonio_Belpaese_indexed_data.as"
+.include "gfx/enemigos/Animated_Zombie_indexed_data.as"
+.include "gfx/enemigos/Animated_Skeleton_indexed_data.as"
+.include "gfx/enemigos/Animated_Ghost_indexed_data.as"
+.include "gfx/enemigos/Animated_Mudman_indexed_data.as"
+.include "gfx/ataques/Animated_Whip_indexed_data.as"
+.include "gfx/ataques/Animated_Items_indexed_data.as"

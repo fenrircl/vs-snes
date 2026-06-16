@@ -2,7 +2,7 @@
 import os
 import sys
 import subprocess
-from PIL import Image
+from PIL import Image, ImageOps, ImageFilter
 
 def main():
     if len(sys.argv) < 3:
@@ -23,18 +23,16 @@ def main():
     print(f"Imagen cargada: {input_path} ({w}x{h}px, modo: {img.mode})")
 
     frames = []
-    is_animated = False
-
-    # Si es un GIF, extraer frames de animación
-    if input_path.lower().endswith('.gif'):
-        is_animated = True
+    # Detectar si la imagen es animada (GIF, WEBP animado, etc.)
+    is_animated = getattr(img, "is_animated", False)
+    if is_animated:
         try:
             while True:
                 frames.append(img.convert('RGBA'))
                 img.seek(img.tell() + 1)
         except EOFError:
             pass
-        print(f"Detectados {len(frames)} frames de animación en el GIF.")
+        print(f"Detectados {len(frames)} frames de animación.")
     else:
         frames.append(img.convert('RGBA'))
 
@@ -76,9 +74,10 @@ def main():
                 temp_32 = Image.new("RGBA", (32, 32), (0, 0, 0, 0))
                 temp_32.paste(clean_img, (0, 0))
                 
-                # Escalar al target final (si es 16x16, se reduce de forma limpia al 50%)
+                # Escalar al target final (si es 16x16, se reduce al 50% con LANCZOS + SHARPEN)
                 if (target_w, target_h) == (16, 16):
-                    new_img = temp_32.resize((16, 16), Image.Resampling.NEAREST)
+                    new_img = temp_32.resize((16, 16), Image.Resampling.LANCZOS)
+                    new_img = new_img.filter(ImageFilter.SHARPEN)
                 else:
                     new_img = temp_32.resize((target_w, target_h), Image.Resampling.NEAREST)
                 processed_frames.append(new_img)
@@ -100,7 +99,11 @@ def main():
                     else:
                         new_h = target_h
                         new_w = int(target_h * aspect)
-                    temp_img = frame.resize((new_w, new_h), Image.Resampling.NEAREST)
+                    
+                    # Usar LANCZOS + SHARPEN para conservar la nitidez en downscales no enteros
+                    temp_img = frame.resize((new_w, new_h), Image.Resampling.LANCZOS)
+                    temp_img = temp_img.filter(ImageFilter.SHARPEN)
+                    
                     new_img = Image.new("RGBA", (target_w, target_h), (0, 0, 0, 0))
                     dx = (target_w - new_w) // 2
                     dy = (target_h - new_h) // 2
@@ -137,8 +140,11 @@ def main():
     r, g, b, a = img.split()
     rgb_img = Image.merge("RGB", (r, g, b))
     
-    # 2. Cuantizar la imagen RGB a 15 colores (dejando 1 para transparencia)
-    quantized = rgb_img.quantize(colors=15, method=Image.Quantize.MAXCOVERAGE)
+    # Aplicar autocontrast para maximizar el rango de la paleta
+    rgb_img = ImageOps.autocontrast(rgb_img, cutoff=1)
+    
+    # 2. Cuantizar la imagen RGB a 15 colores (dejando 1 para transparencia) con MEDIANCUT
+    quantized = rgb_img.quantize(colors=15, method=Image.Quantize.MEDIANCUT)
     
     # 3. Crear una nueva imagen de paleta de 16 colores donde el color 0 sea transparente
     # Obtener la paleta de 15 colores existente

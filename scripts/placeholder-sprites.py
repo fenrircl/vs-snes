@@ -118,6 +118,23 @@ def draw_gem_tile(pixels, tx, ty, palette):
             else:
                 pixels[py][px] = 0
 
+def draw_hp_bar_tile(pixels, tx, ty, green_pixels):
+    """Dibuja un tile de barra de vida con cierta cantidad de píxeles verdes."""
+    for y in range(TILE_SIZE):
+        for x in range(TILE_SIZE):
+            px = tx * TILE_SIZE + x
+            py = ty * TILE_SIZE + y
+            if y >= 3 and y <= 4:
+                if x >= 1 and x <= 6:
+                    if (x - 1) < green_pixels:
+                        pixels[py][px] = 5  # verde
+                    else:
+                        pixels[py][px] = 1  # rojo
+                else:
+                    pixels[py][px] = 0
+            else:
+                pixels[py][px] = 0
+
 def draw_tile(pixels, tx, ty, pattern, palette, color_idx):
     """Dibuja un tile según un patrón de bits (para formas más complejas)."""
     for y in range(TILE_SIZE):
@@ -160,6 +177,13 @@ def main():
     
     # Tile 9: Enemigo variante 4 (rojo oscuro)
     draw_enemy_tile(pixels, 1, 3, palette, 6, 1)
+    
+    # Tiles 37-41: HP Bars (Row 2, Cols 5-9)
+    draw_hp_bar_tile(pixels, 5, 2, 6) # 5/5 lives
+    draw_hp_bar_tile(pixels, 6, 2, 5) # 4/5 lives
+    draw_hp_bar_tile(pixels, 7, 2, 4) # 3/5 lives
+    draw_hp_bar_tile(pixels, 8, 2, 2) # 2/5 lives
+    draw_hp_bar_tile(pixels, 9, 2, 1) # 1/5 lives
     
     # Crear imagen indexada
     img = Image.new('P', (SHEET_W, SHEET_H))

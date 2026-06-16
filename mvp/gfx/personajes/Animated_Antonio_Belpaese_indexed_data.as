@@ -5,4 +5,3 @@ Animated_Antonio_Belpaese_indexed_tilend:
 Animated_Antonio_Belpaese_indexed_pal:
 .incbin "gfx/personajes/Animated_Antonio_Belpaese_indexed.pal"
 Animated_Antonio_Belpaese_indexed_palend:
-
