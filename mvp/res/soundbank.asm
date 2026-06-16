@@ -1,13 +1,21 @@
 ;************************************************
 ; snesmod soundbank data                        *
-; total size:      29064 bytes                  *
+; total size:      40218 bytes                  *
 ;************************************************
 
 .include "hdr.asm"
 
 .BANK 5
-.SECTION "SOUNDBANK" ; need dedicated bank(s)
+.SECTION "SOUNDBANK0" ; need dedicated bank(s)
 
-SOUNDBANK__:
-.incbin "forest_rockman_sb.bnk"
+SOUNDBANK__0:
+.incbin "res/soundbank.bnk" read $8000
 .ENDS
+
+.BANK 6
+.SECTION "SOUNDBANK1" ; need dedicated bank(s)
+
+SOUNDBANK__1:
+.incbin "res/soundbank.bnk" skip $8000
+.ENDS
+

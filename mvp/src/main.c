@@ -6,7 +6,7 @@
 #include "gems.h"
 #include "res/soundbank.h"
 
-extern char SOUNDBANK__;
+extern char SOUNDBANK__0;
 
 /* ============================================================
  *  DEFINICIONES DE VARIABLES GLOBALES
@@ -370,7 +370,7 @@ void levelUpMenu(void) {
 int main(void) {
     /* Inicializar sonido (bota la APU spc700) */
     spcBoot();
-    spcSetBank(&SOUNDBANK__);
+    spcSetBank(&SOUNDBANK__0);
     spcLoad(MOD_BGM);
 
     /* Inicializar sistema */
