@@ -4,6 +4,9 @@
 *.obj
 *.ps
 *.sym
+*.bnk
+*.asm
+*.def
 
 # Graphics conversion output
 *.pic
@@ -24,3 +27,11 @@ Thumbs.db
 
 # Temp
 tmp/
+
+# Test artifacts
+mvp/res/test_*
+scripts/create_it_*
+scripts/patch_it.py
+scripts/create_loop_it.py
+music/*.wav
+music/*.brr
