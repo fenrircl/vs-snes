@@ -91,7 +91,7 @@ void renderGems(void) {
             attributes = OBJ_PRIO(3) | OBJ_PAL((frameCount / 8) & 1);
         }
 
-        oamSetAttr(slot, screenX - 4, screenY - 4, TILE_GEM, attributes);
         oamSetEx(slot, OBJ_SMALL, OBJ_SHOW);
+        oamSetAttr(slot, screenX - 4, screenY - 4, TILE_GEM, attributes);
     }
 }

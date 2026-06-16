@@ -70,7 +70,6 @@ void updateAxe(void) {
                     enemies[e].active = 0;
                     player.score += enemyScore[enemies[e].vy];
                     player.kills++;
-                    player.xp += enemyScore[enemies[e].vy] / 10;
                     spawnGem(enemies[e].x, enemies[e].y, 1);
                 }
             }
@@ -145,7 +144,7 @@ void renderAxe(void) {
         else if (rotFrame == 2) oamAttr |= (OBJ_FLIPX | OBJ_FLIPY);
         else if (rotFrame == 3) oamAttr |= OBJ_FLIPY;
 
-        oamSetAttr(slot, screenX - 8, screenY - 8, tileIndex, oamAttr);
         oamSetEx(slot, OBJ_LARGE, OBJ_SHOW);
+        oamSetAttr(slot, screenX - 8, screenY - 8, tileIndex, oamAttr);
     }
 }

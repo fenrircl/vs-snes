@@ -350,8 +350,12 @@ void levelUpMenu(void) {
         consoleDrawText(3, r, "                          ");
     }
 
-    // Update level and next XP target
-    player.xp -= player.nextLevelXp;
+    // Update level and next XP target safely to prevent unsigned underflow
+    if (player.xp >= player.nextLevelXp) {
+        player.xp -= player.nextLevelXp;
+    } else {
+        player.xp = 0;
+    }
     player.level++;
     player.nextLevelXp = player.level * 6 + 4;
 
@@ -612,6 +616,11 @@ start:
             if (padDown & KEY_Y) dbgGemUpdate = !dbgGemUpdate;
             if (padDown & KEY_L) dbgBulletUpdate = !dbgBulletUpdate;
             if (padDown & KEY_R) dbgPlayerShoot = !dbgPlayerShoot;
+            if (padDown & KEY_SELECT) {
+                levelUpMenu();
+                // Force redrawing the HUD after menu exits
+                player.score = player.score; // Triggers redraw check next frame
+            }
         }
         if (spawnTimer == 0) {
             spawnEnemy();

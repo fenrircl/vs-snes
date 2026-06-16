@@ -74,7 +74,6 @@ void updateWhip(void) {
                         enemies[i].active = 0;
                         player.score += enemyScore[enemies[i].vy];
                         player.kills++;
-                        player.xp += enemyScore[enemies[i].vy] / 10;
                         
                         // Drop gem
                         spawnGem(enemies[i].x, enemies[i].y, 1);
@@ -106,24 +105,24 @@ void renderWhip(void) {
     // A 32x16 sheet of a frame consists of two 16x16 sprites side by side.
     // Sprite A tile = base + frame * 8.
     // Sprite B tile = base + frame * 8 + 4.
-    u16 baseTile = TILEBASE_Whip + (frame * 8);
+    u16 baseTile = TILEBASE_Whip + (frame * 4);
 
     s16 screenX = player.x - cameraX;
     s16 screenY = player.y - cameraY;
 
     u16 oamAttr = OBJ_PRIO(3) | OBJ_PAL(WEAPONS_PALETTE);
     
+    oamSetEx(OAM_WHIP_A, OBJ_LARGE, OBJ_SHOW);
+    oamSetEx(OAM_WHIP_B, OBJ_LARGE, OBJ_SHOW);
+
     if (whipFacingLeft) {
         oamAttr |= OBJ_FLIPX;
         // Position A (left side) and B (right side)
         // When flipped, sprite B (tip) is on the left, A (base) on the right.
-        oamSetAttr(OAM_WHIP_A, screenX - 24, screenY - 8, baseTile + 4, oamAttr);
+        oamSetAttr(OAM_WHIP_A, screenX - 24, screenY - 8, baseTile + 2, oamAttr);
         oamSetAttr(OAM_WHIP_B, screenX - 8, screenY - 8, baseTile, oamAttr);
     } else {
         oamSetAttr(OAM_WHIP_A, screenX + 8, screenY - 8, baseTile, oamAttr);
-        oamSetAttr(OAM_WHIP_B, screenX + 24, screenY - 8, baseTile + 4, oamAttr);
+        oamSetAttr(OAM_WHIP_B, screenX + 24, screenY - 8, baseTile + 2, oamAttr);
     }
-
-    oamSetEx(OAM_WHIP_A, OBJ_LARGE, OBJ_SHOW);
-    oamSetEx(OAM_WHIP_B, OBJ_LARGE, OBJ_SHOW);
 }

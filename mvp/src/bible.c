@@ -93,7 +93,6 @@ void updateBible(void) {
                         enemies[i].active = 0;
                         player.score += enemyScore[enemies[i].vy];
                         player.kills++;
-                        player.xp += enemyScore[enemies[i].vy] / 10;
                         spawnGem(enemies[i].x, enemies[i].y, 1);
                     }
                 }
@@ -144,7 +143,7 @@ void renderBible(void) {
         u16 tileIndex = TILE_ICON_KING_BIBLE; // 16x16 single frame tile from sprites.png
         u16 oamAttr = OBJ_PRIO(3) | OBJ_PAL(0);
 
-        oamSetAttr(slot, screenX - 8, screenY - 8, tileIndex, oamAttr);
         oamSetEx(slot, OBJ_LARGE, OBJ_SHOW);
+        oamSetAttr(slot, screenX - 8, screenY - 8, tileIndex, oamAttr);
     }
 }

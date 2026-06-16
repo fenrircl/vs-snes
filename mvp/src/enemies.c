@@ -177,8 +177,8 @@ void renderEnemies(void) {
             oamAttr |= OBJ_FLIPX;
         }
         
-        oamSetAttr(slot, screenX - 8, screenY - 8, tileIndex, oamAttr);
         oamSetEx(slot, OBJ_LARGE, OBJ_SHOW);
+        oamSetAttr(slot, screenX - 8, screenY - 8, tileIndex, oamAttr);
     }
 }
 

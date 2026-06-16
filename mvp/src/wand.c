@@ -103,7 +103,6 @@ void updateWand(void) {
                     enemies[e].active = 0;
                     player.score += enemyScore[enemies[e].vy];
                     player.kills++;
-                    player.xp += enemyScore[enemies[e].vy] / 10;
                     spawnGem(enemies[e].x, enemies[e].y, 1);
                 }
                 break;
@@ -159,9 +158,9 @@ void renderWand(void) {
 
         // We use the Magic Wand sprite itself as the projectile, which represents a flying wand projectile
         u16 tileIndex = TILEBASE_Magic_Wand;
-        u16 oamAttr = OBJ_PRIO(3) | OBJ_PAL(WEAPONS_PALETTE);
+        u16 oamAttr = OBJ_PRIO(3) | OBJ_PAL(ITEMS_PALETTE);
 
-        oamSetAttr(slot, screenX - 8, screenY - 8, tileIndex, oamAttr);
         oamSetEx(slot, OBJ_LARGE, OBJ_SHOW);
+        oamSetAttr(slot, screenX - 8, screenY - 8, tileIndex, oamAttr);
     }
 }

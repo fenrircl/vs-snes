@@ -31,8 +31,9 @@ void updateGarlic(void) {
         if (player.garlicLvl >= 3) dmg = 2;
         if (player.garlicLvl >= 5) dmg = 3;
 
-        // Radius matches the visual outline scale: Lvl 1=16px, Lvl 2=18px, Lvl 3=20px, Lvl 4=22px, Lvl 5=24px
-        s16 radius = 14 + player.garlicLvl * 2;
+        // Enlarge collision radius to match the new wide visual aura
+        // Lvl 1: 24px, Lvl 2: 28px, Lvl 3: 32px, Lvl 4: 36px, Lvl 5: 40px
+        s16 radius = 20 + player.garlicLvl * 4;
 
         u8 e;
         for (e = 0; e < MAX_ENEMIES; e++) {
@@ -51,7 +52,6 @@ void updateGarlic(void) {
                     enemies[e].active = 0;
                     player.score += enemyScore[enemies[e].vy];
                     player.kills++;
-                    player.xp += enemyScore[enemies[e].vy] / 10;
                     spawnGem(enemies[e].x, enemies[e].y, 1);
                 }
             }
@@ -69,43 +69,59 @@ void renderGarlic(void) {
         return;
     }
 
-    // Base offset: Lvl 1=4px, Lvl 2=5px, Lvl 3=6px, Lvl 4=7px, Lvl 5=8px
-    s16 baseOffset = 3 + player.garlicLvl;
-    if (baseOffset > 8) baseOffset = 8;
+    // Base offset: Lvl 1=14px, Lvl 2=18px, Lvl 3=22px, Lvl 4=26px, Lvl 5=30px
+    s16 baseOffset = 10 + player.garlicLvl * 4;
     
-    // Pulse the offset slightly to make the outline breathe/glow
+    // Pulse the offset slightly to make the aura breathe/glow
     s16 pulse = (frameCount / 8) & 1;
     s16 d = baseOffset + pulse;
 
     s16 screenX = player.x - cameraX;
     s16 screenY = player.y - cameraY;
-    u16 tileIndex = TILEBASE_Garlic;
 
-    // Define the 4 corner positions and their flip attributes
-    static const s8 xSign[4] = {-1,  1, -1,  1};
-    static const s8 ySign[4] = {-1, -1,  1,  1};
-    static const u16 flipFlags[4] = {0, OBJ_FLIPX, OBJ_FLIPY, OBJ_FLIPX | OBJ_FLIPY};
+    // Use the blue translucent ring tiles (first sprite in items, which is TILEBASE_Items) instead of the garlic head icon
+    u16 tileIndex = TILEBASE_Items;
+
+    // Define 8 offsets forming a circle around the player
+    // Diagonals (using d * 0.7 approx) and Cardinals
+    s16 diag = (d * 7) / 10;
+    
+    s16 xOff[8] = { -d,  d,  0,  0, -diag,  diag, -diag,  diag };
+    s16 yOff[8] = {  0,  0, -d,  d, -diag, -diag,  diag,  diag };
+
+    // Flip the garlic curved sprites to face outwards, forming a perfect circular ring boundary
+    // Ordering: Left, Right, Up, Down, Up-Left, Up-Right, Down-Left, Down-Right
+    static const u16 garlicFlips[8] = {
+        0,                               // Left (facing right)
+        OBJ_FLIPX,                       // Right (facing left)
+        OBJ_FLIPY,                       // Up
+        0,                               // Down
+        0,                               // Up-Left
+        OBJ_FLIPX,                       // Up-Right
+        OBJ_FLIPY,                       // Down-Left
+        OBJ_FLIPX | OBJ_FLIPY            // Down-Right
+    };
+
+    // Use weapons palette (3) or player palette (2) for a cleaner, more glowing ring look
+    u16 oamAttr = OBJ_PRIO(2) | OBJ_PAL(WEAPONS_PALETTE);
 
     for (i = 0; i < 8; i++) {
         u16 slot = OAM_GARLIC(i);
-        if (i >= 4) {
-            oamSetAttr(slot, 0, 240, 0, 0);
-            oamSetEx(slot, OBJ_LARGE, OBJ_HIDE);
-            continue;
-        }
 
-        s16 gx = screenX + xSign[i] * d;
-        s16 gy = screenY + ySign[i] * d;
+        // Center the 16x16 sprites around the offset circle (subtracting 8 px to center them perfectly)
+        s16 gx = screenX - 8 + xOff[i];
+        s16 gy = screenY - 8 + yOff[i];
 
-        u16 oamAttr = OBJ_PRIO(3) | OBJ_PAL(ITEMS_PALETTE) | flipFlags[i];
+        // Combine flip flags for each direction to curve outwards
+        u16 spriteAttr = oamAttr | garlicFlips[i];
 
         // Alternate showing even/odd sprites to create a smooth CRT 50% translucency aura effect
         if (((frameCount + i) & 1) == 0) {
             oamSetAttr(slot, 0, 240, 0, 0);
             oamSetEx(slot, OBJ_LARGE, OBJ_HIDE);
         } else {
-            oamSetAttr(slot, gx - 8, gy - 8, tileIndex, oamAttr);
             oamSetEx(slot, OBJ_LARGE, OBJ_SHOW);
+            oamSetAttr(slot, gx, gy, tileIndex, spriteAttr);
         }
     }
 }

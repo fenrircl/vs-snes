@@ -44,9 +44,9 @@ void renderPlayer(void) {
     if (player.invincibilityTimer > 0 && (frameCount & 4)) {
         oamSetAttr(OAM_PLAYER, 0, 240, 0, 0);
     } else {
+        oamSetEx(OAM_PLAYER, OBJ_LARGE, OBJ_SHOW);
         oamSetAttr(OAM_PLAYER, screenX - 8, screenY - 8, tileIndex, oamAttr);
     }
-    oamSetEx(OAM_PLAYER, OBJ_LARGE, OBJ_SHOW);
 
     // Render HP bar sprite under player feet (only if alive)
     if (player.lives > 0 && player.lives <= 5) {
