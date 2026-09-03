@@ -385,8 +385,46 @@ void levelUpMenu(void) {
     player.nextLevelXp = (player.level * player.level * 2) + 8;
 
     gameStartTime += (snes_vblank_count - menuStart);
-}
+/* ============================================================
+ *  GAME RESET HELPER
+ * ============================================================ */
 
+static void resetGameState(void) {
+    player.x = MAP_W / 2; player.y = MAP_H / 2;
+    player.lives = 5; player.score = 0; player.kills = 0; player.shootTimer = 0;
+    player.xp = 0; player.nextLevelXp = 10; player.level = 1;
+    player.speed = PLAYER_SPEED; player.shootCooldown = SHOOT_COOLDOWN; player.bulletSpeed = BULLET_SPEED;
+    player.invincibilityTimer = 0;
+    player.magnetRange = 40;
+    player.cooldownLvl = 1; player.speedLvl = 1; player.magnetLvl = 1; 
+    player.bibleLvl = 0; player.axeLvl = 0; player.garlicLvl = 0; player.wandLvl = 0; player.waterLvl = 0;
+    spawnTimer = 0; frameCount = 0; gameTimer = 0; wave = 0;
+    gameMins = 0; gameSecs = 0;
+    cameraX = 0; cameraY = 0;
+    initEnemies(); initWhip(); initBible(); initAxe(); initGarlic(); initWand(); initWater(); initGems();
+    
+    consoleDrawText(6, 10, "                     ");
+    consoleDrawText(2, 11, "                         ");
+    consoleDrawText(2, 12, "                 ");
+    consoleDrawText(2, 14, "              ");
+    
+    consoleDrawTextColored(2, 1, 4, "LVL:");
+    consoleDrawTextColored(6, 1, 0, "1");
+    drawTime(12, 1, 0, 0);
+    consoleDrawTextColored(20, 1, 5, "PTS:");
+    consoleDrawTextColored(24, 1, 0, "0");
+    consoleDrawTextColored(29, 1, 7, "K:");
+    consoleDrawTextColored(31, 1, 0, "0");
+
+    consoleDrawTextColored(2, 0, 6, "WPN:");
+    consoleDrawTextColored(6, 0, 0, "1");
+    consoleDrawTextColored(10, 0, 4, "SPD:");
+    consoleDrawTextColored(14, 0, 0, "1");
+    consoleDrawTextColored(18, 0, 5, "MAG:");
+    consoleDrawTextColored(22, 0, 0, "1");
+
+    consoleDrawText(0, 27, "                                ");
+}
 
 /* ============================================================
  *  MAIN
@@ -836,6 +874,7 @@ start:
             }
         }
         
+
         if (gameMins >= 10) {
             consoleDrawTextColored(6, 10, 4, "  VICTORY!  ");
             consoleDrawTextColored(2, 11, 6, "SCORE:");
@@ -846,41 +885,9 @@ start:
             drawTime(10, 12, gameMins, gameSecs);
             consoleDrawTextColored(2, 14, 6, "PRESIONA START");
             while (!(padsDown(0) & KEY_START)) {
-                // spcProcess();
                 WaitForVBlank();
             }
-            player.x = MAP_W / 2; player.y = MAP_H / 2;
-            player.lives = 5; player.score = 0; player.kills = 0; player.shootTimer = 0;
-            player.xp = 0; player.nextLevelXp = 10; player.level = 1;
-            player.speed = PLAYER_SPEED; player.shootCooldown = SHOOT_COOLDOWN; player.bulletSpeed = BULLET_SPEED;
-            player.invincibilityTimer = 0;
-            player.magnetRange = 40;
-            player.cooldownLvl = 1; player.speedLvl = 1; player.magnetLvl = 1; player.bibleLvl = 0;
-            spawnTimer = 0; frameCount = 0; gameTimer = 0; wave = 0;
-            gameMins = 0; gameSecs = 0;
-            cameraX = 0; cameraY = 0;
-            initEnemies(); initWhip(); initBible(); initGems();
-            consoleDrawText(6, 10, "            ");
-            consoleDrawText(2, 11, "                         ");
-            consoleDrawText(2, 12, "                 ");
-            consoleDrawText(2, 14, "              ");
-            
-            consoleDrawTextColored(2, 1, 4, "LVL:");
-            consoleDrawTextColored(6, 1, 0, "1");
-            drawTime(12, 1, 0, 0);
-            consoleDrawTextColored(20, 1, 5, "PTS:");
-            consoleDrawTextColored(24, 1, 0, "0");
-            consoleDrawTextColored(29, 1, 7, "K:");
-            consoleDrawTextColored(31, 1, 0, "0");
-
-            consoleDrawTextColored(2, 0, 6, "WPN:");
-            consoleDrawTextColored(6, 0, 0, "1");
-            consoleDrawTextColored(10, 0, 4, "SPD:");
-            consoleDrawTextColored(14, 0, 0, "1");
-            consoleDrawTextColored(18, 0, 5, "MAG:");
-            consoleDrawTextColored(22, 0, 0, "1");
-
-            consoleDrawText(0, 27, "                                ");
+            resetGameState();
             goto start;
         }
         
@@ -894,41 +901,9 @@ start:
             drawTime(10, 12, gameMins, gameSecs);
             consoleDrawTextColored(2, 14, 6, "PRESIONA START");
             while (!(padsDown(0) & KEY_START)) {
-                // spcProcess();
                 WaitForVBlank();
             }
-            player.x = MAP_W / 2; player.y = MAP_H / 2;
-            player.lives = 5; player.score = 0; player.kills = 0; player.shootTimer = 0;
-            player.xp = 0; player.nextLevelXp = 10; player.level = 1;
-            player.speed = PLAYER_SPEED; player.shootCooldown = SHOOT_COOLDOWN; player.bulletSpeed = BULLET_SPEED;
-            player.invincibilityTimer = 0;
-            player.magnetRange = 40;
-            player.cooldownLvl = 1; player.speedLvl = 1; player.magnetLvl = 1; player.bibleLvl = 0;
-            spawnTimer = 0; frameCount = 0; gameTimer = 0; wave = 0;
-            gameMins = 0; gameSecs = 0;
-            cameraX = 0; cameraY = 0;
-            initEnemies(); initWhip(); initBible(); initGems();
-            consoleDrawText(6, 10, "         ");
-            consoleDrawText(2, 11, "                         ");
-            consoleDrawText(2, 12, "                 ");
-            consoleDrawText(2, 14, "              ");
-            
-            consoleDrawTextColored(2, 1, 4, "LVL:");
-            consoleDrawTextColored(6, 1, 0, "1");
-            drawTime(12, 1, 0, 0);
-            consoleDrawTextColored(20, 1, 5, "PTS:");
-            consoleDrawTextColored(24, 1, 0, "0");
-            consoleDrawTextColored(29, 1, 7, "K:");
-            consoleDrawTextColored(31, 1, 0, "0");
-
-            consoleDrawTextColored(2, 0, 6, "WPN:");
-            consoleDrawTextColored(6, 0, 0, "1");
-            consoleDrawTextColored(10, 0, 4, "SPD:");
-            consoleDrawTextColored(14, 0, 0, "1");
-            consoleDrawTextColored(18, 0, 5, "MAG:");
-            consoleDrawTextColored(22, 0, 0, "1");
-
-            consoleDrawText(0, 27, "                                ");
+            resetGameState();
             goto start;
         }
     }
