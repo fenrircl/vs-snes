@@ -31,16 +31,18 @@ void updateGems(void) {
     for (i = 0; i < MAX_GEMS; i++) {
         if (!gems[i].active) continue;
 
-        // Merge gems that are very close to each other
-        for (j = i + 1; j < MAX_GEMS; j++) {
-            if (!gems[j].active) continue;
-            s16 gdx = gems[i].x - gems[j].x;
-            if (gdx < -8 || gdx > 8) continue;
-            s16 gdy = gems[i].y - gems[j].y;
-            if (gdy < -8 || gdy > 8) continue;
-            
-            gems[i].xpValue += gems[j].xpValue;
-            gems[j].active = 0;
+        // Merge gems that are very close to each other (every 8 frames)
+        if ((frameCount & 7) == 0) {
+            for (j = i + 1; j < MAX_GEMS; j++) {
+                if (!gems[j].active) continue;
+                s16 gdx = gems[i].x - gems[j].x;
+                if (gdx < -8 || gdx > 8) continue;
+                s16 gdy = gems[i].y - gems[j].y;
+                if (gdy < -8 || gdy > 8) continue;
+                
+                gems[i].xpValue += gems[j].xpValue;
+                gems[j].active = 0;
+            }
         }
 
         s16 dx = player.x - gems[i].x;

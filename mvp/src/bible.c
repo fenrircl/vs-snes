@@ -69,32 +69,32 @@ void updateBible(void) {
             }
             u8 pos = (bibleOrbitPos + offset) & 15;
             
-            // Adjust radius based on level: Lvl 1-2 = 1.0x, Lvl 3 = 1.1x (approx), Lvl 4 = 1.2x, Lvl 5 = 1.3x
+            // Adjust radius based on level (shift approximation instead of division)
             s16 bx = player.x + orbitX[pos];
             s16 by = player.y + orbitY[pos];
-            if (player.bibleLvl == 3) { bx += orbitX[pos]/10; by += orbitY[pos]/10; }
-            else if (player.bibleLvl == 4) { bx += orbitX[pos]/5; by += orbitY[pos]/5; }
-            else if (player.bibleLvl >= 5) { bx += orbitX[pos]/3; by += orbitY[pos]/3; }
+            if (player.bibleLvl == 3) { bx += orbitX[pos] >> 3; by += orbitY[pos] >> 3; }
+            else if (player.bibleLvl == 4) { bx += orbitX[pos] >> 2; by += orbitY[pos] >> 2; }
+            else if (player.bibleLvl >= 5) { bx += orbitX[pos] >> 1; by += orbitY[pos] >> 1; }
 
-            // Collide with enemies
+            // Collide with enemies (early exit in X)
             u8 i;
             for (i = 0; i < MAX_ENEMIES; i++) {
                 if (!enemies[i].active) continue;
 
                 s16 dx = bx - enemies[i].x;
-                s16 dy = by - enemies[i].y;
-                if (dx < 0) dx = -dx;
-                if (dy < 0) dy = -dy;
+                if (dx < -10 || dx > 10) continue;
 
-                if (dx <= 10 && dy <= 10) {
-                    if (enemies[i].hp > dmg) {
-                        enemies[i].hp -= dmg;
-                    } else {
-                        enemies[i].active = 0;
-                        player.score += enemyScore[enemies[i].vy];
-                        player.kills++;
-                        spawnGem(enemies[i].x, enemies[i].y, 1);
-                    }
+                s16 dy = by - enemies[i].y;
+                if (dy < -10 || dy > 10) continue;
+
+                if (enemies[i].hp > dmg) {
+                    enemies[i].hp -= dmg;
+                    enemies[i].hitFlash = 4;
+                } else {
+                    enemies[i].active = 0;
+                    player.score += enemyScore[enemies[i].vy];
+                    player.kills++;
+                    spawnGem(enemies[i].x, enemies[i].y, 1);
                 }
             }
         }
@@ -133,9 +133,9 @@ void renderBible(void) {
 
         s16 bx = player.x + orbitX[pos];
         s16 by = player.y + orbitY[pos];
-        if (player.bibleLvl == 3) { bx += orbitX[pos]/10; by += orbitY[pos]/10; }
-        else if (player.bibleLvl == 4) { bx += orbitX[pos]/5; by += orbitY[pos]/5; }
-        else if (player.bibleLvl >= 5) { bx += orbitX[pos]/3; by += orbitY[pos]/3; }
+        if (player.bibleLvl == 3) { bx += orbitX[pos] >> 3; by += orbitY[pos] >> 3; }
+        else if (player.bibleLvl == 4) { bx += orbitX[pos] >> 2; by += orbitY[pos] >> 2; }
+        else if (player.bibleLvl >= 5) { bx += orbitX[pos] >> 1; by += orbitY[pos] >> 1; }
 
         s16 screenX = bx - cameraX;
         s16 screenY = by - cameraY;

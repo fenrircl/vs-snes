@@ -90,6 +90,10 @@ void spawnEnemy(void) {
             enemies[i].hp = enemyHP[type];
             enemies[i].vx = enemySpeed[type];
             enemies[i].vy = type;  // Guardar tipo
+            enemies[i].animFrame = 0;
+            enemies[i].animTimer = enemyAnimSpeed[type];
+            enemies[i].facingLeft = 0;
+            enemies[i].hitFlash = 0;
             return;
         }
     }
@@ -102,6 +106,14 @@ void updateEnemies(void) {
     
     for (i = frameOdd; i < MAX_ENEMIES; i += 2) {
         if (!enemies[i].active) continue;
+        
+        /* Animación diferida / state-driven */
+        if (enemies[i].animTimer > 0) {
+            enemies[i].animTimer--;
+        } else {
+            enemies[i].animFrame = (enemies[i].animFrame + 1) & 3;
+            enemies[i].animTimer = enemyAnimSpeed[enemies[i].vy];
+        }
         
         /* Movimiento hacia el jugador */
         dx = player.x - enemies[i].x;
@@ -116,11 +128,11 @@ void updateEnemies(void) {
         if (speedStep > 0) {
             if (dx > 0) {
                 enemies[i].x += speedStep;
-                enemies[i].unused1 = 0; // Mirando a la derecha
+                enemies[i].facingLeft = 0; // Mirando a la derecha
             }
             else if (dx < 0) {
                 enemies[i].x -= speedStep;
-                enemies[i].unused1 = 1; // Mirando a la izquierda (flip)
+                enemies[i].facingLeft = 1; // Mirando a la izquierda (flip)
             }
             
             if (dy > 0) enemies[i].y += speedStep;
@@ -141,6 +153,7 @@ void updateEnemies(void) {
             if (player.invincibilityTimer == 0) {
                 if (player.lives > 0) player.lives--;
                 player.invincibilityTimer = 30; // 0.5s de invencibilidad
+                shakeTimer = 8; // Impacto visual de screen shake
             }
         }
     }
@@ -164,16 +177,19 @@ void renderEnemies(void) {
             oamSetEx(slot, OBJ_SMALL, OBJ_HIDE);
             continue;
         }
-        u8 animDiv = enemyAnimSpeed[enemies[i].vy];
-        // Desfase de animación usando el índice del enemigo i
-        u8 animFrame = ((frameCount + (i * 3)) / animDiv) & 3;
         
         u16 animTileBase = enemyTileBase[enemies[i].vy];
-        u16 tileIndex = animTileBase + (animFrame * 2);
+        u16 tileIndex = animTileBase + (enemies[i].animFrame * 2);
         u8 palette = enemyPalette[enemies[i].vy];
+        if (enemies[i].hitFlash > 0) {
+            enemies[i].hitFlash--;
+            if (enemies[i].hitFlash & 2) {
+                palette = 0; // Use bright palette 0 for hit-flash
+            }
+        }
         
         u16 oamAttr = OBJ_PRIO(3) | OBJ_PAL(palette);
-        if (enemies[i].unused1) {
+        if (enemies[i].facingLeft) {
             oamAttr |= OBJ_FLIPX;
         }
         

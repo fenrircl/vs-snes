@@ -53,9 +53,10 @@ typedef struct {
     u8 active;
     u8 hp;
     u8 animFrame;
-    u8 unused1;
+    u8 facingLeft;
     u16 oamSlot;
-    u16 unused2;
+    u8 animTimer;
+    u8 hitFlash;
 } Entity;
 
 typedef struct {
@@ -104,6 +105,7 @@ extern u16 gameTimer;
 extern u8 wave, gameMins, gameSecs;
 extern u32 gameStartTime;
 extern s16 cameraX, cameraY;
+extern u8 shakeTimer;
 
 /* Fuentes y Sprites base (los sprites animados se declaran en assets_gen.h) */
 extern char tilfont, palfont;

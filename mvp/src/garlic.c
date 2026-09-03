@@ -48,6 +48,7 @@ void updateGarlic(void) {
             if (dx <= radius && dy <= radius && (dx + dy <= radius + (radius >> 2))) {
                 if (enemies[e].hp > dmg) {
                     enemies[e].hp -= dmg;
+                    enemies[e].hitFlash = 4;
                 } else {
                     enemies[e].active = 0;
                     player.score += enemyScore[enemies[e].vy];
@@ -83,8 +84,8 @@ void renderGarlic(void) {
     u16 tileIndex = TILEBASE_Items;
 
     // Define 8 offsets forming a circle around the player
-    // Diagonals (using d * 0.7 approx) and Cardinals
-    s16 diag = (d * 7) / 10;
+    // Diagonals (using (d * 7) >> 3 approx) and Cardinals
+    s16 diag = (d * 7) >> 3;
     
     s16 xOff[8] = { -d,  d,  0,  0, -diag,  diag, -diag,  diag };
     s16 yOff[8] = {  0,  0, -d,  d, -diag, -diag,  diag,  diag };

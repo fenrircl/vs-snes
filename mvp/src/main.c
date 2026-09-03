@@ -22,6 +22,7 @@ u8 wave, gameMins, gameSecs;
 u32 gameStartTime;
 
 s16 cameraX, cameraY;
+u8 shakeTimer = 0;
 u16 dbgEnemyUpdate = 1;
 u16 dbgSpriteRender = 1;
 u16 dbgBgScroll = 1;
@@ -142,8 +143,8 @@ void levelUpMenu(void) {
 
     u8 ownedCount = countOwnedWeapons();
 
-    // Build pool of valid upgrades (ONLY items/weapons: Whip, Bible, Axe, Garlic, Wand, Water)
-    u8 pool[6];
+    // Build pool of valid upgrades (weapons + stats)
+    u8 pool[8];
     u8 poolSize = 0;
     
     // Whip (Option 0)
@@ -180,8 +181,16 @@ void levelUpMenu(void) {
             pool[poolSize++] = 5;
         }
     }
+    // Speed Stat (Option 7)
+    if (player.speedLvl < 5) {
+        pool[poolSize++] = 7;
+    }
+    // Magnet Stat (Option 8)
+    if (player.magnetLvl < 5) {
+        pool[poolSize++] = 8;
+    }
 
-    // Fallback if no upgrades are possible (all weapons maxed out)
+    // Fallback if no upgrades are possible
     if (poolSize == 0) {
         pool[0] = 6; // HEAL
         poolSize = 1;
@@ -288,6 +297,16 @@ void levelUpMenu(void) {
             consoleDrawTextColored(8, drawRow, 6, "HEAL (RECOVER HP)");
             oamSetAttr(slot, 0, 240, 0, 0);
             oamSetEx(slot, OBJ_LARGE, OBJ_HIDE);
+        } else if (opt == 7) {
+            sprintf(tempStr, "SPD: Lvl %u (+Move)", player.speedLvl + 1);
+            consoleDrawTextColored(11, drawRow, 4, tempStr);
+            oamSetAttr(slot, 0, 240, 0, 0);
+            oamSetEx(slot, OBJ_LARGE, OBJ_HIDE);
+        } else if (opt == 8) {
+            sprintf(tempStr, "MAG: Lvl %u (+Range)", player.magnetLvl + 1);
+            consoleDrawTextColored(11, drawRow, 5, tempStr);
+            oamSetAttr(slot, 0, 240, 0, 0);
+            oamSetEx(slot, OBJ_LARGE, OBJ_HIDE);
         }
     }
     consoleDrawTextColored(3, 19, 4, "+------------------------+");
@@ -330,6 +349,12 @@ void levelUpMenu(void) {
                 player.waterLvl++;
             } else if (opt == 6) {
                 if (player.lives < 5) player.lives++;
+            } else if (opt == 7) {
+                player.speed++;
+                player.speedLvl++;
+            } else if (opt == 8) {
+                player.magnetRange += 20;
+                player.magnetLvl++;
             }
             break;
         }
@@ -357,7 +382,7 @@ void levelUpMenu(void) {
         player.xp = 0;
     }
     player.level++;
-    player.nextLevelXp = player.level * 6 + 4;
+    player.nextLevelXp = (player.level * player.level * 2) + 8;
 
     gameStartTime += (snes_vblank_count - menuStart);
 }
@@ -587,14 +612,24 @@ int main(void) {
 start:
     gameStartTime = snes_vblank_count;
     while (1) {
-        u32 elapsed = snes_vblank_count - gameStartTime;
-        gameSecs = (elapsed / 60) % 60;
-        gameMins = (elapsed / 3600);
-        wave = elapsed / 900;
+        u32 elapsedFrames = snes_vblank_count - gameStartTime;
+        u16 totalSecs = (u16)(elapsedFrames / 60);
+        gameSecs = totalSecs % 60;
+        gameMins = totalSecs / 60;
+        wave = gameMins;
         
         /* Centrar la cámara en el jugador y limitar a los bordes del mapa de 512x512 */
         cameraX = player.x - (SCREEN_W / 2);
         cameraY = player.y - (SCREEN_H / 2);
+
+        /* Screen shake cuando el player recibe daño */
+        if (shakeTimer > 0) {
+            shakeTimer--;
+            s8 shakeOffset = (shakeTimer & 1) ? 2 : -2;
+            cameraX += shakeOffset;
+            cameraY += (shakeTimer & 2) ? 2 : -2;
+        }
+
         if (cameraX < 0) cameraX = 0;
         else if (cameraX > MAP_W - SCREEN_W) cameraX = MAP_W - SCREEN_W;
         if (cameraY < 0) cameraY = 0;
@@ -708,6 +743,9 @@ start:
             }
             if (player.kills != lastKills) {
                 consoleDrawTextColored(31, 1, 0, "%u  ", player.kills);
+                if (player.kills == 50 || player.kills == 100 || player.kills == 200 || player.kills == 500) {
+                    consoleDrawTextColored(10, 3, 4, "*** %u KILLS! ***", player.kills);
+                }
                 lastKills = player.kills;
             }
             if (player.level != lastLevel) {

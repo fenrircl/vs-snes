@@ -71,13 +71,18 @@ void updateWater(void) {
                         if (!enemies[e].active) continue;
 
                         s16 dx = waterX[i] - enemies[e].x;
-                        s16 dy = waterY[i] - enemies[e].y;
-                        if (dx < 0) dx = -dx;
-                        if (dy < 0) dy = -dy;
+                        if (dx < -16 || dx > 16) continue;
 
-                        if (dx + dy <= 16) {
+                        s16 dy = waterY[i] - enemies[e].y;
+                        if (dy < -16 || dy > 16) continue;
+
+                        s16 adx = dx < 0 ? -dx : dx;
+                        s16 ady = dy < 0 ? -dy : dy;
+
+                        if (adx + ady <= 16) {
                             if (enemies[e].hp > dmg) {
                                 enemies[e].hp -= dmg;
+                                enemies[e].hitFlash = 4;
                             } else {
                                 enemies[e].active = 0;
                                 player.score += enemyScore[enemies[e].vy];

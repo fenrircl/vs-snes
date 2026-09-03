@@ -64,6 +64,11 @@ void updateWand(void) {
     u8 i;
     if (player.wandLvl == 0) return;
 
+    // Damage values: Lvl 1-2=1, Lvl 3-4=2, Lvl 5=3
+    u8 dmg = 1;
+    if (player.wandLvl >= 3) dmg = 2;
+    if (player.wandLvl >= 5) dmg = 3;
+
     // Update active projectiles
     for (i = 0; i < MAX_WANDS; i++) {
         if (!wandActive[i]) continue;
@@ -79,34 +84,29 @@ void updateWand(void) {
             continue;
         }
 
-        // Damage values: Lvl 1-2=1, Lvl 3-4=2, Lvl 5=3
-        u8 dmg = 1;
-        if (player.wandLvl >= 3) dmg = 2;
-        if (player.wandLvl >= 5) dmg = 3;
-
         // Collision check with enemies (single-target impact, deactivates projectile)
         u8 e;
         for (e = 0; e < MAX_ENEMIES; e++) {
             if (!enemies[e].active) continue;
 
             s16 edx = wandX[i] - enemies[e].x;
-            s16 edy = wandY[i] - enemies[e].y;
-            if (edx < 0) edx = -edx;
-            if (edy < 0) edy = -edy;
+            if (edx < -10 || edx > 10) continue;
 
-            if (edx <= 10 && edy <= 10) {
-                // Hit enemy
-                wandActive[i] = 0; // Destroy projectile
-                if (enemies[e].hp > dmg) {
-                    enemies[e].hp -= dmg;
-                } else {
-                    enemies[e].active = 0;
-                    player.score += enemyScore[enemies[e].vy];
-                    player.kills++;
-                    spawnGem(enemies[e].x, enemies[e].y, 1);
-                }
-                break;
+            s16 edy = wandY[i] - enemies[e].y;
+            if (edy < -10 || edy > 10) continue;
+
+            // Hit enemy
+            wandActive[i] = 0; // Destroy projectile
+            if (enemies[e].hp > dmg) {
+                enemies[e].hp -= dmg;
+                enemies[e].hitFlash = 4;
+            } else {
+                enemies[e].active = 0;
+                player.score += enemyScore[enemies[e].vy];
+                player.kills++;
+                spawnGem(enemies[e].x, enemies[e].y, 1);
             }
+            break;
         }
     }
 

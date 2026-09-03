@@ -22,6 +22,11 @@ void updateAxe(void) {
     u8 i;
     if (player.axeLvl == 0) return;
 
+    u8 dmg = 2;
+    if (player.axeLvl == 2 || player.axeLvl == 3) dmg = 3;
+    else if (player.axeLvl == 4) dmg = 4;
+    else if (player.axeLvl >= 5) dmg = 5;
+
     // Update existing axes
     for (i = 0; i < MAX_AXES; i++) {
         if (!axeActive[i]) continue;
@@ -43,35 +48,25 @@ void updateAxe(void) {
             continue;
         }
 
-        // Damage configurations based on level:
-        // Lvl 1: dmg 2
-        // Lvl 2-3: dmg 3
-        // Lvl 4: dmg 4
-        // Lvl 5: dmg 5
-        u8 dmg = 2;
-        if (player.axeLvl == 2 || player.axeLvl == 3) dmg = 3;
-        else if (player.axeLvl == 4) dmg = 4;
-        else if (player.axeLvl >= 5) dmg = 5;
-
         // Collision check with all enemies (piercing, does not deactivate axe)
         u8 e;
         for (e = 0; e < MAX_ENEMIES; e++) {
             if (!enemies[e].active) continue;
 
             s16 dx = axeX[i] - enemies[e].x;
-            s16 dy = axeY[i] - enemies[e].y;
-            if (dx < 0) dx = -dx;
-            if (dy < 0) dy = -dy;
+            if (dx < -12 || dx > 12) continue;
 
-            if (dx <= 12 && dy <= 12) {
-                if (enemies[e].hp > dmg) {
-                    enemies[e].hp -= dmg;
-                } else {
-                    enemies[e].active = 0;
-                    player.score += enemyScore[enemies[e].vy];
-                    player.kills++;
-                    spawnGem(enemies[e].x, enemies[e].y, 1);
-                }
+            s16 dy = axeY[i] - enemies[e].y;
+            if (dy < -12 || dy > 12) continue;
+
+            if (enemies[e].hp > dmg) {
+                enemies[e].hp -= dmg;
+                enemies[e].hitFlash = 4;
+            } else {
+                enemies[e].active = 0;
+                player.score += enemyScore[enemies[e].vy];
+                player.kills++;
+                spawnGem(enemies[e].x, enemies[e].y, 1);
             }
         }
     }

@@ -40,6 +40,10 @@ void fireBullet(s16 targetX, s16 targetY) {
 
 void updateBullets(void) {
     u8 i;
+    u8 damage = 1;
+    if (player.cooldownLvl == 2 || player.cooldownLvl == 3) damage = 2;
+    else if (player.cooldownLvl == 4) damage = 3;
+    else if (player.cooldownLvl >= 5) damage = 4;
     
     for (i = 0; i < MAX_BULLETS; i++) {
         if (!bullets[i].active) continue;
@@ -68,15 +72,10 @@ void updateBullets(void) {
             s16 dy = bullets[i].y - enemies[j].y;
             if (dy < -8 || dy > 8) continue;
             
-            u8 damage = 1;
-            if (player.cooldownLvl == 2) damage = 2;
-            else if (player.cooldownLvl == 3) damage = 2;
-            else if (player.cooldownLvl == 4) damage = 3;
-            else if (player.cooldownLvl >= 5) damage = 4;
-            
             bullets[i].active = 0;
             if (enemies[j].hp > damage) {
                 enemies[j].hp -= damage;
+                enemies[j].hitFlash = 4;
             } else {
                 enemies[j].active = 0;
                 player.score += enemyScore[enemies[j].vy];

@@ -69,6 +69,7 @@ void updateWhip(void) {
                     
                     if (enemies[i].hp > dmg) {
                         enemies[i].hp -= dmg;
+                        enemies[i].hitFlash = 4;
                     } else {
                         // Kill enemy
                         enemies[i].active = 0;
