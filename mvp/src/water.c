@@ -145,12 +145,12 @@ void renderWater(void) {
         u16 slot = OAM_WATER(i);
         if (!waterActive[i] || player.waterLvl == 0) {
             oamSetAttr(slot, 0, 240, 0, 0);
-            oamSetEx(slot, OBJ_LARGE, OBJ_HIDE);
+            oamSetEx(slot, OBJ_SMALL, OBJ_HIDE);
             continue;
         }
 
-        s16 screenX = waterX[i] - cameraX;
-        s16 screenY = waterY[i] - cameraY;
+        s16 screenX = CAMERA_X(waterX[i]);
+        s16 screenY = CAMERA_Y(waterY[i]);
 
         u16 tileIndex = TILEBASE_Santa_Water;
         u16 oamAttr = OBJ_PRIO(3) | OBJ_PAL(ITEMS_PALETTE);
@@ -159,14 +159,14 @@ void renderWater(void) {
             // State 1: Flying bottle. Apply parabolic height offset.
             s16 t = waterTimer[i]; // counts down from 32 to 0
             s16 height = (t * (32 - t)) >> 4; // Parabola peaking at 16px
-            oamSetEx(slot, OBJ_LARGE, OBJ_SHOW);
+            oamSetEx(slot, OBJ_SMALL, OBJ_SHOW);
             oamSetAttr(slot, screenX - 8, screenY - 8 - height, tileIndex, oamAttr);
         } else if (waterActive[i] == 2) {
             // State 2: Puddle on the floor. Flicker slightly to represent bubbling water/fire.
             if (frameCount & 4) {
                 oamAttr |= OBJ_FLIPX;
             }
-            oamSetEx(slot, OBJ_LARGE, OBJ_SHOW);
+            oamSetEx(slot, OBJ_SMALL, OBJ_SHOW);
             oamSetAttr(slot, screenX - 8, screenY - 8, tileIndex, oamAttr);
         }
     }

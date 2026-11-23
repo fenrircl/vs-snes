@@ -21,31 +21,38 @@ extern u8 Animated_Whip_indexed_pal, Animated_Whip_indexed_palend;
 extern u8 Animated_Items_indexed_til, Animated_Items_indexed_tilend;
 extern u8 Animated_Items_indexed_pal, Animated_Items_indexed_palend;
 
-#define TILEBASE_Pipeestrello 256
-#define TILEBASE_Antonio_Belpaese 288
-#define TILEBASE_Zombie 320
-#define TILEBASE_Skeleton 352
+#define ANIM_FRAME_TILE_STRIDE 4
+#define ANIM_OBJ_SIZE 32
+#define ANIM_OAM_PROFILE OBJ_SIZE16_L32
+#define HP_BAR_TILE_BASE 32
+#define HP_BAR_TILE_STRIDE 2
+#define TILE_BULLET 42
+
+#define TILEBASE_Pipeestrello 128
+#define TILEBASE_Antonio_Belpaese 192
+#define TILEBASE_Zombie 256
+#define TILEBASE_Skeleton 320
 #define TILEBASE_Ghost 384
-#define TILEBASE_Mudman 416
-#define TILEBASE_Whip 448
-#define TILEBASE_Items 480
-#define TILEBASE_King_Bible (480 + 0)
-#define TILEBASE_Axe (480 + 2)
-#define TILEBASE_Garlic (480 + 4)
-#define TILEBASE_Magic_Wand (480 + 6)
-#define TILEBASE_Santa_Water (480 + 8)
-#define TILEBASE_Experience_Gem (480 + 10)
-#define PLAYER_TILE_BASE 288
+#define TILEBASE_Mudman 448
+#define TILEBASE_Whip 64
+#define TILEBASE_Items 96
+#define TILEBASE_King_Bible (96 + 0)
+#define TILEBASE_Axe (96 + 2)
+#define TILEBASE_Garlic (96 + 4)
+#define TILEBASE_Magic_Wand (96 + 6)
+#define TILEBASE_Santa_Water (96 + 8)
+#define TILEBASE_Experience_Gem (96 + 10)
+#define PLAYER_TILE_BASE 192
 #define PLAYER_PALETTE 2
 #define WEAPONS_PALETTE 3
 #define ITEMS_PALETTE 4
-#define TILE_ICON_EXPERIENCE_GEM 34
-#define TILE_ICON_WHIP 64
-#define TILE_ICON_KING_BIBLE 68
-#define TILE_ICON_AXE 72
-#define TILE_ICON_GARLIC 76
-#define TILE_ICON_MAGIC_WAND 96
-#define TILE_ICON_SANTA_WATER 100
+#define TILE_ICON_EXPERIENCE_GEM 0
+#define TILE_ICON_WHIP 2
+#define TILE_ICON_KING_BIBLE 4
+#define TILE_ICON_AXE 6
+#define TILE_ICON_GARLIC 8
+#define TILE_ICON_MAGIC_WAND 10
+#define TILE_ICON_SANTA_WATER 12
 
 #define ENEMY_TYPES 5
 

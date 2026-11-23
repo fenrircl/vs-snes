@@ -1,0 +1,16 @@
+{
+  "frames": 4,
+  "sprite_size": 24,
+  "palette_groups": {
+    "starting_characters": {
+      "slot": 2,
+      "members": ["Antonio", "Imelda", "Pasqualina", "Gennaro"]
+    }
+  },
+  "sprites": [
+    { "name": "Antonio", "src": "port/source/characters/Antonio.png", "role": "player", "layout": "phaser_strip", "frame_size": [32, 32], "resample": "nearest" },
+    { "name": "Imelda", "src": "port/source/characters/Imelda.png", "role": "player", "layout": "phaser_strip", "frame_size": [32, 33], "resample": "nearest" },
+    { "name": "Pasqualina", "src": "port/source/characters/Pasqualina.png", "role": "player", "layout": "phaser_strip", "frame_size": [31, 33], "resample": "nearest" },
+    { "name": "Gennaro", "src": "port/source/characters/Gennaro.png", "role": "player", "layout": "phaser_strip", "frame_size": [29, 32], "resample": "nearest" }
+  ]
+}

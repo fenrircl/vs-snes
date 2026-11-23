@@ -53,8 +53,8 @@ void updateBullets(void) {
         bullets[i].y += bullets[i].vy;
         
         /* Fuera de cámara → desactivar */
-        s16 screenX = bullets[i].x - cameraX;
-        s16 screenY = bullets[i].y - cameraY;
+        s16 screenX = CAMERA_X(bullets[i].x);
+        s16 screenY = CAMERA_Y(bullets[i].y);
         if (screenX < -16 || screenX > SCREEN_W + 16 ||
             screenY < -16 || screenY > SCREEN_H + 16) {
             bullets[i].active = 0;
@@ -93,11 +93,13 @@ void renderBullets(void) {
         u16 slot = bullets[i].oamSlot;
         if (!bullets[i].active) {
             oamSetAttr(slot, 0, 240, 0, 0);
+            oamSetEx(slot, OBJ_SMALL, OBJ_HIDE);
             continue;
         }
-        s16 screenX = bullets[i].x - cameraX;
-        s16 screenY = bullets[i].y - cameraY;
-        oamSetAttr(slot, screenX - 4, screenY - 4, TILE_BULLET,
+        s16 screenX = CAMERA_X(bullets[i].x);
+        s16 screenY = CAMERA_Y(bullets[i].y);
+        oamSetEx(slot, OBJ_SMALL, OBJ_SHOW);
+        oamSetAttr(slot, screenX - 8, screenY - 8, TILE_BULLET,
             OBJ_PRIO(3) | OBJ_PAL(0));
     }
 }

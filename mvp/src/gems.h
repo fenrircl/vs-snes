@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-#define TILE_GEM 34
+#define TILE_GEM TILE_ICON_EXPERIENCE_GEM
 #define GEM_MAGNET_DIST 40
 #define GEM_COLLECT_DIST 8
 

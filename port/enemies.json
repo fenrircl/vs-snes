@@ -1,0 +1,21 @@
+{
+  "frames": 4,
+  "sprite_size": 24,
+  "palette_groups": {
+    "forest_enemy_candidates": {
+      "slot": 1,
+      "members": ["Bat1", "Bat2", "Bat3", "Skeleton1", "Skeleton2", "SkeletonN1", "Ghost", "Flower1", "Witch1"]
+    }
+  },
+  "sprites": [
+    { "name": "Bat1", "src": "port/source/enemies/Bat1.png", "role": "enemy", "layout": "phaser_strip", "frame_size": [22, 21], "resample": "nearest" },
+    { "name": "Bat2", "src": "port/source/enemies/Bat2.png", "role": "enemy", "layout": "phaser_strip", "frame_size": [27, 26], "resample": "nearest" },
+    { "name": "Bat3", "src": "port/source/enemies/Bat3.png", "role": "enemy", "layout": "phaser_strip", "frame_size": [30, 27], "resample": "nearest" },
+    { "name": "Skeleton1", "src": "port/source/enemies/Skeleton1.png", "role": "enemy", "layout": "phaser_strip", "frame_size": [34, 37], "resample": "nearest" },
+    { "name": "Skeleton2", "src": "port/source/enemies/Skeleton2.png", "role": "enemy", "layout": "phaser_strip", "frame_size": [36, 33], "resample": "nearest" },
+    { "name": "SkeletonN1", "src": "port/source/enemies/SkeletonN1.png", "role": "enemy", "layout": "phaser_strip", "frame_size": [34, 44], "resample": "nearest" },
+    { "name": "Ghost", "src": "port/source/enemies/Ghost.png", "role": "enemy", "layout": "phaser_strip", "frame_size": [30, 32], "resample": "nearest" },
+    { "name": "Flower1", "src": "port/source/enemies/Flower1.png", "role": "enemy", "layout": "phaser_strip", "frame_size": [28, 31], "resample": "nearest" },
+    { "name": "Witch1", "src": "port/source/enemies/Witch1.png", "role": "enemy", "layout": "phaser_strip", "frame_size": [28, 34], "resample": "nearest" }
+  ]
+}

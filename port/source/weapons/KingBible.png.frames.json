@@ -1,0 +1,29 @@
+{
+  "source_atlas_json": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/items.json",
+  "source_atlas_image": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/items.png",
+  "cell_size": [
+    16,
+    16
+  ],
+  "frames": [
+    {
+      "name": "HolyBook.png",
+      "source_size": [
+        16,
+        16
+      ],
+      "sprite_source_size": [
+        2,
+        0,
+        12,
+        16
+      ],
+      "rotated": false,
+      "cell": 0,
+      "cell_offset": [
+        0,
+        0
+      ]
+    }
+  ]
+}

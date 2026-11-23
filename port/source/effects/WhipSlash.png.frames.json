@@ -1,0 +1,29 @@
+{
+  "source_atlas_json": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/vfx.json",
+  "source_atlas_image": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/vfx.png",
+  "cell_size": [
+    160,
+    32
+  ],
+  "frames": [
+    {
+      "name": "slash.png",
+      "source_size": [
+        147,
+        22
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        147,
+        22
+      ],
+      "rotated": false,
+      "cell": 0,
+      "cell_offset": [
+        6,
+        5
+      ]
+    }
+  ]
+}

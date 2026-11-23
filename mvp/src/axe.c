@@ -41,8 +41,8 @@ void updateAxe(void) {
         }
 
         // Deactivate if out of map/screen bounds (especially falling down)
-        s16 screenY = axeY[i] - cameraY;
-        s16 screenX = axeX[i] - cameraX;
+        s16 screenY = CAMERA_Y(axeY[i]);
+        s16 screenX = CAMERA_X(axeX[i]);
         if (screenY > 240 || screenX < -16 || screenX > 272 || axeY[i] > MAP_H) {
             axeActive[i] = 0;
             continue;
@@ -123,12 +123,12 @@ void renderAxe(void) {
         u16 slot = OAM_AXE(i);
         if (!axeActive[i] || player.axeLvl == 0) {
             oamSetAttr(slot, 0, 240, 0, 0);
-            oamSetEx(slot, OBJ_LARGE, OBJ_HIDE);
+            oamSetEx(slot, OBJ_SMALL, OBJ_HIDE);
             continue;
         }
 
-        s16 screenX = axeX[i] - cameraX;
-        s16 screenY = axeY[i] - cameraY;
+        s16 screenX = CAMERA_X(axeX[i]);
+        s16 screenY = CAMERA_Y(axeY[i]);
 
         u16 tileIndex = TILE_ICON_AXE;
         u16 oamAttr = OBJ_PRIO(3) | OBJ_PAL(0);
@@ -139,7 +139,7 @@ void renderAxe(void) {
         else if (rotFrame == 2) oamAttr |= (OBJ_FLIPX | OBJ_FLIPY);
         else if (rotFrame == 3) oamAttr |= OBJ_FLIPY;
 
-        oamSetEx(slot, OBJ_LARGE, OBJ_SHOW);
+        oamSetEx(slot, OBJ_SMALL, OBJ_SHOW);
         oamSetAttr(slot, screenX - 8, screenY - 8, tileIndex, oamAttr);
     }
 }

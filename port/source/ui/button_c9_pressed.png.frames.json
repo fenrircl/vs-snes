@@ -1,0 +1,29 @@
+{
+  "source_atlas_json": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/UI.json",
+  "source_atlas_image": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/UI.png",
+  "cell_size": [
+    48,
+    48
+  ],
+  "frames": [
+    {
+      "name": "button_c9_pressed.png",
+      "source_size": [
+        48,
+        48
+      ],
+      "sprite_source_size": [
+        0,
+        7,
+        48,
+        35
+      ],
+      "rotated": false,
+      "cell": 0,
+      "cell_offset": [
+        0,
+        0
+      ]
+    }
+  ]
+}

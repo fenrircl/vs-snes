@@ -1,0 +1,162 @@
+{
+  "source_atlas_json": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/items.json",
+  "source_atlas_image": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/items.png",
+  "cell_size": [
+    16,
+    16
+  ],
+  "frames": [
+    {
+      "name": "Gem1.png",
+      "source_size": [
+        16,
+        16
+      ],
+      "sprite_source_size": [
+        3,
+        1,
+        11,
+        14
+      ],
+      "rotated": false,
+      "cell": 0,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Whip.png",
+      "source_size": [
+        16,
+        16
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "rotated": false,
+      "cell": 1,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "HolyBook.png",
+      "source_size": [
+        16,
+        16
+      ],
+      "sprite_source_size": [
+        2,
+        0,
+        12,
+        16
+      ],
+      "rotated": false,
+      "cell": 2,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Axe.png",
+      "source_size": [
+        16,
+        16
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "rotated": false,
+      "cell": 3,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Garlic.png",
+      "source_size": [
+        16,
+        16
+      ],
+      "sprite_source_size": [
+        2,
+        2,
+        13,
+        13
+      ],
+      "rotated": false,
+      "cell": 4,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "WandFire.png",
+      "source_size": [
+        16,
+        16
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "rotated": false,
+      "cell": 5,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "HolyWater.png",
+      "source_size": [
+        16,
+        16
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "rotated": false,
+      "cell": 6,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Knife.png",
+      "source_size": [
+        16,
+        16
+      ],
+      "sprite_source_size": [
+        0,
+        2,
+        16,
+        11
+      ],
+      "rotated": false,
+      "cell": 7,
+      "cell_offset": [
+        0,
+        0
+      ]
+    }
+  ]
+}

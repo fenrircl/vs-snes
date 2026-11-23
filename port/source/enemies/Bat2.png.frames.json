@@ -1,0 +1,86 @@
+{
+  "source_atlas_json": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/enemies.json",
+  "source_atlas_image": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/enemies.png",
+  "cell_size": [
+    27,
+    26
+  ],
+  "frames": [
+    {
+      "name": "Bat2_1.png",
+      "source_size": [
+        25,
+        24
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        25,
+        24
+      ],
+      "rotated": false,
+      "cell": 0,
+      "cell_offset": [
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Bat2_2.png",
+      "source_size": [
+        25,
+        24
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        25,
+        24
+      ],
+      "rotated": false,
+      "cell": 1,
+      "cell_offset": [
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Bat2_3.png",
+      "source_size": [
+        26,
+        24
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        26,
+        24
+      ],
+      "rotated": false,
+      "cell": 2,
+      "cell_offset": [
+        0,
+        1
+      ]
+    },
+    {
+      "name": "Bat2_4.png",
+      "source_size": [
+        27,
+        26
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        27,
+        26
+      ],
+      "rotated": false,
+      "cell": 3,
+      "cell_offset": [
+        0,
+        0
+      ]
+    }
+  ]
+}

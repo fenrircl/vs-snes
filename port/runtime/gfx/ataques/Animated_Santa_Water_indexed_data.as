@@ -1,0 +1,7 @@
+Animated_Santa_Water_indexed_til:
+.incbin "gfx/ataques/Animated_Santa_Water_indexed.pic"
+Animated_Santa_Water_indexed_tilend:
+
+Animated_Santa_Water_indexed_pal:
+.incbin "gfx/ataques/Animated_Santa_Water_indexed.pal"
+Animated_Santa_Water_indexed_palend:

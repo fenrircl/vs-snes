@@ -1,0 +1,162 @@
+{
+  "source_atlas_json": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/UI.json",
+  "source_atlas_image": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/UI.png",
+  "cell_size": [
+    40,
+    32
+  ],
+  "frames": [
+    {
+      "name": "TreasureIdle_01.png",
+      "source_size": [
+        40,
+        32
+      ],
+      "sprite_source_size": [
+        2,
+        10,
+        32,
+        22
+      ],
+      "rotated": false,
+      "cell": 0,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "TreasureIdle_02.png",
+      "source_size": [
+        40,
+        32
+      ],
+      "sprite_source_size": [
+        3,
+        7,
+        30,
+        25
+      ],
+      "rotated": false,
+      "cell": 1,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "TreasureIdle_03.png",
+      "source_size": [
+        40,
+        32
+      ],
+      "sprite_source_size": [
+        4,
+        5,
+        28,
+        27
+      ],
+      "rotated": false,
+      "cell": 2,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "TreasureIdle_04.png",
+      "source_size": [
+        40,
+        32
+      ],
+      "sprite_source_size": [
+        2,
+        8,
+        32,
+        24
+      ],
+      "rotated": false,
+      "cell": 3,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "TreasureIdle_05.png",
+      "source_size": [
+        40,
+        32
+      ],
+      "sprite_source_size": [
+        0,
+        12,
+        37,
+        20
+      ],
+      "rotated": false,
+      "cell": 4,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "TreasureIdle_06.png",
+      "source_size": [
+        40,
+        32
+      ],
+      "sprite_source_size": [
+        2,
+        10,
+        32,
+        22
+      ],
+      "rotated": false,
+      "cell": 5,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "TreasureIdle_07.png",
+      "source_size": [
+        40,
+        32
+      ],
+      "sprite_source_size": [
+        1,
+        11,
+        34,
+        21
+      ],
+      "rotated": false,
+      "cell": 6,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "TreasureIdle_08.png",
+      "source_size": [
+        40,
+        32
+      ],
+      "sprite_source_size": [
+        2,
+        10,
+        32,
+        22
+      ],
+      "rotated": false,
+      "cell": 7,
+      "cell_offset": [
+        0,
+        0
+      ]
+    }
+  ]
+}

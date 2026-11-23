@@ -108,13 +108,13 @@ void renderWhip(void) {
     // Sprite B tile = base + frame * 8 + 4.
     u16 baseTile = TILEBASE_Whip + (frame * 4);
 
-    s16 screenX = player.x - cameraX;
-    s16 screenY = player.y - cameraY;
+    s16 screenX = CAMERA_X(player.x);
+    s16 screenY = CAMERA_Y(player.y);
 
     u16 oamAttr = OBJ_PRIO(3) | OBJ_PAL(WEAPONS_PALETTE);
     
-    oamSetEx(OAM_WHIP_A, OBJ_LARGE, OBJ_SHOW);
-    oamSetEx(OAM_WHIP_B, OBJ_LARGE, OBJ_SHOW);
+    oamSetEx(OAM_WHIP_A, OBJ_SMALL, OBJ_SHOW);
+    oamSetEx(OAM_WHIP_B, OBJ_SMALL, OBJ_SHOW);
 
     if (whipFacingLeft) {
         oamAttr |= OBJ_FLIPX;

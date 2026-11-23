@@ -1,0 +1,8 @@
+MenuButtonDesaturated_96x32_til:
+.incbin "MenuButtonDesaturated_96x32.pic"
+MenuButtonDesaturated_96x32_tilend:
+
+MenuButtonDesaturated_96x32_pal:
+.incbin "MenuButtonDesaturated_96x32.pal"
+MenuButtonDesaturated_96x32_palend:
+

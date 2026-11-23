@@ -77,8 +77,8 @@ void updateWand(void) {
         wandY[i] += wand_vy[i];
 
         // Deactivate if off-screen
-        s16 screenX = wandX[i] - cameraX;
-        s16 screenY = wandY[i] - cameraY;
+        s16 screenX = CAMERA_X(wandX[i]);
+        s16 screenY = CAMERA_Y(wandY[i]);
         if (screenX < -8 || screenX > 264 || screenY < -8 || screenY > 232) {
             wandActive[i] = 0;
             continue;
@@ -149,18 +149,18 @@ void renderWand(void) {
         u16 slot = OAM_WAND(i);
         if (!wandActive[i] || player.wandLvl == 0) {
             oamSetAttr(slot, 0, 240, 0, 0);
-            oamSetEx(slot, OBJ_LARGE, OBJ_HIDE);
+            oamSetEx(slot, OBJ_SMALL, OBJ_HIDE);
             continue;
         }
 
-        s16 screenX = wandX[i] - cameraX;
-        s16 screenY = wandY[i] - cameraY;
+        s16 screenX = CAMERA_X(wandX[i]);
+        s16 screenY = CAMERA_Y(wandY[i]);
 
         // We use the Magic Wand sprite itself as the projectile, which represents a flying wand projectile
         u16 tileIndex = TILEBASE_Magic_Wand;
         u16 oamAttr = OBJ_PRIO(3) | OBJ_PAL(ITEMS_PALETTE);
 
-        oamSetEx(slot, OBJ_LARGE, OBJ_SHOW);
+        oamSetEx(slot, OBJ_SMALL, OBJ_SHOW);
         oamSetAttr(slot, screenX - 8, screenY - 8, tileIndex, oamAttr);
     }
 }

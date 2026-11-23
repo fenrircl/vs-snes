@@ -1,0 +1,15 @@
+{
+  "frames": 8,
+  "sprite_size": 32,
+  "palette_groups": {
+    "treasure": {
+      "slot": 3,
+      "members": ["TreasureIdle", "TreasureOpen", "TreasureOpenFront"]
+    }
+  },
+  "sprites": [
+    { "name": "TreasureIdle", "src": "port/source/chests/TreasureIdle.png", "role": "weapon", "layout": "phaser_strip", "frame_size": [40, 32], "resample": "nearest" },
+    { "name": "TreasureOpen", "src": "port/source/chests/TreasureOpen.png", "role": "weapon", "layout": "phaser_strip", "frame_size": [40, 32], "resample": "nearest" },
+    { "name": "TreasureOpenFront", "src": "port/source/chests/TreasureOpenFront.png", "role": "weapon", "layout": "phaser_strip", "frame_size": [40, 32], "resample": "nearest" }
+  ]
+}

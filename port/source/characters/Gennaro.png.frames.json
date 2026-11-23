@@ -1,0 +1,86 @@
+{
+  "source_atlas_json": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/characters.json",
+  "source_atlas_image": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/characters.png",
+  "cell_size": [
+    29,
+    32
+  ],
+  "frames": [
+    {
+      "name": "Gennaro_01.png",
+      "source_size": [
+        29,
+        32
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        29,
+        32
+      ],
+      "rotated": false,
+      "cell": 0,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Gennaro_02.png",
+      "source_size": [
+        29,
+        32
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        29,
+        32
+      ],
+      "rotated": false,
+      "cell": 1,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Gennaro_03.png",
+      "source_size": [
+        29,
+        32
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        29,
+        32
+      ],
+      "rotated": false,
+      "cell": 2,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Gennaro_04.png",
+      "source_size": [
+        29,
+        32
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        29,
+        32
+      ],
+      "rotated": false,
+      "cell": 3,
+      "cell_offset": [
+        0,
+        0
+      ]
+    }
+  ]
+}

@@ -61,20 +61,20 @@ void spawnEnemy(void) {
                     side = (randOffset + t) & 3;
                     switch (side) {
                         case 0: /* arriba */
-                            sx = cameraX + (randOffset % (SCREEN_W - 16)) + 8;
+                            sx = cameraX + (randOffset % (WORLD_VIEW_W - 16)) + 8;
                             sy = cameraY - 8;
                             break;
                         case 1: /* derecha */
-                            sx = cameraX + SCREEN_W + 8;
-                            sy = cameraY + (randOffset % (SCREEN_H - 16)) + 8;
+                            sx = cameraX + WORLD_VIEW_W + 8;
+                            sy = cameraY + (randOffset % (WORLD_VIEW_H - 16)) + 8;
                             break;
                         case 2: /* abajo */
-                            sx = cameraX + (randOffset % (SCREEN_W - 16)) + 8;
-                            sy = cameraY + SCREEN_H + 8;
+                            sx = cameraX + (randOffset % (WORLD_VIEW_W - 16)) + 8;
+                            sy = cameraY + WORLD_VIEW_H + 8;
                             break;
                         case 3: /* izquierda */
                             sx = cameraX - 8;
-                            sy = cameraY + (randOffset % (SCREEN_H - 16)) + 8;
+                            sy = cameraY + (randOffset % (WORLD_VIEW_H - 16)) + 8;
                             break;
                     }
                     if (sx >= 8 && sx <= MAP_W - 8 && sy >= 8 && sy <= MAP_H - 8) {
@@ -148,7 +148,7 @@ void updateEnemies(void) {
         }
         
         /* Colisión con jugador */
-        if (distPlayerX <= 12 && distPlayerY <= 12) {
+        if (distPlayerX <= 20 && distPlayerY <= 20) {
             enemies[i].active = 0;
             if (player.invincibilityTimer == 0) {
                 if (player.lives > 0) player.lives--;
@@ -168,18 +168,18 @@ void renderEnemies(void) {
             oamSetEx(slot, OBJ_SMALL, OBJ_HIDE);
             continue;
         }
-        s16 screenX = enemies[i].x - cameraX;
-        s16 screenY = enemies[i].y - cameraY;
+        s16 screenX = CAMERA_X(enemies[i].x);
+        s16 screenY = CAMERA_Y(enemies[i].y);
         
-        if (screenX < -16 || screenX > SCREEN_W + 16 ||
-            screenY < -16 || screenY > SCREEN_H + 16) {
+        if (screenX < -32 || screenX > SCREEN_W + 32 ||
+            screenY < -32 || screenY > SCREEN_H + 32) {
             oamSetAttr(slot, 0, 240, 0, 0);
             oamSetEx(slot, OBJ_SMALL, OBJ_HIDE);
             continue;
         }
         
         u16 animTileBase = enemyTileBase[enemies[i].vy];
-        u16 tileIndex = animTileBase + (enemies[i].animFrame * 2);
+        u16 tileIndex = animTileBase + (enemies[i].animFrame * ANIM_FRAME_TILE_STRIDE);
         u8 palette = enemyPalette[enemies[i].vy];
         if (enemies[i].hitFlash > 0) {
             enemies[i].hitFlash--;
@@ -194,7 +194,8 @@ void renderEnemies(void) {
         }
         
         oamSetEx(slot, OBJ_LARGE, OBJ_SHOW);
-        oamSetAttr(slot, screenX - 8, screenY - 8, tileIndex, oamAttr);
+        oamSetAttr(slot, screenX - (ANIM_OBJ_SIZE / 2),
+                   screenY - (ANIM_OBJ_SIZE / 2), tileIndex, oamAttr);
     }
 }
 

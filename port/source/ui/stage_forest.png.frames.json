@@ -1,0 +1,29 @@
+{
+  "source_atlas_json": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/UI.json",
+  "source_atlas_image": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/UI.png",
+  "cell_size": [
+    156,
+    96
+  ],
+  "frames": [
+    {
+      "name": "stage_forest.png",
+      "source_size": [
+        156,
+        96
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        156,
+        96
+      ],
+      "rotated": false,
+      "cell": 0,
+      "cell_offset": [
+        0,
+        0
+      ]
+    }
+  ]
+}

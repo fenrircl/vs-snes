@@ -1,0 +1,86 @@
+{
+  "source_atlas_json": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/enemies.json",
+  "source_atlas_image": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/enemies.png",
+  "cell_size": [
+    28,
+    34
+  ],
+  "frames": [
+    {
+      "name": "Witch1_1.png",
+      "source_size": [
+        28,
+        34
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        28,
+        34
+      ],
+      "rotated": false,
+      "cell": 0,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Witch1_2.png",
+      "source_size": [
+        28,
+        34
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        28,
+        34
+      ],
+      "rotated": false,
+      "cell": 1,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Witch1_3.png",
+      "source_size": [
+        27,
+        34
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        27,
+        34
+      ],
+      "rotated": false,
+      "cell": 2,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Witch1_4.png",
+      "source_size": [
+        27,
+        34
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        27,
+        34
+      ],
+      "rotated": false,
+      "cell": 3,
+      "cell_offset": [
+        0,
+        0
+      ]
+    }
+  ]
+}

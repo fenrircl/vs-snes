@@ -1,0 +1,162 @@
+{
+  "source_atlas_json": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/UI.json",
+  "source_atlas_image": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/UI.png",
+  "cell_size": [
+    40,
+    32
+  ],
+  "frames": [
+    {
+      "name": "TreasureOpenFront_01.png",
+      "source_size": [
+        40,
+        32
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        3,
+        3
+      ],
+      "rotated": false,
+      "cell": 0,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "TreasureOpenFront_02.png",
+      "source_size": [
+        40,
+        32
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        3,
+        3
+      ],
+      "rotated": false,
+      "cell": 1,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "TreasureOpenFront_03.png",
+      "source_size": [
+        40,
+        32
+      ],
+      "sprite_source_size": [
+        3,
+        20,
+        31,
+        12
+      ],
+      "rotated": false,
+      "cell": 2,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "TreasureOpenFront_04.png",
+      "source_size": [
+        40,
+        32
+      ],
+      "sprite_source_size": [
+        3,
+        19,
+        34,
+        13
+      ],
+      "rotated": false,
+      "cell": 3,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "TreasureOpenFront_05.png",
+      "source_size": [
+        40,
+        32
+      ],
+      "sprite_source_size": [
+        3,
+        18,
+        37,
+        14
+      ],
+      "rotated": false,
+      "cell": 4,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "TreasureOpenFront_06.png",
+      "source_size": [
+        40,
+        32
+      ],
+      "sprite_source_size": [
+        3,
+        19,
+        35,
+        13
+      ],
+      "rotated": false,
+      "cell": 5,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "TreasureOpenFront_07.png",
+      "source_size": [
+        40,
+        32
+      ],
+      "sprite_source_size": [
+        3,
+        20,
+        33,
+        12
+      ],
+      "rotated": false,
+      "cell": 6,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "TreasureOpenFront_08.png",
+      "source_size": [
+        40,
+        32
+      ],
+      "sprite_source_size": [
+        3,
+        20,
+        33,
+        12
+      ],
+      "rotated": false,
+      "cell": 7,
+      "cell_offset": [
+        0,
+        0
+      ]
+    }
+  ]
+}

@@ -77,11 +77,11 @@ void renderGems(void) {
             oamSetEx(slot, OBJ_SMALL, OBJ_HIDE);
             continue;
         }
-        s16 screenX = gems[i].x - cameraX;
-        s16 screenY = gems[i].y - cameraY;
+        s16 screenX = CAMERA_X(gems[i].x);
+        s16 screenY = CAMERA_Y(gems[i].y);
 
-        if (screenX < -8 || screenX > SCREEN_W + 8 ||
-            screenY < -8 || screenY > SCREEN_H + 8) {
+        if (screenX < -16 || screenX > SCREEN_W + 16 ||
+            screenY < -16 || screenY > SCREEN_H + 16) {
             oamSetAttr(slot, 0, 240, 0, 0);
             oamSetEx(slot, OBJ_SMALL, OBJ_HIDE);
             continue;
@@ -94,6 +94,6 @@ void renderGems(void) {
         }
 
         oamSetEx(slot, OBJ_SMALL, OBJ_SHOW);
-        oamSetAttr(slot, screenX - 4, screenY - 4, TILE_GEM, attributes);
+        oamSetAttr(slot, screenX - 8, screenY - 8, TILE_GEM, attributes);
     }
 }

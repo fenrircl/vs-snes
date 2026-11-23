@@ -1,0 +1,86 @@
+{
+  "source_atlas_json": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/enemies.json",
+  "source_atlas_image": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/enemies.png",
+  "cell_size": [
+    36,
+    33
+  ],
+  "frames": [
+    {
+      "name": "Skeleton2_1.png",
+      "source_size": [
+        32,
+        33
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        32,
+        33
+      ],
+      "rotated": false,
+      "cell": 0,
+      "cell_offset": [
+        2,
+        0
+      ]
+    },
+    {
+      "name": "Skeleton2_2.png",
+      "source_size": [
+        32,
+        33
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        32,
+        33
+      ],
+      "rotated": false,
+      "cell": 1,
+      "cell_offset": [
+        2,
+        0
+      ]
+    },
+    {
+      "name": "Skeleton2_3.png",
+      "source_size": [
+        33,
+        33
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        33,
+        33
+      ],
+      "rotated": false,
+      "cell": 2,
+      "cell_offset": [
+        1,
+        0
+      ]
+    },
+    {
+      "name": "Skeleton2_4.png",
+      "source_size": [
+        36,
+        31
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        36,
+        31
+      ],
+      "rotated": false,
+      "cell": 3,
+      "cell_offset": [
+        0,
+        1
+      ]
+    }
+  ]
+}

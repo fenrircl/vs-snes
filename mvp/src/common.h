@@ -12,6 +12,14 @@
 #define SCREEN_H       224
 #define MAP_W          512
 #define MAP_H          512
+/* Zoom lógico fijo 7/8: el PPU no escala BG/OBJ en los modos usados. */
+#define ZOOM_NUM        7
+#define ZOOM_SHIFT      3
+#define ZOOM_COORD(delta) (((delta) * ZOOM_NUM) >> ZOOM_SHIFT)
+#define CAMERA_X(worldX) ZOOM_COORD((worldX) - cameraX)
+#define CAMERA_Y(worldY) ZOOM_COORD((worldY) - cameraY)
+#define WORLD_VIEW_W   ((SCREEN_W * 8 + 6) / 7)
+#define WORLD_VIEW_H   ((SCREEN_H * 8 + 6) / 7)
 #define PLAYER_SPEED    3
 #define ENEMY_SPEED     2
 #define MAX_ENEMIES     44
@@ -23,24 +31,22 @@
 #define KILL_SCORE      10
 /* ENEMY_TYPES y las tablas enemyHP/Speed/Score/AnimSpeed se generan en assets_gen.h/.c */
 
-#define OAM_BASE    256
-#define OAM_PLAYER  OAM_BASE
-#define OAM_HP_BAR  (OAM_BASE + 4)
-#define OAM_WHIP_A  (OAM_BASE + 8)     // 264
-#define OAM_WHIP_B  (OAM_BASE + 12)    // 268
-#define OAM_BIBLE(i) (OAM_BASE + 16 + (i) * 4)  // 272, 276, 280 (up to 3 books)
-#define OAM_AXE(i)   (OAM_BASE + 28 + (i) * 4)  // 284, 288 (up to 2 axes)
-#define OAM_GARLIC(i) (128 + (i) * 4) // Up to 8 garlic particles in unused OAM area (slots 32-39)
-#define OAM_WAND(i)  (OAM_BASE + 44 + (i) * 4)  // 300, 304, 308 (up to 3 magic missiles)
-#define OAM_WATER(i) (OAM_BASE + 56 + (i) * 4)  // 312, 316 (up to 2 puddles/bottles)
-#define OAM_HUD_ICON(i) (OAM_BASE + 64 + (i) * 4) // 320, 324, 328 (up to 3 owned HUD weapon icons)
-#define OAM_MENU_ICON(i) (OAM_BASE + 76 + (i) * 4) // 332, 336, 340 (temporary level-up icons)
-#define OAM_ENEMY(i) (OAM_BASE + 88 + (i) * 4)  // 344 onwards (up to 44 enemies)
-#define OAM_BULLET(i) (OAM_BASE + 88 + MAX_ENEMIES * 4 + (i) * 4) // Bullets kept dormant
-#define OAM_GEM(i) ((i) * 4)
+#define OAM_PLAYER       0
+#define OAM_HP_BAR       4
+#define OAM_WHIP_A       8
+#define OAM_WHIP_B       12
+#define OAM_BIBLE(i)    (16 + (i) * 4)
+#define OAM_AXE(i)      (28 + (i) * 4)
+#define OAM_GARLIC(i)   (36 + (i) * 4)
+#define OAM_WAND(i)     (68 + (i) * 4)
+#define OAM_WATER(i)    (80 + (i) * 4)
+#define OAM_HUD_ICON(i) (88 + (i) * 4)
+#define OAM_MENU_ICON(i) (100 + (i) * 4)
+#define OAM_ENEMY(i)   (112 + (i) * 4)
+#define OAM_BULLET(i)  (288 + (i) * 4)
+#define OAM_GEM(i)     (352 + (i) * 4)
 
 #define TILE_PLAYER     0
-#define TILE_BULLET     33
 
 
 /* ============================================================
@@ -110,9 +116,9 @@ extern u8 shakeTimer;
 /* Fuentes y Sprites base (los sprites animados se declaran en assets_gen.h) */
 extern char tilfont, palfont;
 extern u8 sprites_til, sprites_tilend;
-extern u8 Mad_Forest_crop_64x64_indexed_til, Mad_Forest_crop_64x64_indexed_tilend;
-extern u8 Mad_Forest_crop_64x64_indexed_map, Mad_Forest_crop_64x64_indexed_mapend;
-extern u8 Mad_Forest_crop_64x64_indexed_pal, Mad_Forest_crop_64x64_indexed_palend;
+extern u8 Mad_Forest_zoom_7_8_til, Mad_Forest_zoom_7_8_tilend;
+extern u8 Mad_Forest_zoom_7_8_map, Mad_Forest_zoom_7_8_mapend;
+extern u8 Mad_Forest_zoom_7_8_pal, Mad_Forest_zoom_7_8_palend;
 
 extern u8 main_menu_til, main_menu_tilend;
 extern u8 main_menu_map, main_menu_mapend;

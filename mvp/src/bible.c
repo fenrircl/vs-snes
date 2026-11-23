@@ -119,7 +119,7 @@ void renderBible(void) {
         u16 slot = OAM_BIBLE(i);
         if (!bibleSpinActive || i >= numBooks) {
             oamSetAttr(slot, 0, 240, 0, 0);
-            oamSetEx(slot, OBJ_LARGE, OBJ_HIDE);
+            oamSetEx(slot, OBJ_SMALL, OBJ_HIDE);
             continue;
         }
 
@@ -137,13 +137,13 @@ void renderBible(void) {
         else if (player.bibleLvl == 4) { bx += orbitX[pos] >> 2; by += orbitY[pos] >> 2; }
         else if (player.bibleLvl >= 5) { bx += orbitX[pos] >> 1; by += orbitY[pos] >> 1; }
 
-        s16 screenX = bx - cameraX;
-        s16 screenY = by - cameraY;
+        s16 screenX = CAMERA_X(bx);
+        s16 screenY = CAMERA_Y(by);
 
         u16 tileIndex = TILE_ICON_KING_BIBLE; // 16x16 single frame tile from sprites.png
         u16 oamAttr = OBJ_PRIO(3) | OBJ_PAL(0);
 
-        oamSetEx(slot, OBJ_LARGE, OBJ_SHOW);
+        oamSetEx(slot, OBJ_SMALL, OBJ_SHOW);
         oamSetAttr(slot, screenX - 8, screenY - 8, tileIndex, oamAttr);
     }
 }

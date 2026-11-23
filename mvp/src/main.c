@@ -22,6 +22,8 @@ u8 wave, gameMins, gameSecs;
 u32 gameStartTime;
 
 s16 cameraX, cameraY;
+static u32 clockLastVblank;
+static u16 clockFrameRemainder;
 u8 shakeTimer = 0;
 u16 dbgEnemyUpdate = 1;
 u16 dbgSpriteRender = 1;
@@ -68,7 +70,7 @@ u8 countOwnedWeapons(void) {
 void renderWeaponIcons(void) {
     // Render Whip Icon: always slot 0, position X=8, Y=26
     oamSetAttr(OAM_HUD_ICON(0), 8, 26, TILE_ICON_WHIP, OBJ_PRIO(3) | OBJ_PAL(0));
-    oamSetEx(OAM_HUD_ICON(0), OBJ_LARGE, OBJ_SHOW);
+    oamSetEx(OAM_HUD_ICON(0), OBJ_SMALL, OBJ_SHOW);
     consoleDrawText(3, 0, "%u", player.cooldownLvl);
 
     u16 targetSlots[2] = {OAM_HUD_ICON(1), OAM_HUD_ICON(2)};
@@ -80,7 +82,7 @@ void renderWeaponIcons(void) {
     if (player.bibleLvl > 0 && activeCount < 2) {
         u16 oam = targetSlots[activeCount];
         oamSetAttr(oam, targetX[activeCount], 26, TILE_ICON_KING_BIBLE, OBJ_PRIO(3) | OBJ_PAL(0));
-        oamSetEx(oam, OBJ_LARGE, OBJ_SHOW);
+        oamSetEx(oam, OBJ_SMALL, OBJ_SHOW);
         consoleDrawText(targetCol[activeCount], 0, "%u", player.bibleLvl);
         activeCount++;
     }
@@ -88,7 +90,7 @@ void renderWeaponIcons(void) {
     if (player.axeLvl > 0 && activeCount < 2) {
         u16 oam = targetSlots[activeCount];
         oamSetAttr(oam, targetX[activeCount], 26, TILE_ICON_AXE, OBJ_PRIO(3) | OBJ_PAL(0));
-        oamSetEx(oam, OBJ_LARGE, OBJ_SHOW);
+        oamSetEx(oam, OBJ_SMALL, OBJ_SHOW);
         consoleDrawText(targetCol[activeCount], 0, "%u", player.axeLvl);
         activeCount++;
     }
@@ -96,7 +98,7 @@ void renderWeaponIcons(void) {
     if (player.garlicLvl > 0 && activeCount < 2) {
         u16 oam = targetSlots[activeCount];
         oamSetAttr(oam, targetX[activeCount], 26, TILE_ICON_GARLIC, OBJ_PRIO(3) | OBJ_PAL(0));
-        oamSetEx(oam, OBJ_LARGE, OBJ_SHOW);
+        oamSetEx(oam, OBJ_SMALL, OBJ_SHOW);
         consoleDrawText(targetCol[activeCount], 0, "%u", player.garlicLvl);
         activeCount++;
     }
@@ -104,7 +106,7 @@ void renderWeaponIcons(void) {
     if (player.wandLvl > 0 && activeCount < 2) {
         u16 oam = targetSlots[activeCount];
         oamSetAttr(oam, targetX[activeCount], 26, TILE_ICON_MAGIC_WAND, OBJ_PRIO(3) | OBJ_PAL(0));
-        oamSetEx(oam, OBJ_LARGE, OBJ_SHOW);
+        oamSetEx(oam, OBJ_SMALL, OBJ_SHOW);
         consoleDrawText(targetCol[activeCount], 0, "%u", player.wandLvl);
         activeCount++;
     }
@@ -112,7 +114,7 @@ void renderWeaponIcons(void) {
     if (player.waterLvl > 0 && activeCount < 2) {
         u16 oam = targetSlots[activeCount];
         oamSetAttr(oam, targetX[activeCount], 26, TILE_ICON_SANTA_WATER, OBJ_PRIO(3) | OBJ_PAL(0));
-        oamSetEx(oam, OBJ_LARGE, OBJ_SHOW);
+        oamSetEx(oam, OBJ_SMALL, OBJ_SHOW);
         consoleDrawText(targetCol[activeCount], 0, "%u", player.waterLvl);
         activeCount++;
     }
@@ -121,7 +123,7 @@ void renderWeaponIcons(void) {
     while (activeCount < 2) {
         u16 oam = targetSlots[activeCount];
         oamSetAttr(oam, 0, 240, 0, 0);
-        oamSetEx(oam, OBJ_LARGE, OBJ_HIDE);
+        oamSetEx(oam, OBJ_SMALL, OBJ_HIDE);
         // Clear level text
         consoleDrawText(targetCol[activeCount], 0, " ");
         activeCount++;
@@ -231,7 +233,7 @@ void levelUpMenu(void) {
             consoleDrawTextColored(3, drawRow, 4, "|    ----------------    |");
             consoleDrawTextColored(3, drawRow + 1, 4, "|                        |");
             oamSetAttr(slot, 0, 240, 0, 0);
-            oamSetEx(slot, OBJ_LARGE, OBJ_HIDE);
+            oamSetEx(slot, OBJ_SMALL, OBJ_HIDE);
             continue;
         }
         
@@ -247,7 +249,7 @@ void levelUpMenu(void) {
             sprintf(tempStr, "WPN: Lvl %u", player.cooldownLvl + 1);
             consoleDrawTextColored(11, drawRow, 6, tempStr);
             oamSetAttr(slot, iconX, iconY, TILE_ICON_WHIP, OBJ_PRIO(3) | OBJ_PAL(0));
-            oamSetEx(slot, OBJ_LARGE, OBJ_SHOW);
+            oamSetEx(slot, OBJ_SMALL, OBJ_SHOW);
         } else if (opt == 1) {
             if (player.bibleLvl == 0) {
                 consoleDrawTextColored(11, drawRow, 7, "BIB: NEW!");
@@ -256,7 +258,7 @@ void levelUpMenu(void) {
                 consoleDrawTextColored(11, drawRow, 5, tempStr);
             }
             oamSetAttr(slot, iconX, iconY, TILE_ICON_KING_BIBLE, OBJ_PRIO(3) | OBJ_PAL(0));
-            oamSetEx(slot, OBJ_LARGE, OBJ_SHOW);
+            oamSetEx(slot, OBJ_SMALL, OBJ_SHOW);
         } else if (opt == 2) {
             if (player.axeLvl == 0) {
                 consoleDrawTextColored(11, drawRow, 7, "AXE: NEW!");
@@ -265,7 +267,7 @@ void levelUpMenu(void) {
                 consoleDrawTextColored(11, drawRow, 5, tempStr);
             }
             oamSetAttr(slot, iconX, iconY, TILE_ICON_AXE, OBJ_PRIO(3) | OBJ_PAL(0));
-            oamSetEx(slot, OBJ_LARGE, OBJ_SHOW);
+            oamSetEx(slot, OBJ_SMALL, OBJ_SHOW);
         } else if (opt == 3) {
             if (player.garlicLvl == 0) {
                 consoleDrawTextColored(11, drawRow, 7, "GAR: NEW!");
@@ -274,7 +276,7 @@ void levelUpMenu(void) {
                 consoleDrawTextColored(11, drawRow, 5, tempStr);
             }
             oamSetAttr(slot, iconX, iconY, TILE_ICON_GARLIC, OBJ_PRIO(3) | OBJ_PAL(0));
-            oamSetEx(slot, OBJ_LARGE, OBJ_SHOW);
+            oamSetEx(slot, OBJ_SMALL, OBJ_SHOW);
         } else if (opt == 4) {
             if (player.wandLvl == 0) {
                 consoleDrawTextColored(11, drawRow, 7, "WND: NEW!");
@@ -283,7 +285,7 @@ void levelUpMenu(void) {
                 consoleDrawTextColored(11, drawRow, 5, tempStr);
             }
             oamSetAttr(slot, iconX, iconY, TILE_ICON_MAGIC_WAND, OBJ_PRIO(3) | OBJ_PAL(0));
-            oamSetEx(slot, OBJ_LARGE, OBJ_SHOW);
+            oamSetEx(slot, OBJ_SMALL, OBJ_SHOW);
         } else if (opt == 5) {
             if (player.waterLvl == 0) {
                 consoleDrawTextColored(11, drawRow, 7, "WTR: NEW!");
@@ -292,21 +294,21 @@ void levelUpMenu(void) {
                 consoleDrawTextColored(11, drawRow, 5, tempStr);
             }
             oamSetAttr(slot, iconX, iconY, TILE_ICON_SANTA_WATER, OBJ_PRIO(3) | OBJ_PAL(0));
-            oamSetEx(slot, OBJ_LARGE, OBJ_SHOW);
+            oamSetEx(slot, OBJ_SMALL, OBJ_SHOW);
         } else if (opt == 6) {
             consoleDrawTextColored(8, drawRow, 6, "HEAL (RECOVER HP)");
             oamSetAttr(slot, 0, 240, 0, 0);
-            oamSetEx(slot, OBJ_LARGE, OBJ_HIDE);
+            oamSetEx(slot, OBJ_SMALL, OBJ_HIDE);
         } else if (opt == 7) {
             sprintf(tempStr, "SPD: Lvl %u (+Move)", player.speedLvl + 1);
             consoleDrawTextColored(11, drawRow, 4, tempStr);
             oamSetAttr(slot, 0, 240, 0, 0);
-            oamSetEx(slot, OBJ_LARGE, OBJ_HIDE);
+            oamSetEx(slot, OBJ_SMALL, OBJ_HIDE);
         } else if (opt == 8) {
             sprintf(tempStr, "MAG: Lvl %u (+Range)", player.magnetLvl + 1);
             consoleDrawTextColored(11, drawRow, 5, tempStr);
             oamSetAttr(slot, 0, 240, 0, 0);
-            oamSetEx(slot, OBJ_LARGE, OBJ_HIDE);
+            oamSetEx(slot, OBJ_SMALL, OBJ_HIDE);
         }
     }
     consoleDrawTextColored(3, 19, 4, "+------------------------+");
@@ -366,7 +368,7 @@ void levelUpMenu(void) {
     // Hide selection menu icons from OAM
     for (i = 0; i < 3; i++) {
         oamSetAttr(OAM_MENU_ICON(i), 0, 240, 0, 0);
-        oamSetEx(OAM_MENU_ICON(i), OBJ_LARGE, OBJ_HIDE);
+        oamSetEx(OAM_MENU_ICON(i), OBJ_SMALL, OBJ_HIDE);
     }
     oamUpdate();
 
@@ -385,6 +387,7 @@ void levelUpMenu(void) {
     player.nextLevelXp = (player.level * player.level * 2) + 8;
 
     gameStartTime += (snes_vblank_count - menuStart);
+}
 /* ============================================================
  *  GAME RESET HELPER
  * ============================================================ */
@@ -431,6 +434,9 @@ static void resetGameState(void) {
  * ============================================================ */
 
 int main(void) {
+    u8 titlePromptTimer;
+    u8 titlePromptVisible;
+
     /* Inicializar sonido (bota la APU spc700) */
     spcBoot();
     spcSetBank(&SOUNDBANK__0);
@@ -527,7 +533,7 @@ int main(void) {
         (&sprites_tilend - &sprites_til),
         &sprites_pal,
         (&sprites_palend - &sprites_pal),
-        0, 0, OBJ_SIZE8_L16
+        0, 0, ANIM_OAM_PROFILE
     );
     
     /* Cargar tiles + paletas de todos los sprites animados (offsets autogenerados desde assets.json) */
@@ -575,44 +581,57 @@ int main(void) {
     
     setScreenOn();
     
-    /* Mensaje de inicio en consola */
-    consoleDrawTextColored(9, 14, 4, "PRESS TO START");
+    /* Prompt abajo, en cian contrastado y con pulso para separarlo del arte. */
+    titlePromptTimer = 0;
+    titlePromptVisible = 1;
+    consoleDrawTextColored(10, 26, 6, "PRESS START");
     
     /* Esperar START */
     while (!(padsDown(0) & KEY_START)) {
+        if (++titlePromptTimer >= 30) {
+            titlePromptTimer = 0;
+            if (titlePromptVisible) {
+                consoleDrawText(10, 26, "           ");
+                titlePromptVisible = 0;
+            } else {
+                consoleDrawTextColored(10, 26, 6, "PRESS START");
+                titlePromptVisible = 1;
+            }
+        }
         spcProcess();
         WaitForVBlank();
     }
     
     /* Iniciar música del juego */
     spcPlay(0);
+    spcSetModuleVolume(255);
     
     // Clear start screen texts
-    consoleDrawText(9, 14, "              ");
+    consoleDrawText(10, 26, "           ");
 
     /* Apagar pantalla para evitar colisión DMA en VRAM activa */
     setScreenOff();
 
     /* Copiar los tiles de Mad Forest a la VRAM a partir de 0x4000 */
-    dmaCopyVram(&Mad_Forest_crop_64x64_indexed_til, 0x4000, &Mad_Forest_crop_64x64_indexed_tilend - &Mad_Forest_crop_64x64_indexed_til);
+    dmaCopyVram(&Mad_Forest_zoom_7_8_til, 0x4000, &Mad_Forest_zoom_7_8_tilend - &Mad_Forest_zoom_7_8_til);
     
     /* Copiar la paleta de Mad Forest a la paleta de BG 1 */
-    dmaCopyCGram(&Mad_Forest_crop_64x64_indexed_pal, 16, 32);
+    dmaCopyCGram(&Mad_Forest_zoom_7_8_pal, 16, 32);
     
-    /* Llenar mapBuffer repitiendo el mapa de 8x8 tiles para rellenar 64x64 tiles, ordenado en cuadrantes de 32x32 */
+    /* Repetir el patrón 7x7 (56x56 px) para cubrir el mapa BG 64x64 tiles. */
     {
         u16 qy, qx, ly, lx;
-        u16 *srcMap = (u16 *)&Mad_Forest_crop_64x64_indexed_map;
+        u16 *srcMap = (u16 *)&Mad_Forest_zoom_7_8_map;
         for (qy = 0; qy < 2; qy++) {
             u16 qyOffset = qy * 2048;
             for (qx = 0; qx < 2; qx++) {
                 u16 qxOffset = qx * 1024;
                 for (ly = 0; ly < 32; ly++) {
-                    u16 srcY = ly & 7;
-                    u16 srcRow = srcY << 3; // srcY * 8
+                    u16 srcY = ly % 7;
+                    u16 srcRow = srcY * 7;
                     u16 rowStart = qyOffset + qxOffset + (ly << 5); // ly * 32
                     for (lx = 0; lx < 32; lx++) {
-                        u16 srcX = lx & 7;
+                        u16 srcX = lx % 7;
                         u16 tile = srcMap[srcRow + srcX];
                         tile = (tile & ~0x1C00) | (1 << 10);
                         mapBuffer[rowStart + lx] = tile;
@@ -649,16 +668,24 @@ int main(void) {
     
 start:
     gameStartTime = snes_vblank_count;
+    clockLastVblank = gameStartTime;
+    clockFrameRemainder = 0;
     while (1) {
-        u32 elapsedFrames = snes_vblank_count - gameStartTime;
-        u16 totalSecs = (u16)(elapsedFrames / 60);
-        gameSecs = totalSecs % 60;
-        gameMins = totalSecs / 60;
-        wave = gameMins;
+        u32 currentVblank = snes_vblank_count;
+        clockFrameRemainder += (u16)(currentVblank - clockLastVblank);
+        clockLastVblank = currentVblank;
+        while (clockFrameRemainder >= 60) {
+            clockFrameRemainder -= 60;
+            if (++gameSecs >= 60) {
+                gameSecs = 0;
+                gameMins++;
+                wave = gameMins;
+            }
+        }
         
-        /* Centrar la cámara en el jugador y limitar a los bordes del mapa de 512x512 */
-        cameraX = player.x - (SCREEN_W / 2);
-        cameraY = player.y - (SCREEN_H / 2);
+        /* Cámara en coordenadas de mundo: el viewport abarca ~14% más mundo. */
+        cameraX = player.x - (WORLD_VIEW_W / 2);
+        cameraY = player.y - (WORLD_VIEW_H / 2);
 
         /* Screen shake cuando el player recibe daño */
         if (shakeTimer > 0) {
@@ -669,13 +696,13 @@ start:
         }
 
         if (cameraX < 0) cameraX = 0;
-        else if (cameraX > MAP_W - SCREEN_W) cameraX = MAP_W - SCREEN_W;
+        else if (cameraX > MAP_W - WORLD_VIEW_W) cameraX = MAP_W - WORLD_VIEW_W;
         if (cameraY < 0) cameraY = 0;
-        else if (cameraY > MAP_H - SCREEN_H) cameraY = MAP_H - SCREEN_H;
+        else if (cameraY > MAP_H - WORLD_VIEW_H) cameraY = MAP_H - WORLD_VIEW_H;
         
         /* Aplicar scroll a BG1 */
         if (dbgBgScroll) {
-            bgSetScroll(1, cameraX, cameraY);
+            bgSetScroll(1, ZOOM_COORD(cameraX), ZOOM_COORD(cameraY));
         } else {
             bgSetScroll(1, 0, 0);
         }
@@ -757,7 +784,7 @@ start:
         } else {
             u8 s;
             for (s = 0; s < 128; s++) {
-                oamSetAttr(s * 4 + OAM_BASE, 0, 240, 0, 0);
+                oamSetAttr(s * 4, 0, 240, 0, 0);
             }
         }
         
@@ -856,7 +883,7 @@ start:
             player.score = player.score; // Triggers redraw check next frame
         }
         
-        // spcProcess();
+        spcProcess();
         WaitForVBlank();
         oamUpdate();
         frameCount++;

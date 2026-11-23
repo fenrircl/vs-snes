@@ -1,0 +1,35 @@
+{
+  "frames": 1,
+  "sprite_size": 32,
+  "palette_groups": {
+    "menu_buttons": {
+      "slot": 2,
+      "members": ["ButtonNormal", "ButtonPressed", "ButtonHover", "ButtonDisabled"]
+    },
+    "character_select": {
+      "slot": 3,
+      "members": ["SelectionBackground", "Selection1", "Selection2", "Selection3", "SelectionActive1", "SelectionActive2", "SelectionActive3"]
+    },
+    "forest_stage": {
+      "slot": 4,
+      "members": ["ForestStage", "ForestStageA", "ForestStageB", "ForestStageIcon"]
+    }
+  },
+  "sprites": [
+    {"name": "ButtonNormal", "src": "port/source/ui/button_c9_normal.png", "role": "weapon", "layout": "static"},
+    {"name": "ButtonPressed", "src": "port/source/ui/button_c9_pressed.png", "role": "weapon", "layout": "static"},
+    {"name": "ButtonHover", "src": "port/source/ui/button_c9_mouseover.png", "role": "weapon", "layout": "static"},
+    {"name": "ButtonDisabled", "src": "port/source/ui/button_c9_desaturated.png", "role": "weapon", "layout": "static"},
+    {"name": "SelectionBackground", "src": "port/source/ui/selectionSquare_BG.png", "role": "weapon", "layout": "static"},
+    {"name": "Selection1", "src": "port/source/ui/selectionSquare_01.png", "role": "weapon", "layout": "static"},
+    {"name": "Selection2", "src": "port/source/ui/selectionSquare_02.png", "role": "weapon", "layout": "static"},
+    {"name": "Selection3", "src": "port/source/ui/selectionSquare_03.png", "role": "weapon", "layout": "static"},
+    {"name": "SelectionActive1", "src": "port/source/ui/selectionSquareActive_01.png", "role": "weapon", "layout": "static"},
+    {"name": "SelectionActive2", "src": "port/source/ui/selectionSquareActive_02.png", "role": "weapon", "layout": "static"},
+    {"name": "SelectionActive3", "src": "port/source/ui/selectionSquareActive_03.png", "role": "weapon", "layout": "static"},
+    {"name": "ForestStage", "src": "port/source/ui/stage_forest.png", "role": "weapon", "layout": "static"},
+    {"name": "ForestStageA", "src": "port/source/ui/stage_forest_A.png", "role": "weapon", "layout": "static"},
+    {"name": "ForestStageB", "src": "port/source/ui/stage_forest_B.png", "role": "weapon", "layout": "static"},
+    {"name": "ForestStageIcon", "src": "port/source/ui/stage_forest_icon.png", "role": "weapon", "layout": "static"}
+  ]
+}

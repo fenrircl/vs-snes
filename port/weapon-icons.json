@@ -1,0 +1,20 @@
+{
+  "frames": 8,
+  "sprite_size": 16,
+  "palette_groups": {
+    "original_weapon_icons": {
+      "slot": 4,
+      "members": ["OriginalWeaponIcons"]
+    }
+  },
+  "sprites": [
+    {
+      "name": "OriginalWeaponIcons",
+      "src": "port/source/weapons/WeaponIcons.png",
+      "role": "weapon",
+      "layout": "phaser_strip",
+      "frame_size": [16, 16],
+      "resample": "nearest"
+    }
+  ]
+}

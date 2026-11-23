@@ -1,0 +1,22 @@
+{
+  "frames": 1,
+  "sprite_size": 32,
+  "palette_groups": {
+    "starter_weapons": {
+      "slot": 5,
+      "members": ["Whip", "MagicWand", "KingBible", "Axe", "Knife"]
+    },
+    "hit_effects": {
+      "slot": 6,
+      "members": ["HitCrossImpact1"]
+    }
+  },
+  "sprites": [
+    {"name": "Whip", "src": "port/source/weapons/Whip.png", "role": "weapon", "layout": "static"},
+    {"name": "MagicWand", "src": "port/source/weapons/MagicWand.png", "role": "weapon", "layout": "static"},
+    {"name": "KingBible", "src": "port/source/weapons/KingBible.png", "role": "weapon", "layout": "static"},
+    {"name": "Axe", "src": "port/source/weapons/Axe.png", "role": "weapon", "layout": "static"},
+    {"name": "Knife", "src": "port/source/weapons/Knife.png", "role": "weapon", "layout": "static"},
+    {"name": "HitCrossImpact1", "src": "port/source/effects/HitCrossImpact1.png", "role": "weapon", "layout": "static"}
+  ]
+}

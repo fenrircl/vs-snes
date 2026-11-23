@@ -1,0 +1,86 @@
+{
+  "source_atlas_json": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/enemies.json",
+  "source_atlas_image": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/enemies.png",
+  "cell_size": [
+    30,
+    32
+  ],
+  "frames": [
+    {
+      "name": "Ghost_1.png",
+      "source_size": [
+        29,
+        32
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        29,
+        32
+      ],
+      "rotated": false,
+      "cell": 0,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Ghost_2.png",
+      "source_size": [
+        30,
+        32
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        30,
+        32
+      ],
+      "rotated": false,
+      "cell": 1,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Ghost_3.png",
+      "source_size": [
+        29,
+        32
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        29,
+        32
+      ],
+      "rotated": false,
+      "cell": 2,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Ghost_4.png",
+      "source_size": [
+        30,
+        31
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        30,
+        31
+      ],
+      "rotated": false,
+      "cell": 3,
+      "cell_offset": [
+        0,
+        0
+      ]
+    }
+  ]
+}

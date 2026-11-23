@@ -8,7 +8,7 @@ void initGarlic(void) {
     garlicTickTimer = 0;
     for (i = 0; i < 8; i++) {
         oamSetAttr(OAM_GARLIC(i), 0, 240, 0, 0);
-        oamSetEx(OAM_GARLIC(i), OBJ_LARGE, OBJ_HIDE);
+        oamSetEx(OAM_GARLIC(i), OBJ_SMALL, OBJ_HIDE);
     }
 }
 
@@ -65,7 +65,7 @@ void renderGarlic(void) {
     if (player.garlicLvl == 0) {
         for (i = 0; i < 8; i++) {
             oamSetAttr(OAM_GARLIC(i), 0, 240, 0, 0);
-            oamSetEx(OAM_GARLIC(i), OBJ_LARGE, OBJ_HIDE);
+            oamSetEx(OAM_GARLIC(i), OBJ_SMALL, OBJ_HIDE);
         }
         return;
     }
@@ -77,8 +77,8 @@ void renderGarlic(void) {
     s16 pulse = (frameCount / 8) & 1;
     s16 d = baseOffset + pulse;
 
-    s16 screenX = player.x - cameraX;
-    s16 screenY = player.y - cameraY;
+    s16 screenX = CAMERA_X(player.x);
+    s16 screenY = CAMERA_Y(player.y);
 
     // Use the blue translucent ring tiles (first sprite in items, which is TILEBASE_Items) instead of the garlic head icon
     u16 tileIndex = TILEBASE_Items;
@@ -119,9 +119,9 @@ void renderGarlic(void) {
         // Alternate showing even/odd sprites to create a smooth CRT 50% translucency aura effect
         if (((frameCount + i) & 1) == 0) {
             oamSetAttr(slot, 0, 240, 0, 0);
-            oamSetEx(slot, OBJ_LARGE, OBJ_HIDE);
+            oamSetEx(slot, OBJ_SMALL, OBJ_HIDE);
         } else {
-            oamSetEx(slot, OBJ_LARGE, OBJ_SHOW);
+            oamSetEx(slot, OBJ_SMALL, OBJ_SHOW);
             oamSetAttr(slot, gx, gy, tileIndex, spriteAttr);
         }
     }

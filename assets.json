@@ -1,7 +1,7 @@
 {
   "_comment": "Manifiesto unico de sprites para VS-SNES. Editar aqui = agregar/quitar enemigos sin tocar C/asm. Regenerar con: python3 scripts/build-sprites.py",
   "frames": 4,
-  "sprite_size": 16,
+  "sprite_size": 24,
 
   "palette_groups": {
     "enemies": { "slot": 1, "members": ["Pipeestrello", "Zombie", "Skeleton", "Ghost", "Mudman"] },
@@ -25,7 +25,7 @@
   ],
 
   "enemy_table": [
-    { "sprite": "Pipeestrello", "hp": 1, "speed": 1, "score": 10, "anim": 6  },
+    { "sprite": "Pipeestrello", "hp": 1, "speed": 1, "score": 10, "anim": 2  },
     { "sprite": "Zombie",       "hp": 2, "speed": 1, "score": 20, "anim": 12 },
     { "sprite": "Skeleton",     "hp": 3, "speed": 1, "score": 30, "anim": 8  },
     { "sprite": "Ghost",        "hp": 1, "speed": 2, "score": 15, "anim": 10 },
@@ -33,13 +33,13 @@
   ],
 
   "weapon_icons": [
-    { "name": "Experience_Gem", "src": "sprites/items/Sprite-Experience_Gem.png", "tile_start": 34 },
-    { "name": "Whip",        "src": "sprites/items/Sprite-Whip.png",        "tile_start": 64 },
-    { "name": "King_Bible",  "src": "sprites/items/Sprite-King_Bible.png",  "tile_start": 68 },
-    { "name": "Axe",         "src": "sprites/items/Sprite-Axe.png",         "tile_start": 72 },
-    { "name": "Garlic",      "src": "sprites/items/Sprite-Garlic.png",      "tile_start": 76 },
-    { "name": "Magic_Wand",  "src": "sprites/items/Sprite-Magic_Wand.png",  "tile_start": 96 },
-    { "name": "Santa_Water", "src": "sprites/items/Sprite-Santa_Water.png", "tile_start": 100 }
+    { "name": "Experience_Gem", "src": "sprites/items/Sprite-Experience_Gem.png", "tile_start": 0 },
+    { "name": "Whip",        "src": "sprites/items/Sprite-Whip.png",        "tile_start": 2 },
+    { "name": "King_Bible",  "src": "sprites/items/Sprite-King_Bible.png",  "tile_start": 4 },
+    { "name": "Axe",         "src": "sprites/items/Sprite-Axe.png",         "tile_start": 6 },
+    { "name": "Garlic",      "src": "sprites/items/Sprite-Garlic.png",      "tile_start": 8 },
+    { "name": "Magic_Wand",  "src": "sprites/items/Sprite-Magic_Wand.png", "tile_start": 10 },
+    { "name": "Santa_Water", "src": "sprites/items/Sprite-Santa_Water.png", "tile_start": 12 }
   ]
 }
 

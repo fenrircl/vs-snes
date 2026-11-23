@@ -1,0 +1,86 @@
+{
+  "source_atlas_json": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/characters.json",
+  "source_atlas_image": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/characters.png",
+  "cell_size": [
+    31,
+    33
+  ],
+  "frames": [
+    {
+      "name": "Pasqualina_01.png",
+      "source_size": [
+        30,
+        33
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        30,
+        33
+      ],
+      "rotated": false,
+      "cell": 0,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Pasqualina_02.png",
+      "source_size": [
+        30,
+        33
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        30,
+        33
+      ],
+      "rotated": false,
+      "cell": 1,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Pasqualina_03.png",
+      "source_size": [
+        31,
+        33
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        31,
+        33
+      ],
+      "rotated": false,
+      "cell": 2,
+      "cell_offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Pasqualina_04.png",
+      "source_size": [
+        30,
+        33
+      ],
+      "sprite_source_size": [
+        0,
+        0,
+        30,
+        33
+      ],
+      "rotated": false,
+      "cell": 3,
+      "cell_offset": [
+        0,
+        0
+      ]
+    }
+  ]
+}

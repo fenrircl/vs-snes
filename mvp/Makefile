@@ -34,4 +34,7 @@ sprites.pic: gfx/sprites.png
 # bg.pic: gfx/background.png
 # 	$(GFXCONV) -s 16 -o 16 -u 16 -p -m -e 0 -i $<
 
-bitmaps : gfx/pvsneslibfont.pic sprites.pic
+bitmaps : gfx/pvsneslibfont.pic sprites.pic gfx/fondos/Mad_Forest_zoom_7_8.map
+
+gfx/fondos/Mad_Forest_zoom_7_8.map: gfx/fondos/Mad_Forest_crop_64x64_indexed.png ../scripts/build-zoom-background.py
+	python3 ../scripts/build-zoom-background.py --converter $(GFXCONV)

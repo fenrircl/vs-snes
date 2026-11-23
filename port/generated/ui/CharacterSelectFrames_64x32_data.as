@@ -1,0 +1,8 @@
+CharacterSelectFrames_64x32_til:
+.incbin "CharacterSelectFrames_64x32.pic"
+CharacterSelectFrames_64x32_tilend:
+
+CharacterSelectFrames_64x32_pal:
+.incbin "CharacterSelectFrames_64x32.pal"
+CharacterSelectFrames_64x32_palend:
+

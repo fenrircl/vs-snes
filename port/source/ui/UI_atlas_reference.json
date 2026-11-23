@@ -1,0 +1,173 @@
+{
+  "source_atlas": "/mnt/c/vampire survivors/resources/app/.webpack/renderer/assets/img/UI.json",
+  "frames": {
+    "background_forest.png": {
+      "filename": "background_forest.png",
+      "rotated": false,
+      "trimmed": false,
+      "sourceSize": {
+        "w": 300,
+        "h": 180
+      },
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 300,
+        "h": 180
+      },
+      "frame": {
+        "x": 603,
+        "y": 1,
+        "w": 300,
+        "h": 180
+      }
+    },
+    "stage_forest_A.png": {
+      "filename": "stage_forest_A.png",
+      "rotated": false,
+      "trimmed": false,
+      "sourceSize": {
+        "w": 19,
+        "h": 18
+      },
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 19,
+        "h": 18
+      },
+      "frame": {
+        "x": 1002,
+        "y": 557,
+        "w": 19,
+        "h": 18
+      }
+    },
+    "stage_forest.png": {
+      "filename": "stage_forest.png",
+      "rotated": false,
+      "trimmed": false,
+      "sourceSize": {
+        "w": 156,
+        "h": 96
+      },
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 156,
+        "h": 96
+      },
+      "frame": {
+        "x": 302,
+        "y": 699,
+        "w": 156,
+        "h": 96
+      }
+    },
+    "button_c9_mouseover.png": {
+      "filename": "button_c9_mouseover.png",
+      "rotated": false,
+      "trimmed": true,
+      "sourceSize": {
+        "w": 48,
+        "h": 48
+      },
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 7,
+        "w": 48,
+        "h": 35
+      },
+      "frame": {
+        "x": 949,
+        "y": 816,
+        "w": 48,
+        "h": 35
+      }
+    },
+    "button_c9_normal.png": {
+      "filename": "button_c9_normal.png",
+      "rotated": false,
+      "trimmed": true,
+      "sourceSize": {
+        "w": 48,
+        "h": 48
+      },
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 7,
+        "w": 48,
+        "h": 35
+      },
+      "frame": {
+        "x": 946,
+        "y": 852,
+        "w": 48,
+        "h": 35
+      }
+    },
+    "button_c9_pressed.png": {
+      "filename": "button_c9_pressed.png",
+      "rotated": false,
+      "trimmed": true,
+      "sourceSize": {
+        "w": 48,
+        "h": 48
+      },
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 7,
+        "w": 48,
+        "h": 35
+      },
+      "frame": {
+        "x": 946,
+        "y": 888,
+        "w": 48,
+        "h": 35
+      }
+    },
+    "stage_forest_B.png": {
+      "filename": "stage_forest_B.png",
+      "rotated": false,
+      "trimmed": false,
+      "sourceSize": {
+        "w": 18,
+        "h": 18
+      },
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 18,
+        "h": 18
+      },
+      "frame": {
+        "x": 438,
+        "y": 1142,
+        "w": 18,
+        "h": 18
+      }
+    },
+    "stage_forest_icon.png": {
+      "filename": "stage_forest_icon.png",
+      "rotated": false,
+      "trimmed": false,
+      "sourceSize": {
+        "w": 18,
+        "h": 18
+      },
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 18,
+        "h": 18
+      },
+      "frame": {
+        "x": 419,
+        "y": 1153,
+        "w": 18,
+        "h": 18
+      }
+    }
+  }
+}
