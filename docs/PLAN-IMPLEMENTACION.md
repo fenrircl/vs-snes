@@ -97,7 +97,7 @@ que en un grupo vertical denso desaparecen enemigos completos, no solo parpadean
 | SFX | No hay: `soundbank.h` solo define `MOD_BGM`; no hay `spcLoadEffect` ni `spcEffect` |
 | `spcProcess()` | Comentado en `main.c:859`; solo se llama en menús y esperas |
 | Echo/reverb | No configurado: el `.it` no tiene mensaje de canción (`msglen = 0`) |
-| Canales | El `.it` tiene 9 canales y `smconv` avisa "More than 8 channels"; el canal 8 se lo roba SNESMOD para SFX |
+| Canales | El `.it` tiene 9 canales y `smconv` avisa "More than 8 channels"; el canal 8 (1-based; índice 7 en C) se lo roba SNESMOD para SFX |
 | Samples | 38 KB de banco, 3 samples reales (según el commit que generó el banco); el resto de slots vacíos |
 | Fades | No se usan `spcSetModuleVolume`/`spcFadeModuleVolume` |
 
