@@ -6,16 +6,14 @@ Explorando los límites del hardware SNES para ver si es posible hacer un juego 
 
 ## Estado
 
-MVP en fase de investigación y prototipado. El plan técnico vigente, con el
-estado verificado, los presupuestos de hardware y el backlog priorizado, está en
-[docs/PLAN-IMPLEMENTACION.md](docs/PLAN-IMPLEMENTACION.md). [plan.md](plan.md)
-queda como roadmap histórico.
+MVP en fase de investigación y prototipado. El estado, checklist y próximos
+pasos están reunidos en el [plan único de implementación](docs/PLAN-IMPLEMENTACION.md).
 
 ## Stack
 
 | Componente | Herramienta |
 |---|---|
-| Librería | PVSNESlib 4.3.0 |
+| Librería | PVSNESlib (versión por fijar; ver el plan) |
 | Compilador C | 816-tcc (fork de TCC para 65816) |
 | Ensamblador | WLA-DX (wla-65816 / wlalink) |
 | Conversor gráficos | gfx4snes (PNG/BMP → .pic .pal) |
@@ -24,7 +22,9 @@ queda como roadmap histórico.
 
 ## Objetivo técnico
 
-Demostrar que se puede tener ~40+ enemigos simultáneos en SNES usando técnicas de flickering, sprites 8x8, update escalonado y colisiones eficientes, todo en C con PVSNESlib.
+Prototipar un juego de supervivencia para SNES y medir cuántos enemigos puede
+mover y mostrar el hardware con estabilidad. Los objetivos de rendimiento se
+definirán cuando exista un build reproducible.
 
 ## Scripts
 
@@ -45,6 +45,7 @@ mednafen vs-snes-mvp.sfc
 
 ## Docs
 
+- [Plan y checklist del MVP](docs/PLAN-IMPLEMENTACION.md)
 - [Guía de instalación](docs/pvsneslib-setup.md)
 - [API de PVSNESlib](docs/pvsneslib-api.md)
 - [Ejemplos de código](docs/pvsneslib-examples.md)

@@ -8,6 +8,9 @@
 *.asm
 *.def
 
+# Generated repository analysis
+/graphify-out/
+
 # Graphics conversion output
 *.pic
 *.pal
@@ -24,6 +27,7 @@ __pycache__/
 *~
 .DS_Store
 Thumbs.db
+*:Zone.Identifier
 
 # Temp
 tmp/

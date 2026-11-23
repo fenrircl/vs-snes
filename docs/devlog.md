@@ -1,5 +1,12 @@
 # Devlog — VS-SNES
 
+> Estas notas son históricas y registran observaciones de sesiones anteriores.
+> No son la fuente de verdad del estado del proyecto. Para estado y tareas,
+> consultar [PLAN-IMPLEMENTACION.md](PLAN-IMPLEMENTACION.md). En particular,
+> las afirmaciones antiguas de OAM de las secciones 4 y 5 no están validadas
+> contra la versión de PVSNESlib que se fijará; no asumir que `OAM_BASE=256`
+> es una solución correcta.
+
 ## Bugs encontrados y fixes
 
 ### 1. setup-snesdev.sh
