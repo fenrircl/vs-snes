@@ -6,7 +6,10 @@ Explorando los límites del hardware SNES para ver si es posible hacer un juego 
 
 ## Estado
 
-MVP en fase de investigación y prototipado. Consulta [plan.md](plan.md) para el roadmap.
+MVP en fase de investigación y prototipado. El plan técnico vigente, con el
+estado verificado, los presupuestos de hardware y el backlog priorizado, está en
+[docs/PLAN-IMPLEMENTACION.md](docs/PLAN-IMPLEMENTACION.md). [plan.md](plan.md)
+queda como roadmap histórico.
 
 ## Stack
 
