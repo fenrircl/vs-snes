@@ -1,0 +1,800 @@
+{
+  "/home/fenrir/vs-snes/.claude/settings.local.json": {
+    "mtime": 1781557625.1154115,
+    "seen": 1795440763.9109867,
+    "ast_hash": "49626bc9fd94f11ac8d19acca66faec4",
+    "semantic_hash": "49626bc9fd94f11ac8d19acca66faec4"
+  },
+  "/home/fenrir/vs-snes/assets.json": {
+    "mtime": 1781561894.6876013,
+    "seen": 1795440763.9109912,
+    "ast_hash": "9d54d545888aa469c5dc28882837123b",
+    "semantic_hash": "9d54d545888aa469c5dc28882837123b"
+  },
+  "/home/fenrir/vs-snes/gfx/enemigos/Animated_Pipeestrello_indexed.inc": {
+    "mtime": 1781043919.0173745,
+    "seen": 1795440763.9109929,
+    "ast_hash": "e27f899f1f5007a6b27c9b74b11b5738",
+    "semantic_hash": "e27f899f1f5007a6b27c9b74b11b5738"
+  },
+  "/home/fenrir/vs-snes/gfx/fondos/Mad_Forest_crop_64x64_indexed.inc": {
+    "mtime": 1781043931.0140517,
+    "seen": 1795440763.9109938,
+    "ast_hash": "2d0ea6aa40bdb19e378bb62594d65bd9",
+    "semantic_hash": "2d0ea6aa40bdb19e378bb62594d65bd9"
+  },
+  "/home/fenrir/vs-snes/gfx/personajes/Animated_Antonio_Belpaese_indexed.inc": {
+    "mtime": 1781043924.8936832,
+    "seen": 1795440763.9109948,
+    "ast_hash": "6d912480a1f98cfc7d552eac3080de14",
+    "semantic_hash": "6d912480a1f98cfc7d552eac3080de14"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/Sprite-Pipeestrello-2_indexed.inc": {
+    "mtime": 1780979416.4342735,
+    "seen": 1795440763.9109955,
+    "ast_hash": "df79b72471537fff0c80218ad90b5bd9",
+    "semantic_hash": "df79b72471537fff0c80218ad90b5bd9"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/Sprite-Pipeestrello_indexed.inc": {
+    "mtime": 1780979381.7662814,
+    "seen": 1795440763.9109962,
+    "ast_hash": "a3e0d86b6bac7b605ef94f38c5b9f603",
+    "semantic_hash": "a3e0d86b6bac7b605ef94f38c5b9f603"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/Sprite-Zombie_indexed.inc": {
+    "mtime": 1780979426.8022711,
+    "seen": 1795440763.910997,
+    "ast_hash": "83676a8b67971526351f9aefe9d3989a",
+    "semantic_hash": "83676a8b67971526351f9aefe9d3989a"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/ataques/Animated_Axe_indexed.inc": {
+    "mtime": 1781561475.1355813,
+    "seen": 1795440763.9109979,
+    "ast_hash": "f64cb1eaf90aab7612ef875ee757ebfb",
+    "semantic_hash": "f64cb1eaf90aab7612ef875ee757ebfb"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/ataques/Animated_Garlic_indexed.inc": {
+    "mtime": 1781561475.1475813,
+    "seen": 1795440763.9109983,
+    "ast_hash": "6f9667442193f96221528455087da41e",
+    "semantic_hash": "6f9667442193f96221528455087da41e"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/ataques/Animated_Items_indexed.inc": {
+    "mtime": 1781569578.5919437,
+    "seen": 1795440763.910999,
+    "ast_hash": "3e7c28a623a9fc2e713e0e60ec07dc94",
+    "semantic_hash": "3e7c28a623a9fc2e713e0e60ec07dc94"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/ataques/Animated_King_Bible_indexed.inc": {
+    "mtime": 1781561475.1235814,
+    "seen": 1795440763.9109998,
+    "ast_hash": "78b4cef14ce4370068c920ca04b8ae44",
+    "semantic_hash": "78b4cef14ce4370068c920ca04b8ae44"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/ataques/Animated_Magic_Wand_indexed.inc": {
+    "mtime": 1781561475.1595812,
+    "seen": 1795440763.9110005,
+    "ast_hash": "a35e4434ad161be1ebb2c1d0b09aa4ce",
+    "semantic_hash": "a35e4434ad161be1ebb2c1d0b09aa4ce"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/ataques/Animated_Santa_Water_indexed.inc": {
+    "mtime": 1781561475.1755812,
+    "seen": 1795440763.9110014,
+    "ast_hash": "524599ef1f11528aac729e3640c86a6a",
+    "semantic_hash": "524599ef1f11528aac729e3640c86a6a"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/ataques/Animated_Whip_indexed.inc": {
+    "mtime": 1781569578.5879438,
+    "seen": 1795440763.911002,
+    "ast_hash": "35cfc69fd74387c7bd980a1349dffa93",
+    "semantic_hash": "35cfc69fd74387c7bd980a1349dffa93"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/enemigos/Animated_Ghost_indexed.inc": {
+    "mtime": 1781569578.5719438,
+    "seen": 1795440763.9110026,
+    "ast_hash": "2a098aa9fe0a100e14e8860d787bb435",
+    "semantic_hash": "2a098aa9fe0a100e14e8860d787bb435"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/enemigos/Animated_Mudman_indexed.inc": {
+    "mtime": 1781569578.5839438,
+    "seen": 1795440763.9110034,
+    "ast_hash": "7c3e44bada5df7f9ef95746a861fbbea",
+    "semantic_hash": "7c3e44bada5df7f9ef95746a861fbbea"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/enemigos/Animated_Pipeestrello_indexed.inc": {
+    "mtime": 1781569578.5359437,
+    "seen": 1795440763.911004,
+    "ast_hash": "e27f899f1f5007a6b27c9b74b11b5738",
+    "semantic_hash": "e27f899f1f5007a6b27c9b74b11b5738"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/enemigos/Animated_Skeleton_indexed.inc": {
+    "mtime": 1781569578.5639439,
+    "seen": 1795440763.9110048,
+    "ast_hash": "ce8a59245026c7972e4df1835ebc5c1a",
+    "semantic_hash": "ce8a59245026c7972e4df1835ebc5c1a"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/enemigos/Animated_Zombie_indexed.inc": {
+    "mtime": 1781569578.5559437,
+    "seen": 1795440763.9110055,
+    "ast_hash": "94453afb4c113a9a20b01c3172fd413c",
+    "semantic_hash": "94453afb4c113a9a20b01c3172fd413c"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/fondos/Mad_Forest_crop_64x64_indexed.inc": {
+    "mtime": 1781043952.4828842,
+    "seen": 1795440763.911006,
+    "ast_hash": "2d0ea6aa40bdb19e378bb62594d65bd9",
+    "semantic_hash": "2d0ea6aa40bdb19e378bb62594d65bd9"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/fondos/main_menu.inc": {
+    "mtime": 1781568050.483873,
+    "seen": 1795440763.9110067,
+    "ast_hash": "fd927c01fa44614462cf8fb59c4a6cd0",
+    "semantic_hash": "fd927c01fa44614462cf8fb59c4a6cd0"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/personajes/Animated-Antonio_Belpaese_indexed.inc": {
+    "mtime": 1781009022.2405686,
+    "seen": 1795440763.9110076,
+    "ast_hash": "2dc3b057346408f20118665550536d21",
+    "semantic_hash": "2dc3b057346408f20118665550536d21"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/personajes/Animated_Antonio_Belpaese_indexed.inc": {
+    "mtime": 1781569578.5479438,
+    "seen": 1795440763.9110086,
+    "ast_hash": "6d912480a1f98cfc7d552eac3080de14",
+    "semantic_hash": "6d912480a1f98cfc7d552eac3080de14"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/pvsneslibfont.inc": {
+    "mtime": 1780959038.7110457,
+    "seen": 1795440763.911009,
+    "ast_hash": "393068ff1ea05c409ecf8ae806256eb9",
+    "semantic_hash": "393068ff1ea05c409ecf8ae806256eb9"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/sprites.inc": {
+    "mtime": 1788455243.029467,
+    "seen": 1795440763.9110098,
+    "ast_hash": "92d66377ac2c695e5a406d98ed60401d",
+    "semantic_hash": "92d66377ac2c695e5a406d98ed60401d"
+  },
+  "/home/fenrir/vs-snes/mvp/res/soundbank.h": {
+    "mtime": 1788455243.017467,
+    "seen": 1795440763.9110103,
+    "ast_hash": "501342d9563a987b123c4d626cf1ef41",
+    "semantic_hash": "501342d9563a987b123c4d626cf1ef41"
+  },
+  "/home/fenrir/vs-snes/mvp/src/assets_gen.c": {
+    "mtime": 1781569578.595944,
+    "seen": 1795440763.911011,
+    "ast_hash": "9a92137f469b1af415d844728599ff97",
+    "semantic_hash": "9a92137f469b1af415d844728599ff97"
+  },
+  "/home/fenrir/vs-snes/mvp/src/assets_gen.h": {
+    "mtime": 1781569578.595944,
+    "seen": 1795440763.9110117,
+    "ast_hash": "3313e4596cd70a13f6706e6612940b0a",
+    "semantic_hash": "3313e4596cd70a13f6706e6612940b0a"
+  },
+  "/home/fenrir/vs-snes/mvp/src/axe.c": {
+    "mtime": 1788454788.6375,
+    "seen": 1795440763.9110124,
+    "ast_hash": "5707ce93ba8fa3815aea13933c165b0e",
+    "semantic_hash": "5707ce93ba8fa3815aea13933c165b0e"
+  },
+  "/home/fenrir/vs-snes/mvp/src/axe.h": {
+    "mtime": 1781560776.9915502,
+    "seen": 1795440763.911013,
+    "ast_hash": "de0647f0b7a34719f5b5ee9dd7ad495f",
+    "semantic_hash": "de0647f0b7a34719f5b5ee9dd7ad495f"
+  },
+  "/home/fenrir/vs-snes/mvp/src/bible.c": {
+    "mtime": 1788454788.6375,
+    "seen": 1795440763.9110136,
+    "ast_hash": "898ef95aab712ca549327458531c549a",
+    "semantic_hash": "898ef95aab712ca549327458531c549a"
+  },
+  "/home/fenrir/vs-snes/mvp/src/bible.h": {
+    "mtime": 1781559834.495511,
+    "seen": 1795440763.911014,
+    "ast_hash": "4d8dfc1941518adfda0c4f4abc74ca8b",
+    "semantic_hash": "4d8dfc1941518adfda0c4f4abc74ca8b"
+  },
+  "/home/fenrir/vs-snes/mvp/src/bullets.c": {
+    "mtime": 1788454788.6375,
+    "seen": 1795440763.9110148,
+    "ast_hash": "3f448eefec0bded0963b1d82a024a1c9",
+    "semantic_hash": "3f448eefec0bded0963b1d82a024a1c9"
+  },
+  "/home/fenrir/vs-snes/mvp/src/bullets.h": {
+    "mtime": 1780978543.0104783,
+    "seen": 1795440763.9110157,
+    "ast_hash": "476d932b1807086cf02e33956f381dc0",
+    "semantic_hash": "476d932b1807086cf02e33956f381dc0"
+  },
+  "/home/fenrir/vs-snes/mvp/src/common.h": {
+    "mtime": 1788454788.6375,
+    "seen": 1795440763.9110162,
+    "ast_hash": "fbdd368d8478b5a05031d875fd799f15",
+    "semantic_hash": "fbdd368d8478b5a05031d875fd799f15"
+  },
+  "/home/fenrir/vs-snes/mvp/src/enemies.c": {
+    "mtime": 1788454788.6375,
+    "seen": 1795440763.9110167,
+    "ast_hash": "f61517dba1d50c86e5d4ab8bc2945bf9",
+    "semantic_hash": "f61517dba1d50c86e5d4ab8bc2945bf9"
+  },
+  "/home/fenrir/vs-snes/mvp/src/enemies.h": {
+    "mtime": 1781044980.8200233,
+    "seen": 1795440763.9110174,
+    "ast_hash": "55cd453cd46e284547f36b3eadde6201",
+    "semantic_hash": "55cd453cd46e284547f36b3eadde6201"
+  },
+  "/home/fenrir/vs-snes/mvp/src/garlic.c": {
+    "mtime": 1788454788.6375,
+    "seen": 1795440763.9110181,
+    "ast_hash": "c70ae28a41951fbce5c6a4ace646e971",
+    "semantic_hash": "c70ae28a41951fbce5c6a4ace646e971"
+  },
+  "/home/fenrir/vs-snes/mvp/src/garlic.h": {
+    "mtime": 1781560789.0755503,
+    "seen": 1795440763.9110188,
+    "ast_hash": "902a6808622a508690504b803cc7d1b4",
+    "semantic_hash": "902a6808622a508690504b803cc7d1b4"
+  },
+  "/home/fenrir/vs-snes/mvp/src/gems.c": {
+    "mtime": 1788454402.0655293,
+    "seen": 1795440763.9110196,
+    "ast_hash": "46677174914a4ccee5fa5c638034864d",
+    "semantic_hash": "46677174914a4ccee5fa5c638034864d"
+  },
+  "/home/fenrir/vs-snes/mvp/src/gems.h": {
+    "mtime": 1781561900.0476017,
+    "seen": 1795440763.91102,
+    "ast_hash": "beeca645b03ae60a9f1dad98e17b1773",
+    "semantic_hash": "beeca645b03ae60a9f1dad98e17b1773"
+  },
+  "/home/fenrir/vs-snes/mvp/src/hud.c": {
+    "mtime": 1781569361.539929,
+    "seen": 1795440763.911021,
+    "ast_hash": "97da760fa0d3147b1b0f4e470b153a76",
+    "semantic_hash": "97da760fa0d3147b1b0f4e470b153a76"
+  },
+  "/home/fenrir/vs-snes/mvp/src/hud.h": {
+    "mtime": 1781569358.1399286,
+    "seen": 1795440763.9110224,
+    "ast_hash": "af041b67c8a68a858c5480a07a61f984",
+    "semantic_hash": "af041b67c8a68a858c5480a07a61f984"
+  },
+  "/home/fenrir/vs-snes/mvp/src/main.c": {
+    "mtime": 1788456422.1373804,
+    "seen": 1795440763.9110231,
+    "ast_hash": "7efdf8955343e5ecb22f9f21efcab0fd",
+    "semantic_hash": "7efdf8955343e5ecb22f9f21efcab0fd"
+  },
+  "/home/fenrir/vs-snes/mvp/src/player.c": {
+    "mtime": 1781614586.143037,
+    "seen": 1795440763.9110236,
+    "ast_hash": "4b95f5cb772c82ae3a9e755eb6ec9375",
+    "semantic_hash": "4b95f5cb772c82ae3a9e755eb6ec9375"
+  },
+  "/home/fenrir/vs-snes/mvp/src/player.h": {
+    "mtime": 1780978506.6184864,
+    "seen": 1795440763.9110243,
+    "ast_hash": "f96d50f5169f2ceba3e893f378017174",
+    "semantic_hash": "f96d50f5169f2ceba3e893f378017174"
+  },
+  "/home/fenrir/vs-snes/mvp/src/wand.c": {
+    "mtime": 1788454788.6375,
+    "seen": 1795440763.9110248,
+    "ast_hash": "19d84f7184b9c0bc763a6dde5f9c90e8",
+    "semantic_hash": "19d84f7184b9c0bc763a6dde5f9c90e8"
+  },
+  "/home/fenrir/vs-snes/mvp/src/wand.h": {
+    "mtime": 1781560804.1995506,
+    "seen": 1795440763.9110258,
+    "ast_hash": "29b1e4359c236cc721bef74ac492f1ca",
+    "semantic_hash": "29b1e4359c236cc721bef74ac492f1ca"
+  },
+  "/home/fenrir/vs-snes/mvp/src/water.c": {
+    "mtime": 1788454788.6375,
+    "seen": 1795440763.9110265,
+    "ast_hash": "06e0d31fd55d3546f94e8a8e60480e81",
+    "semantic_hash": "06e0d31fd55d3546f94e8a8e60480e81"
+  },
+  "/home/fenrir/vs-snes/mvp/src/water.h": {
+    "mtime": 1781560814.8715506,
+    "seen": 1795440763.911027,
+    "ast_hash": "17d68d96bebb2e03889afb870363c7e5",
+    "semantic_hash": "17d68d96bebb2e03889afb870363c7e5"
+  },
+  "/home/fenrir/vs-snes/mvp/src/whip.c": {
+    "mtime": 1788454788.6375,
+    "seen": 1795440763.9110277,
+    "ast_hash": "8f05864cc78960c101b661903134b924",
+    "semantic_hash": "8f05864cc78960c101b661903134b924"
+  },
+  "/home/fenrir/vs-snes/mvp/src/whip.h": {
+    "mtime": 1781559828.2795126,
+    "seen": 1795440763.9110284,
+    "ast_hash": "746d9b63c831d709402de148f8e7da45",
+    "semantic_hash": "746d9b63c831d709402de148f8e7da45"
+  },
+  "/home/fenrir/vs-snes/scripts/analyze_bible.py": {
+    "mtime": 1781559164.6274772,
+    "seen": 1795440763.911029,
+    "ast_hash": "ad1a6c97f9b4deadc7986cc28832453e",
+    "semantic_hash": "ad1a6c97f9b4deadc7986cc28832453e"
+  },
+  "/home/fenrir/vs-snes/scripts/analyze_indexed.py": {
+    "mtime": 1781098664.9024174,
+    "seen": 1795440763.9110298,
+    "ast_hash": "0f4913f22000e7bc39862d7a58d15815",
+    "semantic_hash": "0f4913f22000e7bc39862d7a58d15815"
+  },
+  "/home/fenrir/vs-snes/scripts/analyze_sprites.py": {
+    "mtime": 1781098646.8104196,
+    "seen": 1795440763.9110303,
+    "ast_hash": "f673be0bd45b12cd1b6e44b1d03be8de",
+    "semantic_hash": "f673be0bd45b12cd1b6e44b1d03be8de"
+  },
+  "/home/fenrir/vs-snes/scripts/analyze_whip.py": {
+    "mtime": 1781558914.1674688,
+    "seen": 1795440763.911031,
+    "ast_hash": "6a9a8cb02acfadab12c8e8def1b1f446",
+    "semantic_hash": "6a9a8cb02acfadab12c8e8def1b1f446"
+  },
+  "/home/fenrir/vs-snes/scripts/build-sprites.py": {
+    "mtime": 1781569574.3879437,
+    "seen": 1795440763.9110317,
+    "ast_hash": "9e6d5a222a053b8c52a45fcbc093275e",
+    "semantic_hash": "9e6d5a222a053b8c52a45fcbc093275e"
+  },
+  "/home/fenrir/vs-snes/scripts/check_icons.py": {
+    "mtime": 1781559314.487484,
+    "seen": 1795440763.9110324,
+    "ast_hash": "b6c92bb26298e1554fbc52222bcb69e0",
+    "semantic_hash": "b6c92bb26298e1554fbc52222bcb69e0"
+  },
+  "/home/fenrir/vs-snes/scripts/convert-asset.py": {
+    "mtime": 1781098817.590399,
+    "seen": 1795440763.9110332,
+    "ast_hash": "57c73bdbc6c86fdd7be01b2955c22d82",
+    "semantic_hash": "57c73bdbc6c86fdd7be01b2955c22d82"
+  },
+  "/home/fenrir/vs-snes/scripts/convert_menu.py": {
+    "mtime": 1781568044.2838724,
+    "seen": 1795440763.9110336,
+    "ast_hash": "1c03d75542ed0196962fc17e41852597",
+    "semantic_hash": "1c03d75542ed0196962fc17e41852597"
+  },
+  "/home/fenrir/vs-snes/scripts/placeholder-sprites.py": {
+    "mtime": 1781039970.2158144,
+    "seen": 1795440763.9110343,
+    "ast_hash": "c69959d37b1e74fd4bbdb04660b0d00c",
+    "semantic_hash": "c69959d37b1e74fd4bbdb04660b0d00c"
+  },
+  "/home/fenrir/vs-snes/scripts/run.sh": {
+    "mtime": 1780957495.7754068,
+    "seen": 1795440763.9110348,
+    "ast_hash": "59e12b4fff80a22f141982e0f4f27cb2",
+    "semantic_hash": "59e12b4fff80a22f141982e0f4f27cb2"
+  },
+  "/home/fenrir/vs-snes/scripts/setup-snesdev.sh": {
+    "mtime": 1780958023.751283,
+    "seen": 1795440763.9110355,
+    "ast_hash": "b7d9f5d2c2756ca33a7db2a3949273ed",
+    "semantic_hash": "b7d9f5d2c2756ca33a7db2a3949273ed"
+  },
+  "/home/fenrir/vs-snes/skills-lock.json": {
+    "mtime": 1788453198.9656186,
+    "seen": 1795440763.9110365,
+    "ast_hash": "bf42e8b39b8bc6c5aeba11e285a590f9",
+    "semantic_hash": "bf42e8b39b8bc6c5aeba11e285a590f9"
+  },
+  "/home/fenrir/vs-snes/.agents/skills/bash-defensive-patterns/SKILL.md": {
+    "mtime": 1788453198.9616187,
+    "seen": 1795440763.911037,
+    "ast_hash": "a3f821809d56ce4308558f88340c48da",
+    "semantic_hash": "a3f821809d56ce4308558f88340c48da"
+  },
+  "/home/fenrir/vs-snes/README.md": {
+    "mtime": 1780956800.127567,
+    "seen": 1795440763.9110377,
+    "ast_hash": "4cbf1239ffc606b1d5033cb8e371ecf4",
+    "semantic_hash": "4cbf1239ffc606b1d5033cb8e371ecf4"
+  },
+  "/home/fenrir/vs-snes/docs/devlog.md": {
+    "mtime": 1780971757.9280684,
+    "seen": 1795440763.9110384,
+    "ast_hash": "8ed2fad285b28b0593047beaada95f2e",
+    "semantic_hash": "8ed2fad285b28b0593047beaada95f2e"
+  },
+  "/home/fenrir/vs-snes/docs/herramientas.md": {
+    "mtime": 1780956800.127567,
+    "seen": 1795440763.911039,
+    "ast_hash": "59181dde7a6bc9a4fa2e82d7a093a041",
+    "semantic_hash": "59181dde7a6bc9a4fa2e82d7a093a041"
+  },
+  "/home/fenrir/vs-snes/docs/pendientes.md": {
+    "mtime": 1788456940.6213436,
+    "seen": 1795440763.9110398,
+    "ast_hash": "4c9f00e12fcf5eece8e5018c79251d9b",
+    "semantic_hash": "4c9f00e12fcf5eece8e5018c79251d9b"
+  },
+  "/home/fenrir/vs-snes/docs/pvsneslib-api.md": {
+    "mtime": 1780956800.127567,
+    "seen": 1795440763.9110405,
+    "ast_hash": "3ed1cad85e508a980200cd64b85302ea",
+    "semantic_hash": "3ed1cad85e508a980200cd64b85302ea"
+  },
+  "/home/fenrir/vs-snes/docs/pvsneslib-examples.md": {
+    "mtime": 1780956800.127567,
+    "seen": 1795440763.911041,
+    "ast_hash": "d81caff0b6ed625663ea7eec34bebe27",
+    "semantic_hash": "d81caff0b6ed625663ea7eec34bebe27"
+  },
+  "/home/fenrir/vs-snes/docs/pvsneslib-setup.md": {
+    "mtime": 1780957293.8314548,
+    "seen": 1795440763.9110417,
+    "ast_hash": "1a9cc362f88ff35ab18f7b79f896b446",
+    "semantic_hash": "1a9cc362f88ff35ab18f7b79f896b446"
+  },
+  "/home/fenrir/vs-snes/docs/recursos.md": {
+    "mtime": 1780956800.127567,
+    "seen": 1795440763.911043,
+    "ast_hash": "d3c2095ecd3749689391cdf75b0fd6e2",
+    "semantic_hash": "d3c2095ecd3749689391cdf75b0fd6e2"
+  },
+  "/home/fenrir/vs-snes/docs/referencia.md": {
+    "mtime": 1780975775.9551253,
+    "seen": 1795440763.9110436,
+    "ast_hash": "d1ce66d52bf1dcbc6a701d7341ce3f06",
+    "semantic_hash": "d1ce66d52bf1dcbc6a701d7341ce3f06"
+  },
+  "/home/fenrir/vs-snes/plan.md": {
+    "mtime": 1780956800.131567,
+    "seen": 1795440763.9110441,
+    "ast_hash": "b83f9823c5a24fa94bcf3beb98b34f49",
+    "semantic_hash": "b83f9823c5a24fa94bcf3beb98b34f49"
+  },
+  "/home/fenrir/vs-snes/gfx/enemigos/Animated_Pipeestrello_indexed.png": {
+    "mtime": 1781043919.0133743,
+    "seen": 1795440763.9110448,
+    "ast_hash": "9bc42de75a1f50a725a43e564b3b43fe",
+    "semantic_hash": "9bc42de75a1f50a725a43e564b3b43fe"
+  },
+  "/home/fenrir/vs-snes/gfx/fondos/Mad_Forest_crop_64x64_indexed.png": {
+    "mtime": 1781043931.006051,
+    "seen": 1795440763.9110453,
+    "ast_hash": "2cd6599a493949fc267200b3efe74063",
+    "semantic_hash": "2cd6599a493949fc267200b3efe74063"
+  },
+  "/home/fenrir/vs-snes/gfx/personajes/Animated_Antonio_Belpaese_indexed.png": {
+    "mtime": 1781043924.889683,
+    "seen": 1795440763.9110465,
+    "ast_hash": "2e2ef7e96852c9edf75ddcdac923e530",
+    "semantic_hash": "2e2ef7e96852c9edf75ddcdac923e530"
+  },
+  "/home/fenrir/vs-snes/mvp/frame0.png": {
+    "mtime": 1780980909.3659253,
+    "seen": 1795440763.911047,
+    "ast_hash": "cfa10d6511f5491f1b68850649fcb106",
+    "semantic_hash": "cfa10d6511f5491f1b68850649fcb106"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/ataques/Animated_Axe_indexed.png": {
+    "mtime": 1781561475.1315813,
+    "seen": 1795440763.9110477,
+    "ast_hash": "b9397568bbf1cb1c697d640e3bb2cc64",
+    "semantic_hash": "b9397568bbf1cb1c697d640e3bb2cc64"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/ataques/Animated_Garlic_indexed.png": {
+    "mtime": 1781561475.1395812,
+    "seen": 1795440763.9110484,
+    "ast_hash": "1e9e812a1e1cc234cbe3789b6d451fc9",
+    "semantic_hash": "1e9e812a1e1cc234cbe3789b6d451fc9"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/ataques/Animated_Items_indexed.png": {
+    "mtime": 1781569578.5919437,
+    "seen": 1795440763.9110491,
+    "ast_hash": "15e20b466fb5b0fbc2ee6ef62f46ed2d",
+    "semantic_hash": "15e20b466fb5b0fbc2ee6ef62f46ed2d"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/ataques/Animated_King_Bible_indexed.png": {
+    "mtime": 1781561475.1155813,
+    "seen": 1795440763.9110498,
+    "ast_hash": "2f5afd94fbe4856feca0e5b355f464cf",
+    "semantic_hash": "2f5afd94fbe4856feca0e5b355f464cf"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/ataques/Animated_Magic_Wand_indexed.png": {
+    "mtime": 1781561475.1555812,
+    "seen": 1795440763.9110506,
+    "ast_hash": "8e4af9460cbac27a6deb0d3918cec76d",
+    "semantic_hash": "8e4af9460cbac27a6deb0d3918cec76d"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/ataques/Animated_Santa_Water_indexed.png": {
+    "mtime": 1781561475.1715813,
+    "seen": 1795440763.9110513,
+    "ast_hash": "dfac1f4803d2ffbc8d906eebd8316073",
+    "semantic_hash": "dfac1f4803d2ffbc8d906eebd8316073"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/ataques/Animated_Whip_indexed.png": {
+    "mtime": 1781569578.5839438,
+    "seen": 1795440763.9110525,
+    "ast_hash": "f7f41dc16ff8254fc18e69127d14b44c",
+    "semantic_hash": "f7f41dc16ff8254fc18e69127d14b44c"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/enemigos/Animated_Ghost_indexed.png": {
+    "mtime": 1781569578.5679438,
+    "seen": 1795440763.9110534,
+    "ast_hash": "257b468655dd197246285adc86cc87f6",
+    "semantic_hash": "257b468655dd197246285adc86cc87f6"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/enemigos/Animated_Mudman_indexed.png": {
+    "mtime": 1781569578.579944,
+    "seen": 1795440763.9110541,
+    "ast_hash": "218e5ffe62b408363b6e11b9f7c02c5a",
+    "semantic_hash": "218e5ffe62b408363b6e11b9f7c02c5a"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/enemigos/Animated_Pipeestrello_indexed.png": {
+    "mtime": 1781569578.5319438,
+    "seen": 1795440763.9110546,
+    "ast_hash": "2e4ea36e7dcd6f4e5d4e03df20d78633",
+    "semantic_hash": "2e4ea36e7dcd6f4e5d4e03df20d78633"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/enemigos/Animated_Skeleton_indexed.png": {
+    "mtime": 1781569578.559944,
+    "seen": 1795440763.9110553,
+    "ast_hash": "687e59b0037c23e2e63c2a0c85787de1",
+    "semantic_hash": "687e59b0037c23e2e63c2a0c85787de1"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/enemigos/Animated_Zombie_indexed.png": {
+    "mtime": 1781569578.5519438,
+    "seen": 1795440763.9110558,
+    "ast_hash": "1e6fb8fbe27e3f60f55d0fe492529703",
+    "semantic_hash": "1e6fb8fbe27e3f60f55d0fe492529703"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/fondos/Mad_Forest_crop_64x64_indexed.png": {
+    "mtime": 1781043952.478884,
+    "seen": 1795440763.9110568,
+    "ast_hash": "2cd6599a493949fc267200b3efe74063",
+    "semantic_hash": "2cd6599a493949fc267200b3efe74063"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/fondos/main_menu.png": {
+    "mtime": 1781568050.4758728,
+    "seen": 1795440763.9110575,
+    "ast_hash": "6ce80f64e183e45977cb37113f640593",
+    "semantic_hash": "6ce80f64e183e45977cb37113f640593"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/personajes/Animated-Antonio_Belpaese_indexed.png": {
+    "mtime": 1781009146.936551,
+    "seen": 1795440763.911058,
+    "ast_hash": "2e2ef7e96852c9edf75ddcdac923e530",
+    "semantic_hash": "2e2ef7e96852c9edf75ddcdac923e530"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/personajes/Animated_Antonio_Belpaese_indexed.png": {
+    "mtime": 1781569578.543944,
+    "seen": 1795440763.9110587,
+    "ast_hash": "fa69e4ebd04cc2e9e61bd71527352396",
+    "semantic_hash": "fa69e4ebd04cc2e9e61bd71527352396"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/pvsneslibfont.png": {
+    "mtime": 1780959006.0750527,
+    "seen": 1795440763.9110594,
+    "ast_hash": "4ebec7ef4a9fb28f0b008e2d4e00d276",
+    "semantic_hash": "4ebec7ef4a9fb28f0b008e2d4e00d276"
+  },
+  "/home/fenrir/vs-snes/mvp/gfx/sprites.png": {
+    "mtime": 1781569578.487944,
+    "seen": 1795440763.9110603,
+    "ast_hash": "a4bcaed06726233335121acf7ba22dc8",
+    "semantic_hash": "a4bcaed06726233335121acf7ba22dc8"
+  },
+  "/home/fenrir/vs-snes/referencia.jpg": {
+    "mtime": 1780975133.180807,
+    "seen": 1795440763.911061,
+    "ast_hash": "e6ceb8f126335ae14111198924122f67",
+    "semantic_hash": "e6ceb8f126335ae14111198924122f67"
+  },
+  "/home/fenrir/vs-snes/sprites/ataques/whip.png": {
+    "mtime": 1781557778.5896862,
+    "seen": 1795440763.9110615,
+    "ast_hash": "cb38c6e0a580150d9a729f20aa591b0f",
+    "semantic_hash": "cb38c6e0a580150d9a729f20aa591b0f"
+  },
+  "/home/fenrir/vs-snes/sprites/enemigos/Animated-Ghost.webp": {
+    "mtime": 1781044498.0762134,
+    "seen": 1795440763.9110622,
+    "ast_hash": "05dc0c03c4d2a3b4dd079adf71443e8d",
+    "semantic_hash": "05dc0c03c4d2a3b4dd079adf71443e8d"
+  },
+  "/home/fenrir/vs-snes/sprites/enemigos/Animated-Mudman-2.gif": {
+    "mtime": 1781043589.7063487,
+    "seen": 1795440763.9110627,
+    "ast_hash": "e9e0c21c4313fac63b8310711fab1d34",
+    "semantic_hash": "e9e0c21c4313fac63b8310711fab1d34"
+  },
+  "/home/fenrir/vs-snes/sprites/enemigos/Animated-Mudman.gif": {
+    "mtime": 1781043585.8228822,
+    "seen": 1795440763.9110637,
+    "ast_hash": "a74597e9c3328c5aa1741c90a544f838",
+    "semantic_hash": "a74597e9c3328c5aa1741c90a544f838"
+  },
+  "/home/fenrir/vs-snes/sprites/enemigos/Animated-Pipeestrello-2.gif": {
+    "mtime": 1780979440.4854681,
+    "seen": 1795440763.9110644,
+    "ast_hash": "968548d8654e1a6c2ad110f02ac91b6a",
+    "semantic_hash": "968548d8654e1a6c2ad110f02ac91b6a"
+  },
+  "/home/fenrir/vs-snes/sprites/enemigos/Animated-Pipeestrello-3.gif": {
+    "mtime": 1781043627.6465511,
+    "seen": 1795440763.911065,
+    "ast_hash": "2dc5a6146ec7b9f97bee2e1960208535",
+    "semantic_hash": "2dc5a6146ec7b9f97bee2e1960208535"
+  },
+  "/home/fenrir/vs-snes/sprites/enemigos/Animated-Pipeestrello-4.gif": {
+    "mtime": 1781043634.3515303,
+    "seen": 1795440763.9110656,
+    "ast_hash": "cad27d4aabbc8c62fae831c91b2adf53",
+    "semantic_hash": "cad27d4aabbc8c62fae831c91b2adf53"
+  },
+  "/home/fenrir/vs-snes/sprites/enemigos/Animated-Pipeestrello.gif": {
+    "mtime": 1780978949.6499588,
+    "seen": 1795440763.9110663,
+    "ast_hash": "bed6ee34ec21b9d8d1b4c7ee76af863b",
+    "semantic_hash": "bed6ee34ec21b9d8d1b4c7ee76af863b"
+  },
+  "/home/fenrir/vs-snes/sprites/enemigos/Animated-Skeleton-2.gif": {
+    "mtime": 1781043692.9504554,
+    "seen": 1795440763.9110672,
+    "ast_hash": "1ba594505090b47918b692042b506338",
+    "semantic_hash": "1ba594505090b47918b692042b506338"
+  },
+  "/home/fenrir/vs-snes/sprites/enemigos/Animated-Skeleton.gif": {
+    "mtime": 1781043555.0701835,
+    "seen": 1795440763.9110677,
+    "ast_hash": "3771f24d7b95f166c395a0ad2f27081d",
+    "semantic_hash": "3771f24d7b95f166c395a0ad2f27081d"
+  },
+  "/home/fenrir/vs-snes/sprites/enemigos/Animated-Zombie-2.gif": {
+    "mtime": 1781043650.3942509,
+    "seen": 1795440763.9110684,
+    "ast_hash": "828b7a7a29fbec2994477d75921f0102",
+    "semantic_hash": "828b7a7a29fbec2994477d75921f0102"
+  },
+  "/home/fenrir/vs-snes/sprites/enemigos/Animated-Zombie-3.gif": {
+    "mtime": 1781043653.6573963,
+    "seen": 1795440763.9110692,
+    "ast_hash": "0da23715e1912c3fd2a121d88a5e1207",
+    "semantic_hash": "0da23715e1912c3fd2a121d88a5e1207"
+  },
+  "/home/fenrir/vs-snes/sprites/enemigos/Animated-Zombie.gif": {
+    "mtime": 1781043535.6036608,
+    "seen": 1795440763.9110699,
+    "ast_hash": "912e51fd847b53a51c09cc300b3216c3",
+    "semantic_hash": "912e51fd847b53a51c09cc300b3216c3"
+  },
+  "/home/fenrir/vs-snes/sprites/fondos/Bestiary-Mad_Forest.png": {
+    "mtime": 1780980171.767828,
+    "seen": 1795440763.9110703,
+    "ast_hash": "d8e7abaca9dc6c569f0f649e4768431f",
+    "semantic_hash": "d8e7abaca9dc6c569f0f649e4768431f"
+  },
+  "/home/fenrir/vs-snes/sprites/fondos/Mad_Forest_crop_64x64.png": {
+    "mtime": 1780981341.5458224,
+    "seen": 1795440763.9110713,
+    "ast_hash": "14890f4647ef4fac09677966c34613e8",
+    "semantic_hash": "14890f4647ef4fac09677966c34613e8"
+  },
+  "/home/fenrir/vs-snes/sprites/fondos/main.jpg": {
+    "mtime": 1781567485.3137524,
+    "seen": 1795440763.911072,
+    "ast_hash": "79df82bb1fc39a8542fecc30bf33e786",
+    "semantic_hash": "79df82bb1fc39a8542fecc30bf33e786"
+  },
+  "/home/fenrir/vs-snes/sprites/items/Sprite-Axe.png": {
+    "mtime": 1781561153.823566,
+    "seen": 1795440763.9110725,
+    "ast_hash": "d86833b22418a71ddb93e0674ecc3dc0",
+    "semantic_hash": "d86833b22418a71ddb93e0674ecc3dc0"
+  },
+  "/home/fenrir/vs-snes/sprites/items/Sprite-Experience_Gem.png": {
+    "mtime": 1781567320.4758415,
+    "seen": 1795440763.9110732,
+    "ast_hash": "c506aecb74797ecf350841f48190eb62",
+    "semantic_hash": "c506aecb74797ecf350841f48190eb62"
+  },
+  "/home/fenrir/vs-snes/sprites/items/Sprite-Garlic.png": {
+    "mtime": 1781560497.7502484,
+    "seen": 1795440763.9110737,
+    "ast_hash": "4ea17e0801ee93c61a0862dda5272294",
+    "semantic_hash": "4ea17e0801ee93c61a0862dda5272294"
+  },
+  "/home/fenrir/vs-snes/sprites/items/Sprite-King_Bible.png": {
+    "mtime": 1781557914.393618,
+    "seen": 1795440763.9110746,
+    "ast_hash": "0d590db8896972d6bec911f799006831",
+    "semantic_hash": "0d590db8896972d6bec911f799006831"
+  },
+  "/home/fenrir/vs-snes/sprites/items/Sprite-Magic_Wand.png": {
+    "mtime": 1781560488.2575696,
+    "seen": 1795440763.911075,
+    "ast_hash": "540f087ff13f2030e50a91bf103c220c",
+    "semantic_hash": "540f087ff13f2030e50a91bf103c220c"
+  },
+  "/home/fenrir/vs-snes/sprites/items/Sprite-Santa_Water.png": {
+    "mtime": 1781561153.831566,
+    "seen": 1795440763.9110758,
+    "ast_hash": "7342d09d8ccec559773792d218343af3",
+    "semantic_hash": "7342d09d8ccec559773792d218343af3"
+  },
+  "/home/fenrir/vs-snes/sprites/items/Sprite-Whip.png": {
+    "mtime": 1781557933.5709195,
+    "seen": 1795440763.9110765,
+    "ast_hash": "08f1948a4d3deb5ecab60bbbd0dc538a",
+    "semantic_hash": "08f1948a4d3deb5ecab60bbbd0dc538a"
+  },
+  "/home/fenrir/vs-snes/sprites/items/combined_items.png": {
+    "mtime": 1781569578.4799438,
+    "seen": 1795440763.9110773,
+    "ast_hash": "585481d630d9b9e904ceaa6dc8e2ed8e",
+    "semantic_hash": "585481d630d9b9e904ceaa6dc8e2ed8e"
+  },
+  "/home/fenrir/vs-snes/sprites/personajes/120px-Animated-Dommario.gif": {
+    "mtime": 1781561432.2209918,
+    "seen": 1795440763.911078,
+    "ast_hash": "7b0fbd767a66d8f6c5121dc62eb1f0de",
+    "semantic_hash": "7b0fbd767a66d8f6c5121dc62eb1f0de"
+  },
+  "/home/fenrir/vs-snes/sprites/personajes/120px-Sprite-Antonio_Belpaese.png": {
+    "mtime": 1781561309.4944203,
+    "seen": 1795440763.9110787,
+    "ast_hash": "2d98d9a8188e9644b88553b2fcc20360",
+    "semantic_hash": "2d98d9a8188e9644b88553b2fcc20360"
+  },
+  "/home/fenrir/vs-snes/sprites/personajes/120px-Sprite-Dommario.png": {
+    "mtime": 1781561329.967719,
+    "seen": 1795440763.9110794,
+    "ast_hash": "e27ffedc5a57e7aac5e4e03db08401b4",
+    "semantic_hash": "e27ffedc5a57e7aac5e4e03db08401b4"
+  },
+  "/home/fenrir/vs-snes/sprites/personajes/120px-Sprite-Imelda_Belpaese.png": {
+    "mtime": 1781561319.2770686,
+    "seen": 1795440763.91108,
+    "ast_hash": "506f7f5fe81e5da0bdca10a56daee70a",
+    "semantic_hash": "506f7f5fe81e5da0bdca10a56daee70a"
+  },
+  "/home/fenrir/vs-snes/sprites/personajes/120px-Sprite-Lama_Ladonna.png": {
+    "mtime": 1781561324.7966666,
+    "seen": 1795440763.9110806,
+    "ast_hash": "39ee453ef15600582d50ba37469ca473",
+    "semantic_hash": "39ee453ef15600582d50ba37469ca473"
+  },
+  "/home/fenrir/vs-snes/sprites/personajes/Animated-Antonio_Belpaese.gif": {
+    "mtime": 1780979930.8106308,
+    "seen": 1795440763.9110816,
+    "ast_hash": "01ada0e2c30cc26ad13a2bf4ea89419b",
+    "semantic_hash": "01ada0e2c30cc26ad13a2bf4ea89419b"
+  },
+  "/home/fenrir/vs-snes/sprites/personajes/Animated-Dommario.gif": {
+    "mtime": 1781561441.9749873,
+    "seen": 1795440763.911082,
+    "ast_hash": "846d6be6e2d1466dd2845aad14adf479",
+    "semantic_hash": "846d6be6e2d1466dd2845aad14adf479"
+  },
+  "/home/fenrir/vs-snes/sprites/personajes/Animated-Imelda_Belpaese.gif": {
+    "mtime": 1781561449.1316905,
+    "seen": 1795440763.9110827,
+    "ast_hash": "1c1bc89c6b2877e5f2322d6a7ebef6ab",
+    "semantic_hash": "1c1bc89c6b2877e5f2322d6a7ebef6ab"
+  },
+  "/home/fenrir/vs-snes/sprites/personajes/Animated-Lama_Ladonna.gif": {
+    "mtime": 1781561456.3521166,
+    "seen": 1795440763.9110835,
+    "ast_hash": "08f64e0fd7dff6bf7ba4b0b66b8a22fb",
+    "semantic_hash": "08f64e0fd7dff6bf7ba4b0b66b8a22fb"
+  },
+  "/home/fenrir/vs-snes/music/forest-night-fever.wav": {
+    "mtime": 1781632681.354635,
+    "seen": 1795440763.9110842,
+    "ast_hash": "5fc750dc3a7244dc683d25d9150dc4a4",
+    "semantic_hash": "5fc750dc3a7244dc683d25d9150dc4a4"
+  }
+}
