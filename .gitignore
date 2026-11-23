@@ -8,8 +8,10 @@
 *.asm
 *.def
 
-# Generated repository analysis
-/graphify-out/
+# Graphify: keep the published graph/report, ignore local caches and internals
+/graphify-out/cache/
+/graphify-out/.graphify_*
+/graphify-out/needs_update
 
 # Graphics conversion output
 *.pic
