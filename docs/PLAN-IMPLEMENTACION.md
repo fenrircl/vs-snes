@@ -318,10 +318,8 @@ Contrato que `midi2it` debe cumplir para vs-snes:
 | Patrones | 64 filas, múltiples patrones, orden con loop |
 | Samples | 16-bit PCM, loops alineados a 16 frames; BRR total ≤58 KB |
 | Echo | `[[SNESMOD]]` con `EDL/EFB/EVOL/EFIR/EON` |
-| Salida | `.it` que `smconv` acepte **sin** "More than 8 channels" y con
-  `Instrument data` > 0 |
-| Validación | `openmpt123 --info` reporta la duración y los instrumentos
-  esperados; `smconv` reporta `Total` ≤58 KB |
+| Salida | `.it` que `smconv` acepte **sin** "More than 8 channels" y con `Instrument data` > 0 |
+| Validación | `openmpt123 --info` reporta la duración y los instrumentos esperados; `smconv` reporta `Total` ≤58 KB |
 
 Tareas:
 
